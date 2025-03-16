@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Profile/Profile.css"; 
-import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png'; 
+import "../../styles/Profile/Profile.css";
+import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png';
 import EditProfile from './EditProfile'; // Corrected import statement
 
 function Profile () {
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(defaultProfilePic);
   const [activeSection, setActiveSection] = useState("editProfile");
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal visibility
   const navigate = useNavigate();
 
   // Get current user from Firebase authentication
@@ -30,6 +31,20 @@ function Profile () {
     }).catch((error) => {
       console.error("Error signing out: ", error);
     });
+  };
+
+  const handleDeleteAccount = async () => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      try {
+        await deleteUser(currentUser);
+        console.log("User deleted successfully");
+        navigate("/login"); // Redirect to login page after account deletion
+      } catch (error) {
+        console.error("Error deleting user: ", error);
+      }
+    }
   };
 
   return (
@@ -58,14 +73,13 @@ function Profile () {
             Account Settings
           </li>
           <li onClick={handleLogout}>Logout</li>
+          <li onClick={() => setShowDeleteModal(true)}>Delete Account</li> {/* Delete Account button */}
         </ul>
       </div>
 
       <div className="main-content">
         {activeSection === "editProfile" && (
           <div className="section">
-            
-         
             <EditProfile /> {/* Corrected component name */}
           </div>
         )}
@@ -84,6 +98,27 @@ function Profile () {
           </div>
         )}
       </div>
+
+      {/* Delete Account Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Are you sure you want to delete your account?</h3>
+            <button 
+              onClick={handleDeleteAccount} 
+              className="delete-confirm-btn"
+            >
+              Yes, Delete
+            </button>
+            <button 
+              onClick={() => setShowDeleteModal(false)} 
+              className="delete-cancel-btn"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
