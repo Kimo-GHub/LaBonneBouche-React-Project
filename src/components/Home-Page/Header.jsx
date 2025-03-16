@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import '../../styles/home/Header.css';
 import bannerBg from '../../assets/Home-images/BANNER.png';
 import logo from '../../assets/Home-images/logo.png';
+import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png'; 
 
 function Header() {
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const navigate = useNavigate(); // Initialize the navigate hook
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  // Check if user is logged in and get their profile picture
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser); // Set user data when logged in
+        setProfilePicture(currentUser.photoURL || defaultProfilePic); // Set profile picture or default one
+      } else {
+        setUser(null); // If not logged in, set user to null
+        setProfilePicture(defaultProfilePic); // Set default profile picture
+      }
+    });
+  }, []);
+
+  const handleProfileClick = () => {
+    if (user) {
+      navigate('/profile'); // Navigate to profile if logged in
+    } else {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  };
 
   return (
     <header className="header" style={{ backgroundImage: `url(${bannerBg})` }}>
@@ -29,24 +55,41 @@ function Header() {
         <div className={`nav-actions ${menuOpen ? 'menu-open' : ''}`}>
           <ul className="navbar-nav nav-links">
             <li className="nav-item">
-              <Link to="/" className={`link ${location.pathname === '/' ? 'active' : ''}`} onClick={toggleMenu}>Home</Link>
+              <Link to="/" className={`link`} onClick={toggleMenu}>Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/about-us" className={`link ${location.pathname === '/about-us' ? 'active' : ''}`} onClick={toggleMenu}>About Us</Link>
+              <Link to="/about-us" className={`link`} onClick={toggleMenu}>About Us</Link>
             </li>
             <li className="nav-item">
-              <Link to="/products" className={`link ${location.pathname === '/products' ? 'active' : ''}`} onClick={toggleMenu}>Shop</Link>
+              <Link to="/products" className={`link`} onClick={toggleMenu}>Shop</Link>
             </li>
             <li className="nav-item">
-              <Link to="/cart" className={`link ${location.pathname === '/cart' ? 'active' : ''}`} onClick={toggleMenu}>My Cart</Link>
+              <Link to="/cart" className={`link`} onClick={toggleMenu}>My Cart</Link>
             </li>
             <li className="nav-item">
-              <Link to="/contact-us" className={`link ${location.pathname === '/contact-us' ? 'active' : ''}`} onClick={toggleMenu}>Contact Us</Link>
+              <Link to="/contact-us" className={`link`} onClick={toggleMenu}>Contact Us</Link>
             </li>
           </ul>
+
           <div className="auth-buttons">
-            <button className="login-btn">Login</button>
-            <button className="signup-btn">Sign Up</button>
+            {!user ? (
+              <>
+                <Link to="/login" onClick={toggleMenu}>
+                  <button className="login-btn">Login</button>
+                </Link>
+                <Link to="/signup" onClick={toggleMenu}>
+                  <button className="signup-btn">Sign Up</button>
+                </Link>
+              </>
+            ) : (
+              <div className="user-profile" onClick={handleProfileClick}>
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  className="profile-img"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

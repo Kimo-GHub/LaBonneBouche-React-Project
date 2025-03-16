@@ -1,4 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/tw-cen-mt-std");
+/* @import url("https://fonts.cdnfonts.com/css/tw-cen-mt-std");
 * {
   margin: 0;
   padding: 0;
@@ -397,8 +397,9 @@ body {
     text-align: center;
     font-size: 0.875rem;
   }
-
+*/
   /* Tablet Styles */
+  /*
   @media (max-width: 768px) {
     .footer-list {
       flex-direction: column;
@@ -513,8 +514,9 @@ body {
       line-height: 1.5rem;
     }
   }
-
+*/
   /* Mobile Styles */
+  /*
   @media (max-width: 480px) {
     .footer-text {
       font-size: 1rem;
@@ -586,8 +588,9 @@ body {
       padding: 1.5rem;
     }
   }
-
+*/
   /* Responsive Design */
+  /*
   @media (max-width: 1024px) {
     .OurStory {
       flex-direction: column;
@@ -618,8 +621,9 @@ body {
     }
   }
 }
-
+*/
 /* 14 inches and above */
+/*
 @media screen and (min-width: 1341px) {
   @import url("https://fonts.cdnfonts.com/css/tw-cen-mt-std");
   * {
@@ -972,17 +976,22 @@ body {
   #list1 .footer-text:first-child {
     font-weight: 600;
   }
+    */
+    /*
   #location-text {
-    text-decoration: none; /* Remove any default underline */
-    display: inline-block; /* Allows better control over background positioning */
+    text-decoration: none;
+    display: inline-block;
     background-image: linear-gradient(
       white,
       white
-    ); /* Color of the underline */
+    ); 
+    */
+    /* Color of the underline */
+    /*
     background-repeat: no-repeat;
-    background-position: bottom left; /* Centers the underline */
-    background-size: 23% 0.5px; /* Width of 30% and thickness of 1px */
-    padding-bottom: 0.25rem; /* Adjust spacing between text and underline */
+    background-position: bottom left; 
+    background-size: 23% 0.5px; 
+    padding-bottom: 0.25rem; 
   }
   .footer-text {
     font-family: "Poppins", sans-serif;
@@ -1014,9 +1023,10 @@ body {
   }
 
   .social-icon {
-    width: fit-content; /* Adjust size based on preference */
+    width: fit-content; 
     height: fit-content;
   }
+  
   #copyright-cont {
     width: 100vw;
     height: 3.4rem;
@@ -1031,4 +1041,5 @@ body {
     font-weight: 400;
     line-height: normal;
   }
-}
+} 
+*/

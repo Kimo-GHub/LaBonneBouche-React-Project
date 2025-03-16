@@ -1,66 +1,31 @@
 import React from 'react';
-// import './AboutUsPage.css'; // Put all styles from your style.css here
-// import logo from './assets/images/About-us-images/logo3.png';
-// import headerImage from './assets/images/About-us-images/AboutUsHeader.png';
-// import arrowIcon from './assets/images/About-us-images/AArrow.PNG';
-// import vector1 from './assets/images/About-us-images/AboutUsVector1.png';
-// import storyVisual from './assets/images/About-us-images/visual our story.png';
-// import bakedWithLove from './assets/images/About-us-images/Baked with Love.png';
-// import vector2 from './assets/images/About-us-images/AboutUsVector2.png';
-// import missionImg1 from './assets/images/About-us-images/OurMission1.PNG';
-// import missionImg2 from './assets/images/About-us-images/OurMission2.png';
-// import visionImg1 from './assets/images/About-us-images/vision2.png';
-// import visionImg2 from './assets/images/About-us-images/vision1.PNG';
-// import aboutCelina from './assets/images/About-us-images/about-celina.png';
-// import aboutC from './assets/images/About-us-images/AboutC.png';
-// import footerLogo from './assets/images/Home-images/logo2.png';
-// import facebookIcon from './assets/images/Home-images/facebook-icon.png';
-// import instagramIcon from './assets/images/Home-images/instagram-icon.png';
-// import tiktokIcon from './assets/images/Home-images/tiktok-icon.png';
+import Footer from '../Home-Page/Footer';
+import Header from '../Home-Page/Header';
+import '../../styles/AboutUs/AboutUs.css';  // Ensure this path is correct
+//import logo from '../../assets/About-us-images/logo3.png';
+//import headerImage from '../../assets/About-us-images/AboutUsHeader.png';
+//import arrowIcon from '../../assets/About-us-images/AArrow.PNG';
+//import vector1 from '../../assets/About-us-images/AboutUsVector1.png';
+//import storyVisual from '../../assets/About-us-images/visual our story.png';
+//import bakedWithLove from '../../assets/About-us-images/Baked with Love.png';
+// import vector2 from '../../assets/About-us-images/AboutUsVector2.png';
+// import missionImg1 from '../../assets/About-us-images/OurMission1.PNG';
+// import missionImg2 from '../../assets/About-us-images/OurMission2.png';
+// import visionImg1 from '../../assets/About-us-images/vision2.png';
+// import visionImg2 from '../../assets/About-us-images/vision1.PNG';
+// import aboutCelina from '../../assets/About-us-images/about-celina.png';
+// import aboutC from '../../assets/About-us-images/AboutC.png';
 
-const AboutUs = () => {
+function AboutUs() {
   return (
     <div>
-      <header className="About-Us">
-        <div className="container-fluid">
-          <div className="logo">
-            <img src={logo} alt="La Bonne Bouche" className="img-fluid" />
-          </div>
-          <div className="nav-links">
-            <ul className="navbar">
-              <li className="nav-item"><a className="link" href="/home">Home</a></li>
-              <li className="nav-item"><a className="link active" href="#">About Us</a></li>
-              <li className="nav-item"><a className="link" href="/products">Shop</a></li>
-              <li className="nav-item"><a className="link" href="/cart">My Cart</a></li>
-              <li className="nav-item"><a className="link" href="/contact">Contact Us</a></li>
-            </ul>
-          </div>
-          <div className="auth-buttons d-flex">
-            <button className="login-btn">Login</button>
-            <button className="signup-btn">Sign up</button>
-          </div>
-        </div>
+      <Header/>
 
-        <div className="image">
-          <img src={headerImage} alt="Header" />
-        </div>
-
-        <div className="home-aboutus">
-          <p className="title">Home</p>
-          <img className="title" src={arrowIcon} alt="Arrow" />
-          <p className="title">About Us</p>
-        </div>
-      </header>
-
-      <main>
-        <div id="vector1A">
-          <img src={vector1} alt="Vector1" />
-        </div>
-
+      {/* <main>
         <div className="OurStory">
           <div className="section1">
             <h1>Our Story</h1>
-            <img src={bakedWithLove} alt="Baked with Love" />
+            <img  alt="Baked with Love" />
             <p>
               Our nostalgic patisserie began three years ago in a cozy home kitchen,<br />
               where a passion for baking turned into a love affair with sweets.
@@ -136,40 +101,12 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
-      </main>
+      </main> */}
 
-      <footer className="text-white" style={{ backgroundColor: '#ffffff' }}>
-        <div id="footer-content" className="d-flex column align-content-center justify-content-between" style={{ backgroundColor: '#091a45' }}>
-          <div id="logo-container"><img src={footerLogo} alt="LaBonneBouche" id="footer-logo" /></div>
-          <ul className="footer-list" id="list1">
-            <li className="footer-text">About Us</li>
-            <li className="footer-text">Products</li>
-            <li className="footer-text">Newsletter</li>
-          </ul>
-          <ul className="footer-list" id="list2">
-            <li className="footer-text">Loyalty Program</li>
-            <li className="footer-text">Customized Cake</li>
-            <li className="footer-text">Review</li>
-          </ul>
-          <div id="list3">
-            <li className="footer-text" id="location-text">Location</li>
-            <li className="footer-text">Ashrafieh, Beirut</li>
-          </div>
-          <div id="socials">
-            <p id="follow-text">Follow us</p>
-            <div className="social-icons">
-              <img src={facebookIcon} alt="Facebook" className="social-icon" />
-              <img src={instagramIcon} alt="Instagram" className="social-icon" />
-              <img src={tiktokIcon} alt="TikTok" className="social-icon" />
-            </div>
-          </div>
-        </div>
-        <div id="copyright-cont" className="d-flex justify-content-center" style={{ backgroundColor: '#091a45' }}>
-          <p id="copyright-text">Copyright © All rights reserved | LaBonneBouche</p>
-        </div>
-      </footer>
+      {/* Footer component should be placed here */}
+      <Footer />
     </div>
   );
-};
+}
 
 export default AboutUs;
