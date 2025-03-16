@@ -3,6 +3,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Profile/Profile.css"; 
 import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png'; 
+import EditProfile from './EditProfile'; // Corrected import statement
 
 function Profile () {
   const [user, setUser] = useState(null);
@@ -63,9 +64,9 @@ function Profile () {
       <div className="main-content">
         {activeSection === "editProfile" && (
           <div className="section">
-            <h2>Edit Profile</h2>
-            {/* Add Edit Profile form or details here */}
-            <p>Update your profile information here.</p>
+            
+         
+            <EditProfile /> {/* Corrected component name */}
           </div>
         )}
         {activeSection === "addPayment" && (
