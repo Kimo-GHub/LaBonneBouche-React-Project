@@ -1,0 +1,224 @@
+/* Style the hamburger button */
+.navbar-toggler {
+    display: flex;
+    flex-direction: column; /* Stack the lines vertically */
+    justify-content: space-between; /* Space the lines evenly */
+    align-items: center;
+    width: 80px; /* Increase button width for longer lines */
+    height: 50px; /* Adjust height for proportional spacing */
+    border: 2px solid white; /* White border around the button */
+    border-radius: 5px; /* Rounded corners */
+    background-color: transparent; /* Transparent background */
+    cursor: pointer; /* Pointer cursor */
+    padding: 5px; /* Add padding for better spacing */
+}
+
+/* Hide the default Bootstrap hamburger icon */
+.navbar-toggler-icon {
+    display: none; /* Hides the default Bootstrap icon */
+}
+
+/* Hamburger lines */
+.navbar-toggler span {
+    display: block;
+    width: 80%; /* Full width of the button */
+    height: 3px; /* Thickness of the lines */
+    background-color: white; /* White color for the lines */
+    border-radius: 2px; /* Rounded edges for the lines */
+    transition: all 0.3s ease; /* Smooth transition for animations */
+}
+
+/* Spacing between the lines */
+.navbar-toggler span:not(:last-child) {
+    margin-bottom: 8px; /* Slightly increased spacing between lines */
+}
+
+/* Hover effect for the hamburger */
+.navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover background */
+}
+
+/* Optional animation for toggling */
+.navbar-toggler.collapsed span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg); /* Top line becomes diagonal */
+}
+
+.navbar-toggler.collapsed span:nth-child(2) {
+    opacity: 0; /* Middle line disappears */
+}
+
+.navbar-toggler.collapsed span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg); /* Bottom line becomes diagonal */
+}
+/* When navbar is toggled, push the navigation links further down */
+.hidden #navbarNav {
+    margin-top: 50px; /* Increase this value to move links further down */
+    transition: margin 0.3s ease; /* Smooth transition for a better effect */
+}
+
+/* Ensure the navbar items remain centered */
+.hidden #navbarNav .navbar-nav {
+    flex-direction: column; /* Stack the links vertically */
+    align-items: center; /* Center align the links */
+}
+
+
+
+
+
+
+
+/* Hide hero content when navbar is toggled */
+.hidden #hero-title,
+.hidden #hero-subtitle,
+.hidden .hero span {
+    display: none !important;
+}
+
+/* Responsive Styles for iPhone 15 Pro Max */
+@media only screen and (max-width: 430px) {
+    /* Align logo on the left */
+    .logo {
+        text-align: left;
+        margin-left: 10px;
+    }
+
+    /* Style the navbar */
+    .navbar {
+        flex-direction: column; /* Stack navbar items vertically */
+        justify-content: center; /* Center items vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 20px;
+        gap: 20px; /* Space between navbar items */
+        position: relative;
+        z-index: 10; /* Ensure navbar is above all other content */
+    }
+
+    /* Hamburger menu toggled: Center navigation links */
+    .nav-open #navbarNav {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        justify-content: center; /* Center vertically */
+        gap: 20px;
+        position: fixed; /* Fixed positioning for better control */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0; /* Cover full screen */
+        background-color: rgba(9, 26, 69, 0.95); /* Semi-transparent background */
+        z-index: 9999; /* Ensure it's above all content */
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+    /* Navigation links appearance */
+    .navbar-nav .nav-item a {
+        font-size: 24px; /* Larger font for better readability */
+        font-weight: 600;
+        padding: 15px 0;
+        text-align: center;
+        color: white; /* Contrast with background */
+        text-decoration: none;
+        width: 100%; /* Span full width for easier clicks */
+        transition: color 0.3s ease;
+    }
+   /* Navigation links spacing */
+.navbar-nav .nav-item {
+    padding: 18px 20px; /* Add horizontal and vertical padding */
+    margin-left: 10%; /* Add left margin for spacing */
+}
+
+/* Sign-up and login buttons spacing */
+.auth-buttons button {
+    margin-left:10%;
+}
+
+    
+    
+
+    .navbar-nav .nav-item a:hover {
+        color: #ddb7dc; /* Hover effect for better UX */
+    }
+
+    /* Hide breadcrumbs when the navbar is toggled */
+    .hidden #hero-home,
+    .hidden #hero-my-cart {
+        display: none !important; /* Force them to hide */
+    }
+
+    /* Ensure the login and sign-up buttons are visible and centered */
+    .auth-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-right: 0;
+        margin-top: 10px; /* Add some spacing above the buttons */
+        width: 100%;
+    }
+
+    .nav-open .hero,
+    .nav-open .auth-buttons,
+    .nav-open .cart-section,
+    .nav-open .order-summary,
+    .nav-open footer {
+        display: none; /* Hide non-navigation elements */
+    }
+
+    /* Adjust the hero section to prevent overlap */
+    .hero {
+        z-index: 0; /* Push the hero section content below navbar */
+        padding-top: 20px; /* Adjust padding for smooth transition */
+    }
+
+    /* Additional adjustment to move the cart and order summary below */
+    .cart-section,
+    .order-summary {
+        margin-top: 100px; /* Add more space when navbar is toggled */
+    }
+
+    /* Ensure smooth layout when the menu is opened */
+    .nav-open .cart-section,
+    .nav-open .order-summary {
+        margin-top: 120px; /* Further move these sections down */
+    }
+
+    /* Stack cart items vertically */
+    .cart-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .cart-item-details,
+    .cart-item-quantity,
+    .cart-item-price {
+        text-align: center;
+    }
+
+    .cart-item-description {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .auth-buttons button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 25px;
+        width: auto;
+    }
+
+    /* Center navigation links and hide other sections */
+    .nav-open .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Hide hero content when navbar is toggled */
+    .nav-open .hero,
+    .nav-open #hero-title,
+    .nav-open #hero-subtitle {
+        display: none;
+    }
+}

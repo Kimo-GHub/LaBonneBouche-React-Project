@@ -1,0 +1,91 @@
+@media only screen and (max-width: 430px) {
+    /* Remove the vector */
+    .vector-container {
+        display: none;
+    }
+
+    /* Remove the owner's picture */
+    .owner-image-above {
+        display: none;
+    }
+
+    /* Adjust Background Text Containers */
+    .background-text-container,
+    .background-text-container-new {
+        display: none;
+    }
+
+    /* Contact Information Section */
+    .contact-info {
+        flex-direction: column;
+        align-items: flex-start; /* Align content to the left */
+        text-align: left; /* Left-align the text */
+        padding: 20px; /* Reduce padding for smaller screens */
+        margin-left: -10px; /* Align with pink section */
+    }
+
+    .contact-intro-details {
+        text-align: left;
+        width: 100%;
+    }
+
+    .get-in-touch {
+        font-size: 24px; /* Smaller font for headers */
+        margin-bottom: 10px;
+        margin-left: 0; /* Align with pink section */
+    }
+
+    .here-to-help {
+        font-size: 36px; /* Increase font size */
+        font-weight: 500; /* Add medium weight for better visibility */
+        color: #091A45; /* Slightly darker color for contrast */
+        opacity: 0.8; /* Make it more opaque */
+        margin-bottom: 10px;
+        margin-top:-25px;
+        margin-left: 0; /* Align with pink section */
+        line-height: 1.2; /* Improve readability */
+    }
+
+    .contact-description {
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-left: 0; /* Align with pink section */
+    }
+
+    /* Pink Background Section for Address */
+    .pink-background-limited {
+        flex-direction: column;
+        align-items: flex-start; /* Align content to the left */
+        text-align: left; /* Position text to the left */
+        padding: 20px;
+        width: 100%; /* Adjust width */
+        margin-left: 0; /* Remove extra margin */
+        margin-top: 20px; /* Lower the pink section */
+    }
+
+    .contact-details-adjusted {
+        margin-left: 0; /* Align with the contact-intro-details */
+        text-align: left; /* Left-align content */
+    }
+
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left; /* Align text to the left */
+        margin-bottom: 15px;
+    }
+
+    .contact-icon {
+        margin-bottom: 10px;
+    }
+
+    .contact-text {
+        font-size: 14px;
+        
+    }
+
+    /* Footer */
+    footer {
+        margin-top: 20px; /* Adjust spacing from the content */
+    }
+}

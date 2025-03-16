@@ -1,0 +1,205 @@
+/* Responsive Design for Cart and Checkout (Aligned with Navbar and Adjusted Counters) */
+@media only screen and (max-width: 430px) {
+    /* Cart Section */
+    .cart-section {
+        flex-direction: column; /* Stack cart and checkout sections vertically */
+        gap: 1rem; /* Add spacing between sections */
+        padding: 0.5rem;
+        margin-left: 10%; /* Align with navbar left margin */
+        width: 80%; /* Adjust width to align properly */
+    }
+
+    .cart-items-container {
+        width: 100%; /* Full width for the container */
+        padding: 1rem;
+        text-align: center; /* Center all text inside the cart items container */
+    }
+
+    /* Hide labels for Product, Quantity, and Price */
+    .cart-header {
+        display: none; /* Hide the labels completely */
+    }
+
+    .cart-item {
+        grid-template-columns: 1fr; /* Stack item details vertically */
+        text-align: center; /* Center text and content */
+        gap: 10px;
+        margin-left: 0; /* Align with navbar */
+        padding-bottom: 1rem; /* Add spacing between cart items */
+        border-bottom: 1px solid #ddd; /* Optional: Add a divider between items */
+    }
+
+    .cart-item-image {
+        width: 100px; /* Center the image */
+        height: auto;
+        margin: 0 auto; /* Center image horizontally */
+        display: block; /* Ensure it behaves as a block element */
+    }
+
+    .cart-item-details {
+        font-size: 14px; /* Adjust font size */
+        margin: 0 auto;
+        text-align: center; /* Center-align description */
+    }
+
+    .cart-item-quantity {
+        display: flex;
+        justify-content: center; /* Center quantity controls */
+        align-items: center;
+        margin: 10px auto;
+        gap: 5px; /* Add spacing between counter buttons */
+    }
+
+    .quantity-input {
+        width: 40px; /* Adjust width for better visibility */
+        text-align: center;
+        margin-left: -3.9px; /* Move the input slightly to the left */
+        font-size: 14px;
+        border-radius: 5px;
+        padding: 2px;
+    }
+
+    .cart-item-price {
+        font-size: 14px; /* Smaller font size for price */
+        text-align: center;
+        margin-top: 10px; /* Add space between counter and price */
+    }
+
+    .cart-summary {
+        align-items: center; /* Center summary content */
+        text-align: center;
+        font-size: 14px; /* Smaller font size for summary */
+        gap: 10px; /* Add spacing between summary items */
+    }
+
+    .cart-summary p {
+        display: flex;
+        justify-content: space-between; /* Space out label and price */
+        width: 90%; /* Adjust width for alignment */
+        margin: 0.5rem 0; /* Add spacing between rows */
+    }
+
+    .cart-summary .label {
+        margin-right: auto; /* Push the label to the left */
+    }
+
+    .cart-summary strong {
+        margin-left: auto; /* Push the price to the right */
+    }
+    .vector-above-footer {
+        display: none; /* Hides the vector */
+    }
+
+    /* Checkout Section */
+    .checkout-container {
+        width: 100%; /* Full width for checkout section */
+        padding: 1rem;
+        margin-left: 0%; /* Align with navbar */
+        text-align: left; /* Align text to the left */
+    }
+
+    .checkout-title {
+        font-size: 18px; /* Smaller font size for mobile */
+        text-align: left; /* Align title to the left */
+        margin-bottom: 0.5rem;
+    }
+
+    .checkout-form label {
+        font-size: 12px; /* Smaller label font */
+        margin-bottom: 0.5rem;
+    }
+
+    .checkout-input {
+        font-size: 12px;
+        padding: 6px;
+        width: 100%; /* Full width for inputs */
+    }
+
+    .payment-options {
+        gap: 8px; /* Smaller spacing between payment options */
+    }
+
+    .payment-option img {
+        width: 20px; /* Adjust icon size */
+        height: 20px;
+    }
+
+    .checkout-button {
+        padding: 8px 16px; /* Smaller button padding */
+        font-size: 14px; /* Adjust button font size */
+        width: 100%; /* Full width button for easier tapping */
+    }
+
+    /* Card Details Section */
+    .card-details {
+        display: flex;
+        flex-direction: row; /* Arrange expiration date and CVV in a row */
+        justify-content: space-between; /* Space them apart */
+        align-items: flex-start; /* Align them to the top */
+        gap: 10px; /* Add spacing between the two sections */
+        margin-top: 1rem;
+    }
+
+    /* Expiration Date Section */
+    .expiration-date-container {
+        display: flex;
+        flex-direction: column; /* Stack label and dropdowns vertically */
+        align-items: flex-start; /* Align text and dropdowns to the left */
+        width: 60%; /* Adjust width for better spacing */
+    }
+
+    .expiration-date-container label {
+        font-size: 14px; /* Adjust font size for mobile */
+        font-weight: 600; /* Make the label more prominent */
+        margin-bottom: 5px; /* Add spacing between label and dropdowns */
+        text-align: left; /* Align text to the left */
+    }
+
+    .expiration-date-input {
+        display: flex;
+        flex-direction: row; /* Arrange dropdowns horizontally */
+        gap: 5px; /* Add spacing between month and year dropdowns */
+    }
+
+    .expiration-date-input select {
+        font-size: 14px; /* Adjust font size for better visibility */
+        width: 60px; /* Adjust dropdown width */
+        height: 40px; /* Adjust dropdown height */
+        text-align: center; /* Center-align text inside dropdowns */
+    }
+
+    /* CVV Section */
+    .cvv-container {
+        display: flex;
+        flex-direction: column; /* Stack label and input vertically */
+        align-items: flex-start; /* Align text and input to the left */
+        width: 35%; /* Adjust width for better spacing */
+    }
+
+    .cvv-container label {
+        font-size: 14px; /* Adjust font size for mobile */
+        font-weight: 600; /* Make the label more prominent */
+        margin-bottom: 5px; /* Add spacing between label and input */
+        text-align: left; /* Align text to the left */
+        margin-top: -3px; /* Raise the label slightly */
+
+        }
+
+    .cvv-container input {
+        font-size: 14px; /* Adjust font size for better readability */
+        width: 100%; /* Full width input */
+        height: 40px; /* Adjust input height */
+        padding: 5px; /* Add padding for better usability */
+    }
+
+    /* Adjust dropdowns */
+    .dropdown {
+        font-size: 12px;
+        padding: 4px;
+        width: 100%; /* Full width dropdown */
+    }
+
+    .line-divider {
+        margin: 0.5rem 0;
+    }
+}

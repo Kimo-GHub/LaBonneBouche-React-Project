@@ -1,0 +1,202 @@
+/* Small Screens (750px and below) */
+@media (max-width: 750px) {
+  .header {
+    height: 40rem;
+    background-image: url("../images/Home-images/Banner-phone.png");
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image within the div */
+    background-repeat: no-repeat;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    z-index: 100;
+  }
+  .navbar-collapse {
+    border-radius: 2rem;
+    background-color: #091a45; /* Dark blue background for collapse */
+    position: fixed; /* Make it appear fixed on the screen */
+    top: 4.5%; /* Align it to the top */
+    right: 61%; /* Align it to the right */
+    width: 16rem; /* Width of the dropdown */
+    z-index: 1050; /* Ensure it's above other elements */
+    padding: 20px;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Align links to the left */
+    gap: 10px; /* Space between items */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .navbar-nav .nav-item .link {
+    color: #ffffff !important; /* White text for links */
+    font-size: 1.25rem; /* Slightly larger text for mobile */
+    padding: 10px 0; /* Add padding for better spacing */
+    width: 100%; /* Full-width clickable links */
+    text-align: left;
+  }
+  .nav-item {
+    margin-right: 0;
+  }
+  .auth-buttons {
+    flex-direction: column; /* Stack login and signup buttons */
+    align-items: center; /* Align buttons to the left */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px; /* Add spacing from the links */
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .signup-btn {
+    margin: 0;
+  }
+  /* Hamburger menu button adjustment for better visibility */
+  .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(
+      1
+    ); /* Invert colors for better visibility on dark backgrounds */
+  }
+  #welcome-text {
+    top: 43%;
+  }
+  #welcome-title {
+    font-size: 2rem;
+  }
+  #welcome-subtitle {
+    position: absolute;
+    top: -7%;
+    color: #091a45;
+    text-align: center;
+    font-family: "Beautifully Delicious Script";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 4rem;
+    display: block;
+    z-index: -1;
+  }
+  .shop-now-btn {
+    width: 7rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  #vector-container1 {
+    top: 60%;
+  }
+
+  #about-us {
+    padding-right: 10px;
+    z-index: 1;
+    height: 36rem;
+    background-image: none;
+    background-color: #091a45;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 5%; /* Adjust padding for positioning */
+  }
+}
+
+/* Extra Small Screens (450px and below) */
+@media (max-width: 450px) {
+  .header {
+    height: 25rem;
+    background-position: top;
+  }
+  .logo {
+    margin-left: 1rem;
+  }
+  .nav-links {
+    gap: 5px;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    z-index: 100;
+  }
+  .navbar-collapse {
+    border-radius: 2rem;
+    background-color: #091a45; /* Dark blue background for collapse */
+    position: fixed; /* Make it appear fixed on the screen */
+    top: 11%; /* Align it to the top */
+    right: 2%; /* Align it to the right */
+    width: 16rem; /* Width of the dropdown */
+    z-index: 1050; /* Ensure it's above other elements */
+    padding: 20px;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Align links to the left */
+    gap: 10px; /* Space between items */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .navbar-nav .nav-item .link {
+    color: #ffffff !important; /* White text for links */
+    font-size: 1.25rem; /* Slightly larger text for mobile */
+    padding: 10px 0; /* Add padding for better spacing */
+    width: 100%; /* Full-width clickable links */
+    text-align: left;
+  }
+  .nav-item {
+    margin-right: 0;
+  }
+  .auth-buttons {
+    flex-direction: column; /* Stack login and signup buttons */
+    align-items: center; /* Align buttons to the left */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px; /* Add spacing from the links */
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .signup-btn {
+    margin: 0;
+  }
+  /* Hamburger menu button adjustment for better visibility */
+  .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(
+      1
+    ); /* Invert colors for better visibility on dark backgrounds */
+  }
+  #welcome-text {
+    top: 55%;
+  }
+  #welcome-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .shop-now-btn {
+    width: 6rem;
+    height: 2rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+  }
+  .auth-buttons {
+    flex-direction: column;
+    gap: 3px;
+  }
+  #vector-container1 {
+    display: none; /* Hide on very small screens */
+  }
+}

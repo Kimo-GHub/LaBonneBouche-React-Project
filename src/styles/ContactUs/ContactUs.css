@@ -1,0 +1,438 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#ContactUs-header {
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  color: white;
+  text-align: center;
+  background-color: #091a45;
+}
+
+.logo {
+  margin-left: 2.9rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  text-decoration: none;
+  padding: 5px;
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  font-size: 1.563rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.nav-item {
+  margin-right: 2.1rem;
+}
+.navbar-nav .nav-item .link.active {
+  border-bottom: 2px solid #ffffff;
+  width: 0%;
+  margin: 0 auto;
+  padding-bottom: 5px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-right: 2rem;
+}
+
+.navbar .link[href="#"] {
+  position: relative;
+}
+
+.navbar .link[href="#"]::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+}
+
+.login-btn {
+  background-color: #ffffff;
+  border: none;
+  width: 123px;
+  height: 52px;
+  color: #091a45;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.signup-btn {
+  width: 9.098rem;
+  height: 3.275rem;
+  background-color: #ddb7dc;
+  border: none;
+  margin-right: 2rem;
+  margin-left: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.hero {
+  width: 100%;
+  height: 23.625rem;
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #091a45;
+  color: white;
+}
+
+#hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.57188rem;
+  font-weight: 700;
+  margin-bottom: -1rem;
+}
+
+#hero-subtitle {
+  font-size: 8rem;
+  font-family: "Beautifully Delicious Script";
+  font-weight: 400;
+  opacity: 0.5;
+  line-height: 30%;
+  margin-bottom: 6rem;
+}
+
+.center-section {
+  text-align: center;
+  background-color: #091a45;
+  padding: 60px 20px;
+  margin-bottom: 100px;
+}
+
+.merged-title-container {
+  text-align: center;
+  margin-bottom: 0;
+  color: white;
+  padding-bottom: 10px;
+}
+
+.contact-title {
+  font-size: 48px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 60px;
+}
+
+.vector-container {
+  position: absolute;
+  bottom: -76%;
+  width: 100%;
+  z-index: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pink-background-limited {
+  position: relative;
+  background-color: #ddb7dc;
+  padding: 20px 40px;
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  margin-top: -50px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.contact-details-adjusted {
+  max-width: 600px;
+  margin-left: 90px;
+}
+
+.get-in-touch {
+  font-family: "Poppins", sans-serif;
+  color: #091a45;
+  font-size: 3.57188rem;
+  font-weight: 700;
+  margin-bottom: -1rem;
+  margin-left: 2rem;
+}
+
+.here-to-help {
+  font-size: 8rem;
+  color: #091a45;
+  font-family: "Beautifully Delicious Script";
+  font-weight: 400;
+  opacity: 0.5;
+  line-height: 60%;
+  margin-bottom: 8rem;
+  margin-left: 2rem;
+}
+
+.contact-description {
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  color: #091a45;
+  margin-bottom: 40px;
+  margin-left: 2rem;
+}
+.contact-description p {
+  margin: 0;
+}
+
+.contact-item .contact-text strong {
+  font-weight: normal;
+  color: #091a45;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #091a45;
+}
+
+.contact-text {
+  font-size: 19px;
+  font-family: "Roboto", sans-serif;
+  color: #091a45;
+}
+
+.contact-text strong {
+  color: #091a45;
+}
+
+.contact-text br {
+  color: white;
+}
+
+.contact-text {
+  color: white;
+}
+
+.contact-item .contact-icon {
+  margin-right: 20px;
+}
+
+.contact-item:first-child .contact-icon {
+  margin-right: 30px;
+}
+
+.owner-image-above {
+  width: 600px;
+  height: auto;
+  margin-top: -650px;
+  margin-left: 1150px;
+  position: relative;
+  z-index: 1;
+}
+
+.owner-image-above img {
+  width: 40.75rem;
+  height: 50.5rem;
+  height: auto;
+  border-radius: 0.52438rem;
+}
+
+.background-text-container {
+  position: absolute;
+  top: 560px;
+  left: 88.2%;
+  transform: translateX(-50%);
+  z-index: -1;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.background-text {
+  font-family: "Beautifully Delicious Script", serif;
+  font-size: 80px;
+  font-weight: 400;
+  color: #091a45;
+  line-height: 0.7;
+  letter-spacing: 0px;
+  position: relative;
+  opacity: 0.5;
+  margin: 0;
+  display: block;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.background-text-container-new {
+  position: absolute;
+  top: 130%;
+  left: 59.5%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.background-text-new {
+  font-family: "Beautifully Delicious Script", serif;
+  font-size: 6rem;
+  font-weight: 400;
+  color: #091a45;
+  line-height: 0.7;
+  letter-spacing: 0px;
+  position: relative;
+  opacity: 0.5;
+  margin: 0;
+  display: block;
+  transform: translateX(-50%);
+  left: 50%;
+  z-index: 20;
+}
+
+/* Footer */
+footer {
+  margin-top: 100px;
+}
+
+#footer-content {
+  width: 100vw;
+  height: 18.63rem;
+  padding: 4rem 7rem;
+  padding-top: 5rem;
+  margin-bottom: 1.5px;
+}
+#logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+}
+.footer-list {
+  max-width: 50rem;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+}
+
+#list1 {
+  height: 10.05rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  padding-left: 2.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#list2 {
+  height: 10.05rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#list3 {
+  height: 6rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#list1 .footer-text:first-child {
+  font-weight: 600;
+}
+#location-text {
+  text-decoration: none;
+  display: inline-block;
+  background-image: linear-gradient(white, white);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 23% 0.5px;
+  padding-bottom: 0.25rem;
+}
+.footer-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  list-style-type: none;
+}
+#socials {
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#follow-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5625rem;
+  font-weight: 300;
+  color: white;
+  margin: 0;
+}
+
+.social-icons {
+  display: flex;
+  gap: 2rem;
+}
+
+.social-icon {
+  width: fit-content;
+  height: fit-content;
+}
+#copyright-cont {
+  height: 3.4rem;
+  padding: 1rem 0;
+}
+#copyright-text {
+  color: #f2f2f2;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.84244rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

@@ -1,0 +1,181 @@
+/* Reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Header background */
+.header {
+  width: 100%;
+  height: 74rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+/* Overall nav container */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+/* Logo stays left */
+.logo {
+  flex-shrink: 0;
+}
+
+/* Nav links + buttons together on right */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Nav links list */
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Individual link */
+.link {
+  text-decoration: none;
+  color: #091a45;
+  font-size: 1.563rem;
+  font-style: normal;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Active link underline */
+.link.active {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+/* Auth buttons wrapper */
+.auth-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Button base styles */
+.login-btn,
+.signup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+/* Login style */
+.login-btn {
+  background-color: #091a45;
+  color: #fff;
+}
+
+/* Sign Up style */
+.signup-btn {
+  background-color: #ffffff;
+  color: #091a45;
+  border: 2px solid #091a45;
+}
+
+
+
+/* Hamburger Icon Styling */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 999;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #091a45;
+  transition: 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+/* Open state animations */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-actions {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-actions.menu-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .nav-links .link {
+    font-size: 1.25rem;
+    width: 100%;
+    color: #091a45;
+    padding: 0.5rem 0;
+  }
+
+  .auth-buttons {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .login-btn,
+  .signup-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+}

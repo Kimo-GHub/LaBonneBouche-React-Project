@@ -1,0 +1,573 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+#product-header {
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  color: white;
+  text-align: center;
+  background-color: #091a45;
+}
+/* Navbar */
+.logo {
+  margin-left: 2.9rem;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+#products-link.active {
+  color: #ffffff; /* White color for the active link */
+  text-decoration: underline solid #ffffff 1px;
+  text-underline-offset: 0.6rem;
+}
+
+.link {
+  text-decoration: none;
+  padding: 5px;
+  color: #ffffff;
+  font-size: 1.563rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.nav-item {
+  margin-right: 2.1rem;
+}
+.nav-links li a.active {
+  color: #091a45;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-right: 2rem;
+}
+
+.login-btn,
+.signup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.login-btn {
+  background-color: #ffffff;
+  border: none;
+  width: 123px;
+  height: 52px;
+  color: #091a45;
+}
+.signup-btn {
+  width: 9.098rem;
+  height: 3.275rem;
+  background-color: #fff;
+  background: #ddb7dc;
+  border: none;
+  margin-right: 2rem;
+  margin-left: 10px;
+}
+
+/* Hero Section */
+.hero {
+  width: 100%;
+  height: 23.625rem;
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #091a45;
+  color: white;
+}
+
+#hero-title {
+  font-size: 3.57188rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: -1rem;
+}
+
+#hero-subtitle {
+  font-size: 2rem;
+  font-family: "Beautifully Delicious Script";
+  opacity: 50%;
+  font-size: 8rem;
+  font-weight: 400;
+  line-height: 30%; /* 2.4rem */
+  margin-bottom: 6rem;
+}
+
+/* Cookie Products Section */
+#cookies {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 10rem;
+}
+#cookie-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: 7rem;
+}
+#products-vector {
+  width: 19.37056rem;
+  height: 18.00781rem;
+  flex-shrink: 0;
+  margin-right: 6.9rem;
+  margin-top: -5.5rem;
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  width: 50%;
+  margin-left: 6rem;
+}
+#cookie-title {
+  color: #091a45;
+  font-size: 3.6188rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 14.9375rem;
+  margin-right: 4.5rem;
+}
+#cookie-subtitle {
+  color: #091a45;
+  font-family: "Beautifully Delicious Script";
+  font-size: 8rem;
+  font-style: normal;
+  opacity: 50%;
+  width: 34.75rem;
+  height: 4.375rem;
+  font-weight: 400;
+  line-height: 30%; /* 2.4rem */
+  width: 34.75rem;
+  height: 4.375rem;
+  margin-top: -1rem;
+}
+#carousel-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.arrows {
+  margin-top: -15rem;
+  background-color: transparent;
+  border: none;
+  max-width: 1.62919rem;
+  height: auto;
+  cursor: pointer;
+}
+
+.arrows img {
+  width: 1.62919rem;
+  height: auto;
+}
+.arrows:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#cookie-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: nowrap; /* Change from wrap to nowrap */
+  overflow-x: hidden; /* Enable horizontal scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+  width: calc(4 * 25.5rem + 3 * 1.5rem); /* Width for 4 items and gaps */
+}
+
+/* Hide scrollbar in WebKit browsers */
+#cookie-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-item {
+  width: 25.5rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image {
+  width: 100%;
+  height: 33.5rem;
+  border-radius: 0.5rem;
+}
+.product-title {
+  min-width: 100%;
+  height: fit-content;
+  color: #ddb7dc;
+  text-align: center;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 1.19rem;
+}
+.product-description {
+  width: 25.5rem;
+  height: fit-content;
+  color: #091a45;
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-transform: lowercase;
+}
+.product-price {
+  color: #091a45;
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  line-height: normal;
+  margin-top: -0.5rem;
+}
+.bold-price {
+  font-weight: 700; /* Bold weight for the price */
+}
+
+.normal-price {
+  font-weight: 300; /* Normal or light weight for the unit */
+}
+.product-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.add-to-cart {
+  border-radius: 2.47rem;
+  border: 1px solid #091a45;
+  color: #091a45;
+  width: 11.0625rem;
+  height: 3.3125rem;
+  color: #091a45;
+  font-size: 1.48088rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: transparent;
+}
+.add-to-cart:hover {
+  background-color: #ddb7dc;
+}
+#bites {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 5.7rem;
+  background-image: url("product-images/bites-bg-img.png");
+  background-size: fill; /* Ensures the image covers the entire div */
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+#bites-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+#bites-title {
+  width: 34.375rem;
+  color: #091a45;
+  font-size: 3.57188rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#bites-subtitle {
+  color: #091a45;
+  font-family: "Beautifully Delicious Script";
+  font-size: 8rem;
+  font-style: normal;
+  opacity: 50%;
+  width: 34.75rem;
+  height: 4.375rem;
+  font-weight: 400;
+  line-height: 30%; /* 2.4rem */
+  width: 40.1875rem;
+  height: 4.375rem;
+  margin-top: -0.9rem;
+  margin-left: 1.7rem;
+}
+#bites-container {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Cakes section design */
+#cakes {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+#cakes-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+#cakes-title {
+  color: #091a45;
+  font-size: 3.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#cakes-subtitle {
+  color: #091a45;
+  font-family: "Beautifully Delicious Script";
+  font-size: 8rem;
+  font-style: normal;
+  opacity: 50%;
+  width: 19.8125rem;
+  height: 4.375rem;
+  font-weight: 400;
+  line-height: 30%; /* 2.4rem */
+  margin-top: -1rem;
+}
+#cakes-quote {
+  color: #091a45;
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 1.5rem;
+}
+
+#cakes-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/* Special Cakes section */
+#special {
+  width: 100%;
+  margin-bottom: 3.4rem;
+  padding: 2rem 0;
+}
+#special-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.3rem;
+  margin-left: 2rem;
+}
+#special-title {
+  width: 41.375rem;
+  color: #091a45;
+  font-size: 3.57188rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#special-subtitle {
+  color: #091a45;
+  font-family: "Beautifully Delicious Script";
+  font-size: 8rem;
+  font-style: normal;
+  opacity: 50%;
+  width: 34.75rem;
+  height: 4.375rem;
+  font-weight: 400;
+  line-height: 30%; /* 2.4rem */
+  width: 74.875rem;
+  height: 4.375rem;
+  margin-top: -1rem;
+}
+#special-img-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 3rem;
+}
+#img-content {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#special-text {
+  width: 56.625rem;
+  color: #ffffff;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#special-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 2.47rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  background: #ddb7dc;
+  border: none;
+  color: #091a45;
+  font-size: 1.48088rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+footer {
+  max-height: 22.5rem;
+}
+#footer-content {
+  width: 100vw;
+  height: 18.63rem;
+  padding: 4rem 7rem;
+  padding-top: 5rem;
+  margin-bottom: 1.5px;
+}
+#logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+}
+.footer-list {
+  max-width: 50rem;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+}
+
+#list1 {
+  height: 10.05rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  padding-left: 2.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#list2 {
+  height: 10.05rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#list3 {
+  height: 6rem;
+  width: fit-content;
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#list1 .footer-text:first-child {
+  font-weight: 600;
+}
+#location-text {
+  text-decoration: none; /* Remove any default underline */
+  display: inline-block; /* Allows better control over background positioning */
+  background-image: linear-gradient(white, white); /* Color of the underline */
+  background-repeat: no-repeat;
+  background-position: bottom left; /* Centers the underline */
+  background-size: 23% 0.5px; /* Width of 30% and thickness of 1px */
+  padding-bottom: 0.25rem; /* Adjust spacing between text and underline */
+}
+.footer-text {
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  list-style-type: none;
+}
+#socials {
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#follow-text {
+  font-size: 1.5625rem;
+  font-weight: 300;
+  color: white;
+  margin: 0;
+}
+
+.social-icons {
+  display: flex;
+  gap: 2rem;
+}
+
+.social-icon {
+  width: fit-content; /* Adjust size based on preference */
+  height: fit-content;
+}
+#copyright-cont {
+  height: 3.4rem;
+  padding: 1rem 0;
+}
+#copyright-text {
+  color: #f2f2f2;
+  font-size: 0.84244rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
