@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from '../Home-Page/Header'
+import Footer from '../Home-Page/Footer'
 //import './styles/ContactUsPage.css'; 
 // import logo from './assets/images/logo.png';
 // import locationIcon from './assets/images/icon.png';
@@ -13,33 +15,8 @@ import React from 'react';
 function ContactUs () {
   return (
     <div>
-      <header id="ContactUs-header">
-        <nav className="navbar navbar-expand-lg navbar-light pt-5">
-          <div className="container-fluid">
-            <div className="col-6 col-md-3 logo">
-              <a href="#"><img src={logo} alt="La Bonne Bouche" className="img-fluid" /></a>
-            </div>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span></span><span></span><span></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li className="nav-item"><a className="link" href="#">Home</a></li>
-                <li className="nav-item"><a className="link" href="#">About Us</a></li>
-                <li className="nav-item"><a className="link" href="#">Shop</a></li>
-                <li className="nav-item"><a className="link" href="#">My Cart</a></li>
-                <li className="nav-item"><a className="link active" href="#">Contact Us</a></li>
-              </ul>
-              <div className="auth-buttons d-flex">
-                <button className="login-btn">Login</button>
-                <button className="signup-btn">Sign up</button>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      <main className="w-100">
+     <Header/>
+      {/* <main className="w-100">
         <section className="hero d-flex flex-column justify-content-start">
           <h1 id="hero-title">Contact Us</h1>
           <h2 id="hero-subtitle">Let's Connect</h2>
@@ -98,38 +75,9 @@ function ContactUs () {
         <div className="owner-image-above">
           <img src={ownerImage} alt="Owner" />
         </div>
-      </main>
+      </main> */}
 
-      <footer className="text-white" style={{ backgroundColor: '#ffffff' }}>
-        <div id="footer-content" className="d-flex column align-content-center justify-content-between" style={{ backgroundColor: '#091a45' }}>
-          <div id="logo-container"><img src={logo2} alt="LaBonneBouche" id="footer-logo" /></div>
-          <ul className="footer-list" id="list1">
-            <li className="footer-text">About Us</li>
-            <li className="footer-text">Products</li>
-            <li className="footer-text">Newsletter</li>
-          </ul>
-          <ul className="footer-list" id="list2">
-            <li className="footer-text">Loyalty Program</li>
-            <li className="footer-text">Customized Cake</li>
-            <li className="footer-text">Review</li>
-          </ul>
-          <div id="list3">
-            <li className="footer-text" id="location-text">Location</li>
-            <li className="footer-text">Ashrafieh, Beirut</li>
-          </div>
-          <div id="socials">
-            <p id="follow-text">Follow us</p>
-            <div className="social-icons">
-              <img src={facebook} alt="Facebook" className="social-icon" />
-              <img src={instagram} alt="Instagram" className="social-icon" />
-              <img src={tiktok} alt="TikTok" className="social-icon" />
-            </div>
-          </div>
-        </div>
-        <div id="copyright-cont" className="d-flex justify-content-center">
-          <p id="copyright-text">Copyright © All rights reserved | LaBonneBouche</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };
