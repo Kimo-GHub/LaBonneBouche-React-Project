@@ -47,6 +47,10 @@ function Profile () {
     }
   };
 
+  const handleGoBack = () => {
+    navigate("/"); // Navigate to home page
+  };
+
   return (
     <div className="profile-container">
       <div className="sidebar">
@@ -94,9 +98,17 @@ function Profile () {
           <div className="section">
             <h2>Account Settings</h2>
             {/* Add account settings options here */}
-            <p>Manage your account settings here.</p>
+            <button 
+              onClick={handleGoBack} 
+              className="delete-cancel-btn"
+            >
+              Back to Home
+            </button>
           </div>
         )}
+        
+        
+
       </div>
 
       {/* Delete Account Confirmation Modal */}
@@ -116,9 +128,12 @@ function Profile () {
             >
               Cancel
             </button>
+
           </div>
         </div>
       )}
+
+
     </div>
   );
 };
