@@ -13,8 +13,13 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(email, password);
-      navigate("/");
+      const { role } = await loginUser(email, password);
+
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -42,8 +47,7 @@ export default function Login() {
       </form>
       {error && <p className="error">{error}</p>}
       <div className="switch-link">
-        Don’t have an account?
-        <Link to="/signup">Sign Up</Link>
+        Don’t have an account? <Link to="/signup">Sign Up</Link>
       </div>
     </div>
   );

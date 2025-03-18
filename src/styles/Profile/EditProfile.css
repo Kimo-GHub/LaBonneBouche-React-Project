@@ -4,6 +4,9 @@
   padding: 20px;
 }
 
+.main-content{
+  padding: 0;
+}
 .profile-pic-section img {
   width: 100px;
   height: 100px;

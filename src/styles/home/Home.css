@@ -1,0 +1,92 @@
+
+#about-us {
+  background-image: url('../../assets/Home-images/aboutusBG.png');
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
+  padding-right: 10px;
+  z-index: 1;
+  height: 36rem;
+  background-image: none;
+  background-color: #091a45;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 5%; 
+}
+
+
+#about-us {
+  background-image: url('../../assets/Home-images/aboutusBG.png'); 
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
+  background-color: #091a45;
+  color: #fff; 
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; 
+  padding: 8rem;
+  text-align: left;
+}
+
+#about-us-heading {
+  margin-bottom: 2rem;
+}
+
+#about-us-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px; 
+}
+#about-us-subtitle {
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-family: "Beautifully Delicious Script";
+  margin-top: 1rem;
+  opacity: 75%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  letter-spacing: 1px; 
+}
+
+#about-us-content {
+  max-width: 80%;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: normal;
+  color: #dddddd;
+  margin-top: 2rem;
+  line-height: 1.6;
+
+  font-weight: 300; 
+  font-family:'Poppins',sans-serif;
+}
+
+/* Styling for the button */
+.read-more-btn {
+  font-size: 1.2rem; 
+  font-weight: 800;
+  color: #091a45; 
+  background-color: #f1a7c3; 
+  padding: 0.75rem 1.5rem; 
+  text-decoration: none;
+  border-radius: 30px; 
+  display: inline-block;
+  text-align: center;
+  margin-top: 40px;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+.read-more-btn:hover {
+  background-color: #e68fa3; 
+  transform: scale(1.05); 
+}
+
+.read-more-btn:focus {
+  outline: none; 
+}
