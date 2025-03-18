@@ -13,11 +13,12 @@ import React from 'react';
 // import instagramIcon from './assets/images/cart/cart-images/instagram-icon.png';
 // import tiktokIcon from './assets/images/cart/cart-images/tiktok-icon.png';
 
-function Cart(){
+/*function Cart(){
   return (
     <div>
+    */
       {/* Header */}
-      <header id="Cart-header">
+      /*<header id="Cart-header">
         <nav className="navbar navbar-expand-lg navbar-light pt-5">
           <div className="container-fluid">
             <div className="col-6 col-md-3 logo">
@@ -42,8 +43,9 @@ function Cart(){
           </div>
         </nav>
       </header>
-
+*/
       {/* Hero Section */}
+      /*
       <main className="w-100">
         <section className="hero d-flex flex-column justify-content-start">
           <h1 id="hero-title">Your Cart</h1>
@@ -53,10 +55,12 @@ function Cart(){
             <span id="hero-my-cart" style={{ color: "white", fontSize: 16 }}>→ My Cart</span>
           </div>
         </section>
-
+*/
         {/* Cart Section */}
-        <section className="cart-section d-flex justify-content-around">
+        /*
+        <section className="cart-section d-flex justify-content-around">*/
           {/* Cart Items */}
+          /*
           <div className="cart-items-container">
             <div className="cart-header">
               <p className="product-header">Product</p>
@@ -64,8 +68,9 @@ function Cart(){
               <p className="price-header">Price</p>
             </div>
             <hr className="header-divider" />
-
+*/
             {/* Item 1 */}
+            /*
             <div className="cart-item">
               <img src={product1} alt="Chocolate Chip Cookie" className="cart-item-image" />
               <div className="cart-item-details">
@@ -81,8 +86,9 @@ function Cart(){
               </div>
               <p className="cart-item-price">$3.50</p>
             </div>
-
+*/
             {/* Item 2 */}
+            /*
             <div className="cart-item">
               <img src={product2} alt="Mini Brownies" className="cart-item-image" />
               <div className="cart-item-details">
@@ -98,8 +104,9 @@ function Cart(){
               </div>
               <p className="cart-item-price">$4.00</p>
             </div>
-
+*/
             {/* Item 3 */}
+            /*
             <div className="cart-item">
               <img src={product3} alt="Orange Cake" className="cart-item-image" />
               <div className="cart-item-details">
@@ -115,16 +122,18 @@ function Cart(){
               </div>
               <p className="cart-item-price">$30.00</p>
             </div>
-
+*/
             {/* Cart Summary */}
+            /*
             <div className="cart-summary">
               <p><span className="label">Subtotal</span><strong>$37.50</strong></p>
               <p><span className="label">Delivery</span><strong>Free</strong></p>
               <p className="total"><span className="label">Total:</span><strong>$37.50</strong></p>
             </div>
           </div>
-
+*/
           {/* Checkout Section */}
+          /*
           <div className="checkout-container">
             <h2 className="checkout-title">You’re Almost There!</h2>
             <form className="checkout-form">
@@ -187,14 +196,19 @@ function Cart(){
           </div>
         </section>
       </main>
-
+*/
       {/* SVG Vector Above Footer */}
+      /*
       <div className="vector-above-footer">
+      */
         {/* Optionally inline the SVG directly here */}
+        /*
         <img src={vectorSVG} alt="Vector Design" />
+        
       </div>
-
+*/
       {/* Footer */}
+      /*
       <footer className="text-white" style={{ backgroundColor: '#ffffff' }}>
         <div id="footer-content" className="d-flex column align-content-center justify-content-between" style={{ backgroundColor: '#091a45' }}>
           <div id="logo-container"><img src={footerLogo} alt="LaBonneBouche" id="footer-logo" /></div>
@@ -230,3 +244,4 @@ function Cart(){
 };
 
 export default Cart;
+*/
