@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { registerUser } from "../../Firebase/firebase"; // Your registerUser handles creating user with email+password
+import { registerUser } from "../../Firebase/firebase";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/Auth/AuthForm.css";
 
@@ -43,10 +43,9 @@ export default function Signup() {
     }
 
     try {
-      await registerUser(email, password); // You can enhance registerUser to save firstName & lastName in Firestore
+      await registerUser(email, password, firstName, lastName);
       navigate("/login");
     } catch (err) {
-      // Handle duplicate email
       if (err.code === "auth/email-already-in-use") {
         setError(
           <>
@@ -64,8 +63,6 @@ export default function Signup() {
     <div className="auth-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSignup} className="signup-form-grid">
-
-        {/* First & Last Name */}
         <div className="input-pair">
           <input
             type="text"
@@ -83,7 +80,6 @@ export default function Signup() {
           />
         </div>
 
-        {/* Email & Password */}
         <div className="input-pair">
           <input
             type="email"
@@ -101,7 +97,6 @@ export default function Signup() {
           />
         </div>
 
-        {/* Password Strength Indicator */}
         <div className="password-strength">
           <progress value={strength} max="4"></progress>
           <ul className="password-rules">
@@ -112,7 +107,6 @@ export default function Signup() {
           </ul>
         </div>
 
-        {/* Confirm Password */}
         <div className="full-width-input">
           <input
             type="password"
@@ -126,7 +120,6 @@ export default function Signup() {
         <button type="submit">Sign Up</button>
       </form>
 
-      {/* Error Message */}
       {error && <p className="error">{error}</p>}
 
       <div className="switch-link">

@@ -9,10 +9,9 @@ function Profile () {
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(defaultProfilePic);
   const [activeSection, setActiveSection] = useState("editProfile");
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal visibility
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
 
-  // Get current user from Firebase authentication
   useEffect(() => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
@@ -20,7 +19,7 @@ function Profile () {
       setUser(currentUser);
       setProfilePicture(currentUser.photoURL || defaultProfilePic);
     } else {
-      navigate("/login"); // Redirect to login if no user is logged in
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -40,7 +39,7 @@ function Profile () {
       try {
         await deleteUser(currentUser);
         console.log("User deleted successfully");
-        navigate("/login"); // Redirect to login page after account deletion
+        navigate("/login");
       } catch (error) {
         console.error("Error deleting user: ", error);
       }
@@ -48,7 +47,7 @@ function Profile () {
   };
 
   const handleGoBack = () => {
-    navigate("/"); // Navigate to home page
+    navigate("/");
   };
 
   return (
@@ -56,6 +55,7 @@ function Profile () {
       <div className="sidebar">
         <div className="profile-pic-container">
           <img src={profilePicture} alt="Profile" className="profile-pic" />
+          {user && <h3 className="profile-name">{user.displayName || "User"}</h3>}
         </div>
         <ul className="sidebar-menu">
           <li
@@ -77,63 +77,51 @@ function Profile () {
             Account Settings
           </li>
           <li onClick={handleLogout}>Logout</li>
-          <li onClick={() => setShowDeleteModal(true)}>Delete Account</li> {/* Delete Account button */}
+          <li onClick={() => setShowDeleteModal(true)}>Delete Account</li>
         </ul>
       </div>
 
       <div className="main-content">
         {activeSection === "editProfile" && (
           <div className="section">
-            <EditProfile /> {/* Corrected component name */}
+            <EditProfile />
           </div>
         )}
         {activeSection === "addPayment" && (
           <div className="section">
             <h2>Add Payment Method</h2>
-            {/* Add payment method form or details here */}
             <p>Add your payment method details here.</p>
           </div>
         )}
         {activeSection === "accountSettings" && (
           <div className="section">
             <h2>Account Settings</h2>
-            {/* Add account settings options here */}
-            <button 
-              onClick={handleGoBack} 
-              className="delete-cancel-btn"
-            >
+            <button onClick={handleGoBack} className="delete-cancel-btn">
               Back to Home
             </button>
           </div>
         )}
-        
-        
-
       </div>
 
-      {/* Delete Account Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Are you sure you want to delete your account?</h3>
-            <button 
-              onClick={handleDeleteAccount} 
+            <button
+              onClick={handleDeleteAccount}
               className="delete-confirm-btn"
             >
               Yes, Delete
             </button>
-            <button 
-              onClick={() => setShowDeleteModal(false)} 
+            <button
+              onClick={() => setShowDeleteModal(false)}
               className="delete-cancel-btn"
             >
               Cancel
             </button>
-
           </div>
         </div>
       )}
-
-
     </div>
   );
 };

@@ -71,21 +71,25 @@
 /* Button base styles */
 .login-btn,
 .signup-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 2rem;
-  border-radius: 30px;
+ 
+  border-radius: 999px;
   font-size: 1.25rem;
   font-weight: 600;
   cursor: pointer;
   border: none;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* Login style */
 .login-btn {
   background-color: #091a45;
   color: #fff;
+  padding: 0.90rem 2rem;
 }
 
 /* Sign Up style */
@@ -93,8 +97,19 @@
   background-color: #ffffff;
   color: #091a45;
   border: 2px solid #091a45;
+  padding: 0.80rem 2rem;
+
 }
 
+/* Add hover effect for better UX */
+.login-btn:hover {
+  background-color: #0b2a6a;
+}
+
+.signup-btn:hover {
+  background-color: #091a45;
+  color: #fff;
+}
 
 
 /* Hamburger Icon Styling */
@@ -199,3 +214,4 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
