@@ -5,6 +5,8 @@ import '../../styles/AboutUs/AboutUs.css';
 import visualourstory from '../../assets/About-us-images/visualourstory.png';
 import OurMission1 from '../../assets/About-us-images/OurMission1.png';
 import OurMission2 from '../../assets/About-us-images/OurMission2.png';
+import vision1 from '../../assets/About-us-images/vision1.png'; 
+import vision2 from '../../assets/About-us-images/vision2.png'; 
 
 function AboutUs() {
   return (
@@ -47,6 +49,27 @@ function AboutUs() {
               </p>
             </div>
           
+          </div>
+        </div>
+
+        {/* Our Vision Section */}
+        <div className="our-vision-section">
+       
+          <div className="vision-content">
+            <div className="vision-description">
+            <div className="vision-photo">
+              <img src={vision2} alt="Our Vision Image" className="vision-photo-image"/>
+            </div>
+              <p>
+                To be a beloved institution, renowned for our exceptional pastries and warm hospitality. We envision a world where our creations inspire joy, comfort, and celebration, leaving a lasting impression on every customer. 
+                We aspire to be the go-to destination for those seeking exquisite treats, whether it's a special occasion or a simple indulgence. Through our dedication to quality, innovation, and customer satisfaction, 
+                we aim to build a loyal following and become a cherished part of the community.
+              </p>
+            </div>
+         
+          </div>
+          <div className="vision-title">
+            <img src={vision1} alt="Our Vision Title" className="vision-title-image"/>
           </div>
         </div>
       </main>
