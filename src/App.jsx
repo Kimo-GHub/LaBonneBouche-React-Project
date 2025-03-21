@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from './components/Home-Page/home';
-import AboutUs from './components/AboutUs-Page/AboutUs';
-import Products from './components/Products-Page/Products';
-import Cart from './components/Cart-Page/Cart';
-import ContactUs from './components/ContactUs-Page/ContactUs';
+import Home from './Pages/Home-Page/home';
+import AboutUs from './Pages/AboutUs-Page/AboutUs';
+import Products from './Pages/Products-Page/Products';
+import Cart from './Pages/Cart-Page/Cart';
+import ContactUs from './Pages/ContactUs-Page/ContactUs';
 import Login from './components/Auth/LoginPage';
 import Signup from './components/Auth/Signup';
 import Profile from './components/Profile-Page/Profile';
-import AdminPanel from './components/Admin-Panel/Admin-Panel'; 
+import AdminPanel from './Pages/Admin-Panel/Admin-Panel'; 
 import ScrollToTopButton from './components/ScrollToTopButton';
 import { auth } from './Firebase/firebase'; 
-import { onAuthStateChanged, getIdTokenResult } from 'firebase/auth'; 
+import { onAuthStateChanged, getIdTokenResult } from 'firebase/auth';    
 
 function App () {
   const [user, setUser] = useState(null);

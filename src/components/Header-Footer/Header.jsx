@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import '../../styles/home/Header.css';
-import bannerBg from '../../assets/Home-images/BANNER.png';
-import logo from '../../assets/Home-images/logo.png';
-import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png'; 
+import bannerBg from '../../images/Home-images/BANNER.png';
+import logo from '../../images/Home-images/logo.png';
+import defaultProfilePic from '../../images/Home-images/DefaultProfile.png'; 
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

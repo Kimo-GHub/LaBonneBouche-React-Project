@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../../Firebase/Supabase';  // Import supabase client
 import { getAuth, updateProfile, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png';  // Default profile image
+import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';  // Default profile image
 import '../../styles/Profile/EditProfile.css';  // Assuming you have custom styles
 
 function EditProfile() {

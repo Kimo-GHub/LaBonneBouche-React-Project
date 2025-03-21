@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Home-Page/Header';
-import Footer from '../Home-Page/Footer';
+import Header from '../../components/Header-Footer/Header';
+import Footer from '../../components/Header-Footer/Footer';
 // import './ProductsPage.css'; // You can transfer all styles from products_style.css, etc.
 
 // import logo from './assets/images/product-images/logo.png';

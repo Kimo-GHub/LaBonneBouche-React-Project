@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import '../../styles/home/Home.css'; 
-import aboutusBG from '../../assets/Home-images/aboutusBG.png';
+import Header from '../../components/Header-Footer/Header';
+import Footer from '../../components/Header-Footer/Footer';
+import './Home.css'; 
+import aboutusBG from '../../images/Home-images/aboutusBG.png';
 
 function Home() {
     return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Profile/Profile.css";
-import defaultProfilePic from '../../assets/Home-images/DefaultProfile.png';
+import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
 import EditProfile from './EditProfile'; // Corrected import statement
 
 function Profile () {

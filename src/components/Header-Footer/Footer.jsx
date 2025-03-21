@@ -1,9 +1,9 @@
 import React from 'react';
 import '../../styles/home/Footer.css';
-import logo2 from '../../assets/Home-images/logo2.png';
-import facebookIcon from '../../assets/Home-images/facebook-icon.png';
-import instagramIcon from '../../assets/Home-images/instagram-icon.png';
-import tiktokIcon from '../../assets/Home-images/tiktok-icon.png';
+import logo2 from '../../images/Home-images/logo2.png';
+import facebookIcon from '../../images/Home-images/facebook-icon.png';
+import instagramIcon from '../../images/Home-images/instagram-icon.png';
+import tiktokIcon from '../../images/Home-images/tiktok-icon.png';
 
 function Footer() {
   return (

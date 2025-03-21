@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../Home-Page/Header';
-import Footer from '../Home-Page/Footer';
-import '../../styles/AboutUs/AboutUs.css'; 
-import visualourstory from '../../assets/About-us-images/visualourstory.png';
-import OurMission1 from '../../assets/About-us-images/OurMission1.png';
-import OurMission2 from '../../assets/About-us-images/OurMission2.png';
-import vision1 from '../../assets/About-us-images/vision1.png'; 
-import vision2 from '../../assets/About-us-images/vision2.png'; 
+import Header from '../../components/Header-Footer/Header';
+import Footer from '../../components/Header-Footer/Footer';
+import './AboutUs.css'; 
+import visualourstory from '../../images/About-us-images/visualourstory.png';
+import OurMission1 from '../../images/About-us-images/OurMission1.png';
+import OurMission2 from '../../images/About-us-images/OurMission2.png';
+import vision1 from '../../images/About-us-images/vision1.png'; 
+import vision2 from '../../images/About-us-images/vision2.png'; 
 
 function AboutUs() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Home-Page/Header'
-import Footer from '../Home-Page/Footer'
+import Header from '../../components/Header-Footer/Header'
+import Footer from '../../components/Header-Footer/Footer'
 //import './styles/ContactUsPage.css'; 
 // import logo from './assets/images/logo.png';
 // import locationIcon from './assets/images/icon.png';
