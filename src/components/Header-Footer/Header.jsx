@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import '../../styles/home/Header.css';
 import bannerBg from '../../images/Home-images/BANNER.png';
 import logo from '../../images/Home-images/logo.png';
-import defaultProfilePic from '../../images/Home-images/DefaultProfile.png'; 
+import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,11 +28,7 @@ function Header() {
   }, []);
 
   const handleProfileClick = () => {
-    if (user) {
-      navigate('/profile');
-    } else {
-      navigate('/login');
-    }
+    navigate(user ? '/profile' : '/login');
   };
 
   return (
@@ -51,6 +47,7 @@ function Header() {
           <span></span>
         </div>
 
+        {/* Navigation */}
         <div className={`nav-actions ${menuOpen ? 'menu-open' : ''}`}>
           <ul className="navbar-nav nav-links">
             <li className="nav-item">
