@@ -7,6 +7,8 @@ import OurMission1 from '../../images/About-us-images/OurMission1.png';
 import OurMission2 from '../../images/About-us-images/OurMission2.png';
 import vision1 from '../../images/About-us-images/vision1.png'; 
 import vision2 from '../../images/About-us-images/vision2.png'; 
+import AboutCelinaImage from '../../images/About-us-images/about-celina.png';
+import AboutCTextImage from '../../images/About-us-images/AboutC.png';
 
 function AboutUs() {
   return (
@@ -72,6 +74,30 @@ function AboutUs() {
             <img src={vision1} alt="Our Vision Title" className="vision-title-image"/>
           </div>
         </div>
+
+        <div className="About-Celine">
+  <div className="about1">
+    <img
+      src={AboutCelinaImage}
+      alt="Celina rolling dough"
+    />
+  </div>
+  <div className="about2">
+    <img
+      src={AboutCTextImage}
+      alt="About Celina title"
+      className="celina-title-img"
+    />
+    <p>
+      Celina, the heart and soul of our patisserie, is a passionate baker with a lifelong love for sweets.
+      Inspired by her family’s culinary traditions, she embarked on a journey to share her passion with the world.
+      With each creation, Celina strives to evoke nostalgia and delight, ensuring every bite is a memorable experience.
+    </p>
+  </div>
+</div>
+
+
+
       </main>
 
       <Footer />

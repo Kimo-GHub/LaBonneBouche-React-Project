@@ -3,7 +3,7 @@ import { getAuth, signOut, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Profile/Profile.css";
 import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
-import EditProfile from './EditProfile'; // Corrected import statement
+import EditProfile from './EditProfile'; 
 
 function Profile () {
   const [user, setUser] = useState(null);
