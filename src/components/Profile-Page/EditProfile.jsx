@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../Firebase/Supabase';  // Import supabase client
-import { getAuth, updateProfile, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
+import { supabase } from '../../Firebase/supabaseClient';
+import {
+  getAuth,
+  updateProfile,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  updatePassword
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc
+} from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';  // Default profile image
-import '../../styles/Profile/EditProfile.css';  // Assuming you have custom styles
+import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
+import '../../styles/Profile/EditProfile.css';
 
 function EditProfile() {
   const [user, setUser] = useState(null);
@@ -16,108 +28,197 @@ function EditProfile() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Password strength validation
+  const passwordValidations = {
+    length: newPassword.length >= 8,
+    uppercase: /[A-Z]/.test(newPassword),
+    number: /[0-9]/.test(newPassword),
+    specialChar: /[^A-Za-z0-9]/.test(newPassword),
+  };
+  const isPasswordStrong = Object.values(passwordValidations).every(Boolean);
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const db = getFirestore();
+
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setEmail(currentUser.email);
-        setFirstName(currentUser.displayName.split(' ')[0] || ''); 
-        setLastName(currentUser.displayName.split(' ')[1] || '');  
         setProfilePicture(currentUser.photoURL || defaultProfilePic);
+
+        try {
+          const docRef = doc(db, 'users', currentUser.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setFirstName(data.firstName || '');
+            setLastName(data.lastName || '');
+          }
+        } catch (err) {
+          setError('Failed to load user data.');
+          console.error(err);
+        }
+
+        setLoading(false);
       } else {
         navigate('/login');
       }
     });
 
-    // Clean up the listener when the component unmounts
     return () => unsubscribe();
   }, [navigate]);
 
-  // Handle file upload
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+
+    // Show preview immediately
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicture(reader.result);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
   };
 
   const handleFileUpload = async () => {
-    if (!file) return;
+    if (!file || !user) return null;
+
     try {
-      const filePath = `profile-pictures/${user.uid}/${file.name}`;
-      const { data, error } = await supabase.storage
-        .from('profile-pictures')
-        .upload(filePath, file);
-      if (error) {
-        throw error;
-      }
-      const { publicURL } = await supabase.storage
-        .from('profile-pictures')
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `${user.uid}/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('la-bonne-bouche')
+        .upload(filePath, file, {
+          upsert: true,
+          contentType: file.type,
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: publicUrlData } = await supabase.storage
+        .from('la-bonne-bouche')
         .getPublicUrl(filePath);
-      setProfilePicture(publicURL);
+
+      const publicURL = publicUrlData.publicUrl;
+
       await updateProfile(getAuth().currentUser, {
         photoURL: publicURL,
       });
+
+      return publicURL;
     } catch (error) {
-      console.error('Error uploading file:', error.message);
-      setError('Error uploading file');
+      setError(`Error uploading profile picture: ${error.message}`);
+      return null;
     }
   };
 
-  // Handle profile update
-  const handleProfileUpdate = async () => {
+  const handleUpdate = async () => {
+    setError('');
+    setSuccess('');
+
     const auth = getAuth();
+    const db = getFirestore();
+
     try {
+      let newPhotoURL = profilePicture;
+
+      if (file) {
+        const uploadedURL = await handleFileUpload();
+        if (uploadedURL) {
+          newPhotoURL = uploadedURL;
+          setProfilePicture(uploadedURL); // Update with uploaded URL
+        } else {
+          return;
+        }
+      }
+
       if (firstName || lastName) {
         await updateProfile(auth.currentUser, {
           displayName: `${firstName} ${lastName}`,
+          photoURL: newPhotoURL,
         });
       }
+
       if (email !== user.email) {
         await auth.currentUser.updateEmail(email);
       }
-      alert('Profile updated successfully!');
-    } catch (error) {
-      console.error('Error updating profile:', error.message);
-      setError('Error updating profile');
-    }
-  };
 
-  // Handle password change
-  const handlePasswordChange = async () => {
-    if (newPassword !== confirmPassword) {
-      setError('New password and confirm password do not match');
-      return;
-    }
+      await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+        firstName,
+        lastName,
+        email,
+      });
 
-    const auth = getAuth();
-    const user = auth.currentUser;
+      if (oldPassword || newPassword || confirmPassword) {
+        if (!oldPassword || !newPassword || !confirmPassword) {
+          setError('All password fields are required.');
+          return;
+        }
 
-    if (user && oldPassword && newPassword) {
-      try {
-        // Re-authenticate the user with their old password
+        if (newPassword !== confirmPassword) {
+          setError('New password and confirmation do not match.');
+          return;
+        }
+
+        if (!isPasswordStrong) {
+          setError('Password must meet all strength requirements.');
+          return;
+        }
+
         const credential = EmailAuthProvider.credential(user.email, oldPassword);
-        await reauthenticateWithCredential(user, credential);
+        await reauthenticateWithCredential(auth.currentUser, credential);
 
-        // Update the password
-        await user.updatePassword(newPassword);
-        alert('Password updated successfully!');
-      } catch (error) {
-        console.error('Error updating password:', error.message);
-        setError('Error updating password');
+        await updatePassword(auth.currentUser, newPassword);
+      }
+
+      setSuccess('Profile updated successfully!');
+    } catch (error) {
+      console.error('Error:', error);
+
+      if (error.code === 'auth/wrong-password') {
+        setError('Incorrect old password.');
+      } else if (error.code === 'auth/email-already-in-use') {
+        setError('Email is already in use.');
+      } else if (error.code === 'auth/requires-recent-login') {
+        setError('Please reauthenticate before making this change.');
+      } else {
+        setError(error.message || 'An error occurred while updating your profile.');
       }
     }
   };
+
+  if (loading) return <div>Loading profile...</div>;
 
   return (
     <div className="edit-profile-container">
       <h2>Edit Profile</h2>
       {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
 
       <div className="profile-pic-upload">
         <img src={profilePicture} alt="Profile" className="profile-pic" />
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleFileUpload}>Upload New Profile Picture</button>
+
+        {/* Styled file input */}
+        <label htmlFor="file-upload" className="custom-file-upload">
+          Choose Profile Picture
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
       </div>
 
       <div className="profile-form">
@@ -181,8 +282,15 @@ function EditProfile() {
           />
         </div>
 
-        <button onClick={handleProfileUpdate}>Update Profile</button>
-        <button onClick={handlePasswordChange}>Change Password</button>
+        {/* Password strength feedback */}
+        <div className="password-requirements">
+          <p className={passwordValidations.length ? 'valid' : ''}>Minimum 8 characters</p>
+          <p className={passwordValidations.uppercase ? 'valid' : ''}>At least one uppercase letter</p>
+          <p className={passwordValidations.number ? 'valid' : ''}>At least one number</p>
+          <p className={passwordValidations.specialChar ? 'valid' : ''}>At least one special character</p>
+        </div>
+
+        <button onClick={handleUpdate}>Update Profile</button>
       </div>
     </div>
   );

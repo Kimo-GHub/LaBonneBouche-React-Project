@@ -104,3 +104,34 @@ button:hover {
   margin: 10px 0;
 }
 
+.password-requirements {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.password-requirements p {
+  margin: 3px 0;
+  transition: color 0.3s ease;
+}
+
+.password-requirements p.valid {
+  color: green;
+  font-weight: bold;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #45a049;
+}
