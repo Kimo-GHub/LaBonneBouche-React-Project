@@ -197,8 +197,6 @@ function EditProfile() {
     }
   };
 
-  if (loading) return <div>Loading profile...</div>;
-
   return (
     <div className="edit-profile-container">
       <h2>Edit Profile</h2>
