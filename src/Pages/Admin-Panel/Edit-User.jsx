@@ -11,6 +11,8 @@ import "../../styles/Admin/Edit-Users.css";
 
 function EditUsers() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showBanModal, setShowBanModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -20,13 +22,13 @@ function EditUsers() {
   const [banEnd, setBanEnd] = useState("");
   const [isLifetimeBan, setIsLifetimeBan] = useState(false);
 
-  // Edit user form
   const [editFirstName, setEditFirstName] = useState("");
   const [editLastName, setEditLastName] = useState("");
   const [editEmail, setEditEmail] = useState("");
   const [editRole, setEditRole] = useState("customer");
 
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const querySnapshot = await getDocs(collection(db, "users"));
       const userList = querySnapshot.docs.map((doc) => ({
@@ -37,13 +39,13 @@ function EditUsers() {
     } catch (err) {
       console.error("Error fetching users:", err);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // When edit button is clicked
   const openEditModal = (user) => {
     setSelectedUser(user);
     setEditFirstName(user.firstName || "");
@@ -58,53 +60,60 @@ function EditUsers() {
       <div className="user-table">
         <h2>Manage Users</h2>
 
-        <table className="styled-table">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>User ID</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>{user.id}</td>
-                <td className="actions">
-                  <button
-                    className="edit-btn"
-                    onClick={() => openEditModal(user)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setShowDeleteModal(true);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className="ban-btn"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setShowBanModal(true);
-                    }}
-                  >
-                    Ban
-                  </button>
-                </td>
+        {loading ? (
+          <div className="spinner-container">
+            <div className="spinner"></div>
+            <p>Loading users...</p>
+          </div>
+        ) : (
+          <table className="styled-table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>User ID</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.id}</td>
+                  <td className="actions">
+                    <button
+                      className="edit-btn"
+                      onClick={() => openEditModal(user)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setShowDeleteModal(true);
+                      }}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="ban-btn"
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setShowBanModal(true);
+                      }}
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {/* Delete Modal */}
@@ -218,7 +227,7 @@ function EditUsers() {
         </div>
       )}
 
-      {/* Edit User Modal */}
+      {/* Edit Modal */}
       {showEditModal && selectedUser && (
         <div className="modal-backdrop">
           <div className="modal">
