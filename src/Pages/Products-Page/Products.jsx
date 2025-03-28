@@ -1,27 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../Firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
 import Footer from '../../components/Header-Footer/Footer';
-// import './ProductsPage.css'; // You can transfer all styles from products_style.css, etc.
-
-// import logo from './assets/images/product-images/logo.png';
-// import vectorImg from './assets/images/product-images/product-vector.png';
-// import arrowLeft from './assets/images/home/Home-images/arrow-left.png';
-// import arrowRight from './assets/images/home/Home-images/arrow-right.png';
-// import specialImg from './assets/images/product-images/special-img.png';
-// import footerLogo from './assets/images/home/Home-images/logo2.png';
-// import facebookIcon from './assets/images/home/Home-images/facebook-icon.png';
-// import instagramIcon from './assets/images/home/Home-images/instagram-icon.png';
-// import tiktokIcon from './assets/images/home/Home-images/tiktok-icon.png';
+import '../../styles/Products/products.css'; // Create this CSS file for styling
 
 function Products() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    const querySnapshot = await getDocs(collection(db, 'products'));
+    const productList = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setProducts(productList);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const cookieProducts = products.filter(product => product.category === "cookies");
+
   return (
-    <div>
-
-
+    <div className="products-page">
       <Header />
+      <section className="category-section">
+        <h2 className="section-title">Cookies <span>Crafted with Love</span></h2>
+        <div className="product-carousel">
+          {cookieProducts.map(product => (
+            <div className="product-card" key={product.id}>
+              <img src={product.imageUrl} alt={product.name} className="product-image" />
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-description">{product.description}</p>
+              <p className="product-price">
+                {product.price ? (
+                  <>
+                    <span className="original-price">${product.originalPrice}</span>
+                    <strong>${product.price}</strong>
+                  </>
+                ) : (
+                  <strong>${product.originalPrice}</strong>
+                )}
+                <span className="product-weight"> / {product.weight}</span>
+              </p>
+              <button className="add-to-cart-btn">Add To Cart</button>
+            </div>
+          ))}
+        </div>
+      </section>
       <Footer />
     </div>
   );
-};
+}
 
 export default Products;
