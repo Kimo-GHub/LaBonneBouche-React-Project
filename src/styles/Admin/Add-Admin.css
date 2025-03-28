@@ -59,3 +59,33 @@
   margin-top: 15px;
   text-align: center;
 }
+.role-selector {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 16px;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%23999'><polygon points='0,0 20,0 10,10'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px;
+}
+
+.password-requirements {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.password-requirements p {
+  margin: 3px 0;
+  color: #888;
+}
+
+.password-requirements p.valid {
+  color: #52c41a;
+  font-weight: 600;
+}

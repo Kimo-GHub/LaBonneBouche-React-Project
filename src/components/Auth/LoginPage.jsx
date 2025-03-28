@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { loginUser } from "../../Firebase/firebase";
 import { useNavigate, Link } from "react-router-dom";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, signOut } from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../Firebase/firebase";
 import "../../styles/Auth/AuthForm.css";
 
 export default function Login() {
@@ -11,14 +13,44 @@ export default function Login() {
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
   const [error, setError] = useState(null);
-  
+
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(null);
+
     try {
-      const { role } = await loginUser(email, password);
-      console.log("Role:", role);
-  
+      const { user, role } = await loginUser(email, password); // assumes loginUser returns user object
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDocRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+
+        if (userData.banned) {
+          const now = new Date();
+
+          if (
+            userData.banEnd === "lifetime" ||
+            new Date(userData.banEnd) > now
+          ) {
+            await signOut(getAuth());
+            setError("You are currently banned from accessing the platform.");
+            return;
+          } else {
+            // Ban has expired — remove it
+            await updateDoc(userDocRef, {
+              banned: false,
+              banStart: "",
+              banEnd: "",
+            });
+          }
+        }
+      }
+
+      // Redirect based on role
       if (role?.trim().toLowerCase() === "admin-panel") {
         navigate("/admin-panel");
       } else {
@@ -28,9 +60,7 @@ export default function Login() {
       setError(err.message);
     }
   };
-  
-  
-  
+
   const handleResetPassword = async () => {
     setError(null);
     setResetMessage("");
@@ -72,19 +102,11 @@ export default function Login() {
         <button type="submit">Login</button>
       </form>
 
-      {/* Forgot Password link styled like Sign Up */}
       <div className="switch-link">
-  Forgot your password?{" "}
-  <span
-    onClick={() => setShowResetModal(true)}
-  
-  >
-  Reset Password
-  </span>
-</div>
+        Forgot your password?{" "}
+        <span onClick={() => setShowResetModal(true)}>Reset Password</span>
+      </div>
 
-
-      {/* Modal for reset password */}
       {showResetModal && (
         <div className="modal-overlay">
           <div className="modal-content">
