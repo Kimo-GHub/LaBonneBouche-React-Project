@@ -8,40 +8,39 @@ import ContactUs from './Pages/ContactUs-Page/ContactUs';
 import Login from './components/Auth/LoginPage';
 import Signup from './components/Auth/Signup';
 import Profile from './components/Profile-Page/Profile';
-import AdminPanel from './Pages/Admin-Panel/Admin-Panel';
+import AdminPanel from './Pages/Admin-Panel/Admin';
 import ScrollToTopButton from './components/ScrollToTopButton';
-import { auth } from './Firebase/firebase';
-import { onAuthStateChanged, getIdTokenResult } from 'firebase/auth';
+import { auth, db } from './Firebase/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
 
 function App() {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
-          const idTokenResult = await getIdTokenResult(currentUser);
-          const userRole = idTokenResult.claims.role || "customer";
+          const userDocRef = doc(db, "users", currentUser.uid);
+          const userDoc = await getDoc(userDocRef);
+          const userData = userDoc.exists() ? userDoc.data() : null;
 
           setUser(currentUser);
-          setRole(userRole);
+          setRole(userData?.role || "customer");
         } catch (error) {
-          console.error("Error fetching user role:", error);
+          console.error("Error fetching user role from Firestore:", error);
         }
       } else {
         setUser(null);
         setRole(null);
       }
-      setLoading(false); 
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
-
-
-  
 
   return (
     <Router>
@@ -56,9 +55,13 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
 
-        {/* Admin Route - protected */}
+        {/* Updated Admin Route to support nested routes */}
+        <Route path="/admin-panel/*" element={<AdminPanel />} />
+
+        {/* Protected Admin Route (optional, uncomment if needed) */}
+        {/*
         <Route
-          path="/admin"
+          path="/admin-panel/*"
           element={
             user && role === "admin" ? (
               <AdminPanel />
@@ -67,6 +70,7 @@ function App() {
             )
           }
         />
+        */}
       </Routes>
     </Router>
   );

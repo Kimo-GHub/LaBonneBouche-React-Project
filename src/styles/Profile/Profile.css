@@ -1,35 +1,37 @@
 .profile-container {
   display: flex;
   height: 100vh;
+  background-color: #f0f8ff;
 }
 
 .sidebar {
-  width: 250px;
-  background-color: #f4f4f4;
+  width: 260px;
+  background-color: #ffffff;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
- 
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-pic-container {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
 .profile-pic {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #091A45;
 }
 
 .profile-name {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #091A45;
   text-align: center;
   word-break: break-word;
 }
@@ -41,42 +43,61 @@
 }
 
 .sidebar-menu li {
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
   text-align: center;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #555;
 }
 
 .sidebar-menu li:hover {
-  background-color: #ddd;
+  background-color: #091A45;
+  color: #ffffff;
 }
 
 .sidebar-menu li.active {
-  background-color: #007bff;
-  color: white;
+  background-color: #091A45;
+  color: #ffffff;
+}
+
+/* Logout & Delete Account buttons */
+.sidebar-menu li.logout-btn,
+.sidebar-menu li.delete-btn {
+  background-color: #ff4d4f;
+  color: #ffffff;
+}
+
+.sidebar-menu li.logout-btn:hover,
+.sidebar-menu li.delete-btn:hover {
+  background-color: #d9363e;
 }
 
 .main-content {
   flex: 1;
-  padding: 20px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  overflow-y: auto;
 }
 
 .section {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .section h2 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #091A45;
 }
 
 .section p {
   font-size: 16px;
+  color: #555;
 }
 
 .modal-overlay {
@@ -85,33 +106,44 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 30px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .delete-confirm-btn,
 .delete-cancel-btn {
-  padding: 10px 20px;
+  padding: 10px 25px;
   margin: 10px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .delete-confirm-btn {
-  background-color: red;
+  background-color: #ff4d4f;
   color: white;
 }
 
+.delete-confirm-btn:hover {
+  background-color: #d9363e;
+}
+
 .delete-cancel-btn {
-  background-color: grey;
+  background-color: #091A45;
   color: white;
+}
+
+.delete-cancel-btn:hover {
+  background-color: #060f2c;
 }

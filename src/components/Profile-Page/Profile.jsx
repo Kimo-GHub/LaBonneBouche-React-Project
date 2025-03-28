@@ -58,27 +58,32 @@ function Profile () {
           {user && <h3 className="profile-name">{user.displayName || "User"}</h3>}
         </div>
         <ul className="sidebar-menu">
-          <li
-            className={activeSection === "editProfile" ? "active" : ""}
-            onClick={() => setActiveSection("editProfile")}
-          >
-            Edit Profile
-          </li>
-          <li
-            className={activeSection === "addPayment" ? "active" : ""}
-            onClick={() => setActiveSection("addPayment")}
-          >
-            Add Payment Method
-          </li>
-          <li
-            className={activeSection === "accountSettings" ? "active" : ""}
-            onClick={() => setActiveSection("accountSettings")}
-          >
-            Account Settings
-          </li>
-          <li onClick={handleLogout}>Logout</li>
-          <li onClick={() => setShowDeleteModal(true)}>Delete Account</li>
-        </ul>
+  <li
+    className={activeSection === "editProfile" ? "active" : ""}
+    onClick={() => setActiveSection("editProfile")}
+  >
+    Edit Profile
+  </li>
+  <li
+    className={activeSection === "addPayment" ? "active" : ""}
+    onClick={() => setActiveSection("addPayment")}
+  >
+    Add Payment Method
+  </li>
+  <li
+    className={activeSection === "accountSettings" ? "active" : ""}
+    onClick={() => setActiveSection("accountSettings")}
+  >
+    Account Settings
+  </li>
+  <li className="logout-btn" onClick={handleLogout}>
+    Logout
+  </li>
+  <li className="delete-btn" onClick={() => setShowDeleteModal(true)}>
+    Delete Account
+  </li>
+</ul>
+
       </div>
 
       <div className="main-content">

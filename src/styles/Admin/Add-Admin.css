@@ -1,0 +1,61 @@
+.admin-add-container {
+  max-width: 500px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.admin-add-heading {
+  margin-bottom: 20px;
+  color: #091A45;
+  text-align: center;
+}
+
+.admin-add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-add-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.admin-add-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #091A45;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.admin-add-btn:hover {
+  background-color: #060f2c;
+}
+
+.admin-add-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.admin-add-error {
+  color: #ff4d4f;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.admin-add-success {
+  color: #52c41a;
+  margin-top: 15px;
+  text-align: center;
+}

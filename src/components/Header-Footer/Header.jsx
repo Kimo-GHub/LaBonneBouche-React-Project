@@ -65,6 +65,10 @@ function Header() {
             <li className="nav-item">
               <NavLink to="/contact-us" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>Contact Us</NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink to="/admin-panel" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>admin-panel</NavLink>
+            </li>
           </ul>
 
           <div className="auth-buttons">

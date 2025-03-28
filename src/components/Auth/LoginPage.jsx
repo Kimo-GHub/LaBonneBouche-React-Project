@@ -11,14 +11,16 @@ export default function Login() {
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
   const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const { role } = await loginUser(email, password);
-      if (role === "admin") {
-        navigate("/admin");
+      console.log("Role:", role);
+  
+      if (role?.trim().toLowerCase() === "admin-panel") {
+        navigate("/admin-panel");
       } else {
         navigate("/");
       }
@@ -26,7 +28,9 @@ export default function Login() {
       setError(err.message);
     }
   };
-
+  
+  
+  
   const handleResetPassword = async () => {
     setError(null);
     setResetMessage("");
