@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../Firebase/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { supabase } from "../../Firebase/supabaseClient";
 import "../../styles/Admin/AddProducts.css";
 
-const bucketName = "product-images";
+const bucketName = "la-bonne-bouche"; // Supabase bucket name
+const folderName = "product-images";  // Folder inside the bucket
 
 export default function AddProducts() {
   const [name, setName] = useState("");
@@ -25,6 +26,13 @@ export default function AddProducts() {
     setImagePreview(URL.createObjectURL(file));
   };
 
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
@@ -37,9 +45,11 @@ export default function AddProducts() {
     }
 
     const fileName = `${Date.now()}-${imageFile.name}`;
+    const fullPath = `${folderName}/${fileName}`;
+
     const { data, error } = await supabase.storage
       .from(bucketName)
-      .upload(fileName, imageFile, { upsert: true });
+      .upload(fullPath, imageFile, { upsert: true });
 
     if (error) {
       setMessage("Failed to upload image.");
@@ -48,7 +58,7 @@ export default function AddProducts() {
       return;
     }
 
-    const imageUrl = `https://pfczymmhgubmkalctpqc.supabase.co/storage/v1/object/public/${bucketName}/${fileName}`;
+    const imageUrl = `https://pfczymmhgubmkalctpqc.supabase.co/storage/v1/object/public/${bucketName}/${fullPath}`;
 
     await addDoc(collection(db, "products"), {
       name,
