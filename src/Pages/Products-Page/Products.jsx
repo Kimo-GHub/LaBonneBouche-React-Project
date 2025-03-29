@@ -3,7 +3,7 @@ import { db } from '../../Firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
 import Footer from '../../components/Header-Footer/Footer';
-import '../../styles/Products/products.css'; // Create this CSS file for styling
+import '../../styles/Products/products.css';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -21,7 +21,9 @@ function Products() {
     fetchProducts();
   }, []);
 
-  const cookieProducts = products.filter(product => product.category === "cookies");
+  const cookieProducts = products.filter(
+    (product) => product.category === "cookies" && !product.hidden
+  );
 
   return (
     <div className="products-page">

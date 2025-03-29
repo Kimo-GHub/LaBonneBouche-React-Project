@@ -1,0 +1,221 @@
+/* ViewProducts.css */
+.view-products-container {
+  padding: 50px 80px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+}
+
+.view-products-container h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #2c3e50;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  table-layout: auto;
+}
+
+.products-table th,
+.products-table td {
+  padding: 16px 18px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.products-table th {
+  background: linear-gradient(90deg, #3498db, #2c80b4);
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.products-table tr:last-child td {
+  border-bottom: none;
+}
+
+.products-table tr:hover {
+  background-color: #f9fbfc;
+  transition: background-color 0.3s ease;
+}
+
+.product-image-cell img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.action-buttons .edit {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.action-buttons .delete {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.action-buttons .hide {
+  background-color: #f39c12;
+  color: #fff;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* Spinner */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 12px;
+  font-size: 16px;
+  color: #555;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 14px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.modal h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-buttons .confirm {
+  background-color: #27ae60;
+  color: white;
+}
+
+.modal-buttons .cancel {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-table th,
+  .products-table td {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .product-image-cell img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}

@@ -4,6 +4,7 @@ import EditUsers from './Edit-User';
 import AddAdmin from './Add-Admin';
 import AddProducts from './Add-Products';
 import AddSales from './Add-Sales';
+import ViewProducts from './View-Products';
 
 export default function Admin() {
   return (
@@ -14,6 +15,7 @@ export default function Admin() {
           <Route path="edit-users" element={<EditUsers />} />
           <Route path="add-admin" element={<AddAdmin />} />
           <Route path="add-products" element={<AddProducts />} />
+          <Route path="view-products" element={<ViewProducts />} />
           <Route path="add-sales" element={<AddSales />} />
 
           {/* Optionally, a default route: */}

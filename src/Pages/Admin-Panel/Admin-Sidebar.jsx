@@ -24,6 +24,7 @@ const AdminSidebar = () => {
           <li><Link to="/admin-panel/add-admin">Add Admin</Link></li>
           <li><Link to="/admin-panel/edit-users">Edit Users</Link></li>
           <li><Link to="/admin-panel/add-products">Add Products</Link></li>
+          <li><Link to="/admin-panel/view-products">View Products</Link></li>
           <li><Link to="/admin-panel/add-sales">Add Sales</Link></li>
           <li><Link to="/">Home</Link></li>
           <li className="logout-btn">
