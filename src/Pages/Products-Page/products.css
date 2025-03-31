@@ -1,0 +1,143 @@
+/* Reset default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .products-page {
+    padding-top: 0;
+    background: #fff;
+  }
+  
+
+/*.products-page {
+    padding-top: 100px;
+    background: #fff;
+  } */
+  
+  .category-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .section-title {
+    font-size: 32px;
+    text-align: center;
+    font-weight: 800;
+    color: #091A45;
+    margin-bottom: 40px;
+  }
+  
+  .section-title span {
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+    color: #888;
+    margin-top: 8px;
+  }
+  
+  /* Product Grid */
+  .product-carousel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .product-card {
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  
+  
+  .product-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #091A45;
+    margin: 10px 0 5px;
+  }
+  
+  .product-description {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 10px;
+    padding: 0 5px;
+  }
+  
+  .product-price {
+    font-size: 16px;
+    color: #091A45;
+    margin-bottom: 12px;
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 8px;
+  }
+  
+  .product-weight {
+    font-size: 14px;
+    color: #666;
+    margin-left: 6px;
+  }
+  
+  /* CTA Button */
+  .add-to-cart-btn {
+    background-color: #35a753;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #2e8b48;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .product-card {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+  .image-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+ 
+ 

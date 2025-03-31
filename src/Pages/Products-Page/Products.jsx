@@ -3,7 +3,7 @@ import { db } from '../../Firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
 import Footer from '../../components/Header-Footer/Footer';
-import '../../styles/Products/products.css';
+import './products.css';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -21,19 +21,26 @@ function Products() {
     fetchProducts();
   }, []);
 
-  const cookieProducts = products.filter(
-    (product) => product.category === "cookies" && !product.hidden
-  );
+  const visibleProducts = products.filter(product => !product.hidden);
 
   return (
     <div className="products-page">
       <Header />
       <section className="category-section">
-        <h2 className="section-title">Cookies <span>Crafted with Love</span></h2>
+      <h2 className="section-title">
+         Freshly Baked Delights <span>Crafted with Love</span>
+      </h2>
+
         <div className="product-carousel">
-          {cookieProducts.map(product => (
+          {visibleProducts.map(product => (
             <div className="product-card" key={product.id}>
-              <img src={product.imageUrl} alt={product.name} className="product-image" />
+              <div className="image-wrapper">
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="product-image"
+                />
+              </div>
               <h3 className="product-name">{product.name}</h3>
               <p className="product-description">{product.description}</p>
               <p className="product-price">
