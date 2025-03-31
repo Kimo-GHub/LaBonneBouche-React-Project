@@ -4,8 +4,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { supabase } from "../../Firebase/supabaseClient";
 import "../../styles/Admin/AddProducts.css";
 
-const bucketName = "la-bonne-bouche"; // Supabase bucket name
-const folderName = "product-images";  // Folder inside the bucket
+const bucketName = "la-bonne-bouche";
+const folderName = "product-images";
 
 export default function AddProducts() {
   const [name, setName] = useState("");
@@ -32,6 +32,15 @@ export default function AddProducts() {
       return () => clearTimeout(timer);
     }
   }, [message]);
+
+  // Weight formatting: convert grams to KG if above 999
+  const formatWeight = (value) => {
+    const numeric = parseFloat(value);
+    if (isNaN(numeric)) return "";
+    return numeric >= 1000
+      ? `${(numeric / 1000).toFixed(2)}KG`
+      : `${numeric}G`;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,9 +72,9 @@ export default function AddProducts() {
     await addDoc(collection(db, "products"), {
       name,
       description,
-      price: price ? parseFloat(price) : null,
       originalPrice: parseFloat(originalPrice),
-      weight,
+      price: price ? parseFloat(price) : null,
+      weight: formatWeight(weight),
       calories,
       category,
       imageUrl,
@@ -113,15 +122,6 @@ export default function AddProducts() {
           required
         />
 
-        <label>New Price (optional)</label>
-        <input
-          type="number"
-          step="0.01"
-          placeholder="New Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-
         <label>Original Price</label>
         <input
           type="number"
@@ -132,10 +132,19 @@ export default function AddProducts() {
           required
         />
 
-        <label>Weight (e.g. 120G)</label>
+        <label>New Price (optional)</label>
         <input
-          type="text"
-          placeholder="Weight"
+          type="number"
+          step="0.01"
+          placeholder="New Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+
+        <label>Weight (grams)</label>
+        <input
+          type="number"
+          placeholder="e.g. 120"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />

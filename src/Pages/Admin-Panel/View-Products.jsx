@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../Firebase/firebase";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { supabase } from "../../Firebase/supabaseClient";
@@ -8,8 +9,10 @@ export default function ViewProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(""); // 'delete' or 'hide'
+  const [modalType, setModalType] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -68,7 +71,7 @@ export default function ViewProducts() {
               <th>Image</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Price</th>
+              <th>New Price</th>
               <th>Original Price</th>
               <th>Weight</th>
               <th>Calories</th>
@@ -80,21 +83,19 @@ export default function ViewProducts() {
             {products.map((product) => (
               <tr key={product.id} className={product.hidden ? "hidden-product" : ""}>
                 <td className="product-image-cell">
-                  <img
-                    src={product.imageUrl}
-                    alt={product.name}
-                    className="product-thumb"
-                  />
+                  <img src={product.imageUrl} alt={product.name} className="product-thumb" />
                 </td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price ? `$${product.price}` : "-"}</td>
-                <td><s>${product.originalPrice}</s></td>
+                <td>${product.originalPrice}</td>
                 <td>{product.weight}</td>
                 <td>{product.calories}</td>
                 <td>{product.category}</td>
                 <td className="action-buttons">
-                  <button className="edit" onClick={() => alert("Edit Coming Soon")}>Edit</button>
+                  <button className="edit" onClick={() => navigate(`/admin/edit-product/${product.id}`)}>
+                    Edit
+                  </button>
                   <button
                     className="delete"
                     onClick={() => {

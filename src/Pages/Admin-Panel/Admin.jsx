@@ -5,6 +5,7 @@ import AddAdmin from './Add-Admin';
 import AddProducts from './Add-Products';
 import AddSales from './Add-Sales';
 import ViewProducts from './View-Products';
+import EditProduct from './Edit-Products';
 
 export default function Admin() {
   return (
@@ -18,7 +19,10 @@ export default function Admin() {
           <Route path="view-products" element={<ViewProducts />} />
           <Route path="add-sales" element={<AddSales />} />
 
-          {/* Optionally, a default route: */}
+    
+          <Route path="edit-product/:id" element={<EditProduct />} />
+
+          {/* Default route fallback */}
           <Route path="*" element={<EditUsers />} />
         </Routes>
       </div>
