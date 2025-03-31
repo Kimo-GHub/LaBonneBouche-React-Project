@@ -11,7 +11,6 @@ export default function ViewProducts() {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
-
   const navigate = useNavigate();
 
   const fetchProducts = async () => {
@@ -35,10 +34,10 @@ export default function ViewProducts() {
         if (imagePath) {
           await supabase.storage.from("la-bonne-bouche").remove([`product-images/${imagePath}`]);
         }
+        await deleteDoc(doc(db, "products", selectedProduct.id));
       } catch (error) {
-        console.error("Error removing image from Supabase:", error);
+        console.error("Error deleting image/product:", error);
       }
-      await deleteDoc(doc(db, "products", selectedProduct.id));
     } else if (modalType === "hide") {
       await updateDoc(doc(db, "products", selectedProduct.id), {
         hidden: !selectedProduct.hidden,
@@ -71,8 +70,9 @@ export default function ViewProducts() {
               <th>Image</th>
               <th>Name</th>
               <th>Description</th>
-              <th>New Price</th>
               <th>Original Price</th>
+              <th>New Price</th>
+              
               <th>Weight</th>
               <th>Calories</th>
               <th>Category</th>
@@ -87,13 +87,19 @@ export default function ViewProducts() {
                 </td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.price ? `$${product.price}` : "-"}</td>
                 <td>${product.originalPrice}</td>
+                <td>{product.price ? `$${product.price}` : "-"}</td>
+             
                 <td>{product.weight}</td>
                 <td>{product.calories}</td>
                 <td>{product.category}</td>
                 <td className="action-buttons">
-                  <button className="edit" onClick={() => navigate(`/admin/edit-product/${product.id}`)}>
+                  <button
+                    className="edit"
+                    onClick={() =>
+                      navigate(`/admin/edit-product/${product.name.replace(/\s+/g, "-").toLowerCase()}`)
+                    }
+                  >
                     Edit
                   </button>
                   <button

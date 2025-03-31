@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../Firebase/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 import "../../styles/Admin/AddProducts.css";
 
 export default function EditProduct() {
@@ -14,12 +14,15 @@ export default function EditProduct() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        const weight = parseFloat(data.weight); // remove G/KG suffix for editing
-        setProduct({ ...data, weight: isNaN(weight) ? "" : weight });
+      const querySnapshot = await getDocs(collection(db, "products"));
+      const matchedDoc = querySnapshot.docs.find(
+        (doc) => doc.data().name.replace(/\s+/g, '-').toLowerCase() === id
+      );
+
+      if (matchedDoc) {
+        const data = matchedDoc.data();
+        const weight = parseFloat(data.weight);
+        setProduct({ ...data, weight: isNaN(weight) ? "" : weight, id: matchedDoc.id });
       } else {
         setMessage("Product not found.");
       }
@@ -43,7 +46,7 @@ export default function EditProduct() {
           : `${product.weight}G`,
     };
 
-    await updateDoc(doc(db, "products", id), updatedProduct);
+    await updateDoc(doc(db, "products", product.id), updatedProduct);
     setMessage("Product updated successfully!");
     setTimeout(() => navigate("/admin/view-products"), 1500);
   };
