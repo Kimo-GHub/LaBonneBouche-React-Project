@@ -3,9 +3,10 @@ import { getAuth, signOut, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Profile/Profile.css";
 import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
-import EditProfile from './EditProfile'; 
+import EditProfile from './EditProfile';
+import PaymentMethod from './PaymentMethod'; // Newly imported component
 
-function Profile () {
+function Profile() {
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(defaultProfilePic);
   const [activeSection, setActiveSection] = useState("editProfile");
@@ -58,32 +59,31 @@ function Profile () {
           {user && <h3 className="profile-name">{user.displayName || "User"}</h3>}
         </div>
         <ul className="sidebar-menu">
-  <li
-    className={activeSection === "editProfile" ? "active" : ""}
-    onClick={() => setActiveSection("editProfile")}
-  >
-    Edit Profile
-  </li>
-  <li
-    className={activeSection === "addPayment" ? "active" : ""}
-    onClick={() => setActiveSection("addPayment")}
-  >
-    Add Payment Method
-  </li>
-  <li
-    className={activeSection === "accountSettings" ? "active" : ""}
-    onClick={() => setActiveSection("accountSettings")}
-  >
-    Account Settings
-  </li>
-  <li className="logout-btn" onClick={handleLogout}>
-    Logout
-  </li>
-  <li className="delete-btn" onClick={() => setShowDeleteModal(true)}>
-    Delete Account
-  </li>
-</ul>
-
+          <li
+            className={activeSection === "editProfile" ? "active" : ""}
+            onClick={() => setActiveSection("editProfile")}
+          >
+            Edit Profile
+          </li>
+          <li
+            className={activeSection === "addPayment" ? "active" : ""}
+            onClick={() => setActiveSection("addPayment")}
+          >
+            Add Payment Method
+          </li>
+          <li
+            className={activeSection === "accountSettings" ? "active" : ""}
+            onClick={() => setActiveSection("accountSettings")}
+          >
+            Account Settings
+          </li>
+          <li className="logout-btn" onClick={handleLogout}>
+            Logout
+          </li>
+          <li className="delete-btn" onClick={() => setShowDeleteModal(true)}>
+            Delete Account
+          </li>
+        </ul>
       </div>
 
       <div className="main-content">
@@ -94,8 +94,7 @@ function Profile () {
         )}
         {activeSection === "addPayment" && (
           <div className="section">
-            <h2>Add Payment Method</h2>
-            <p>Add your payment method details here.</p>
+            <PaymentMethod /> {/* Updated to render PaymentMethod */}
           </div>
         )}
         {activeSection === "accountSettings" && (
