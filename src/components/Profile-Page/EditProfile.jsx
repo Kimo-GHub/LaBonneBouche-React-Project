@@ -32,7 +32,6 @@ function EditProfile() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Password strength validation
   const passwordValidations = {
     length: newPassword.length >= 8,
     uppercase: /[A-Z]/.test(newPassword),
@@ -74,11 +73,20 @@ function EditProfile() {
     return () => unsubscribe();
   }, [navigate]);
 
+  useEffect(() => {
+    if (success || error) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+        setError('');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, error]);
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
 
-    // Show preview immediately
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -136,7 +144,7 @@ function EditProfile() {
         const uploadedURL = await handleFileUpload();
         if (uploadedURL) {
           newPhotoURL = uploadedURL;
-          setProfilePicture(uploadedURL); // Update with uploaded URL
+          setProfilePicture(uploadedURL);
         } else {
           return;
         }
@@ -177,20 +185,19 @@ function EditProfile() {
 
         const credential = EmailAuthProvider.credential(user.email, oldPassword);
         await reauthenticateWithCredential(auth.currentUser, credential);
-
         await updatePassword(auth.currentUser, newPassword);
       }
 
-      setSuccess('Profile updated successfully!');
+      setSuccess('✅ Profile updated successfully!');
     } catch (error) {
       console.error('Error:', error);
 
       if (error.code === 'auth/wrong-password') {
-        setError('Incorrect old password.');
+        setError('❌ Incorrect old password.');
       } else if (error.code === 'auth/email-already-in-use') {
-        setError('Email is already in use.');
+        setError('❌ Email is already in use.');
       } else if (error.code === 'auth/requires-recent-login') {
-        setError('Please reauthenticate before making this change.');
+        setError('⚠️ Please reauthenticate before making this change.');
       } else {
         setError(error.message || 'An error occurred while updating your profile.');
       }
@@ -200,13 +207,12 @@ function EditProfile() {
   return (
     <div className="edit-profile-container">
       <h2>Edit Profile</h2>
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
+
+      {error && <p className="flash-message error-flash">{error}</p>}
+      {success && <p className="flash-message success-flash">{success}</p>}
 
       <div className="profile-pic-upload">
         <img src={profilePicture} alt="Profile" className="profile-pic" />
-
-        {/* Styled file input */}
         <label htmlFor="file-upload" className="custom-file-upload">
           Choose Profile Picture
         </label>
@@ -280,7 +286,6 @@ function EditProfile() {
           />
         </div>
 
-        {/* Password strength feedback */}
         <div className="password-requirements">
           <p className={passwordValidations.length ? 'valid' : ''}>Minimum 8 characters</p>
           <p className={passwordValidations.uppercase ? 'valid' : ''}>At least one uppercase letter</p>

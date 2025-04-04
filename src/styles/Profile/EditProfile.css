@@ -1,12 +1,17 @@
 .edit-profile-container {
-  width: 80%;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 80%;
 }
 
-.main-content{
+.main-content {
   padding: 0;
 }
+
 .profile-pic-section img {
   width: 100px;
   height: 100px;
@@ -21,7 +26,8 @@ input {
   width: 100%;
 }
 
-.save-btn, .change-password-btn {
+.save-btn,
+.change-password-btn {
   padding: 10px 20px;
   margin-top: 20px;
   cursor: pointer;
@@ -30,13 +36,6 @@ input {
 .error-text {
   color: red;
   font-size: 14px;
-}.edit-profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .profile-display {
@@ -93,6 +92,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -102,6 +103,53 @@ button:hover {
 .error-message {
   color: red;
   margin: 10px 0;
+}
+
+/* New Flash Message Styles */
+/* Flash Messages */
+.flash-message {
+  font-size: 1rem;
+  padding: 14px 24px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid transparent;
+  position: relative;
+  opacity: 1;
+  animation: fadeOut 2s ease-in-out forwards;
+  animation-delay: 2s;
+  transition: all 0.4s ease;
+}
+
+.success-flash {
+  background: linear-gradient(135deg, #d4f8d4, #eaffea);
+  color: #076807;
+  border-color: #9fdfa4;
+}
+
+.error-flash {
+  background: linear-gradient(135deg, #ffe1e1, #fff0f0);
+  color: #a00000;
+  border-color: #f5b5b5;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 .password-requirements {
