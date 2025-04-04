@@ -13,6 +13,9 @@ export default function AddProducts() {
   const [price, setPrice] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
   const [weight, setWeight] = useState("");
+  const [pieces, setPieces] = useState("");
+  const [serves, setServes] = useState("");
+  const [displayUnit, setDisplayUnit] = useState("weight");
   const [calories, setCalories] = useState("");
   const [category, setCategory] = useState("cookies");
   const [imageFile, setImageFile] = useState(null);
@@ -33,13 +36,10 @@ export default function AddProducts() {
     }
   }, [message]);
 
-  // Weight formatting: convert grams to KG if above 999
   const formatWeight = (value) => {
     const numeric = parseFloat(value);
     if (isNaN(numeric)) return "";
-    return numeric >= 1000
-      ? `${(numeric / 1000).toFixed(2)}KG`
-      : `${numeric}G`;
+    return numeric >= 1000 ? `${(numeric / 1000).toFixed(2)}KG` : `${numeric}G`;
   };
 
   const handleSubmit = async (e) => {
@@ -56,7 +56,7 @@ export default function AddProducts() {
     const fileName = `${Date.now()}-${imageFile.name}`;
     const fullPath = `${folderName}/${fileName}`;
 
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from(bucketName)
       .upload(fullPath, imageFile, { upsert: true });
 
@@ -72,10 +72,30 @@ export default function AddProducts() {
     await addDoc(collection(db, "products"), {
       name,
       description,
-      originalPrice: parseFloat(originalPrice),
-      price: price ? parseFloat(price) : null,
-      weight: formatWeight(weight),
-      calories,
+      originalPrice:
+        category === "taste-of-the-season" ? null : parseFloat(originalPrice),
+      price:
+        category === "taste-of-the-season"
+          ? null
+          : price
+          ? parseFloat(price)
+          : null,
+      weight:
+        category === "taste-of-the-season" ? null : formatWeight(weight),
+      pieces:
+        category === "taste-of-the-season"
+          ? null
+          : pieces
+          ? `${pieces} PCS`
+          : null,
+      serves:
+        category === "taste-of-the-season"
+          ? null
+          : serves
+          ? parseInt(serves)
+          : null,
+      displayUnit: category === "taste-of-the-season" ? null : displayUnit,
+      calories: category === "taste-of-the-season" ? null : calories,
       category,
       imageUrl,
       createdAt: serverTimestamp(),
@@ -87,6 +107,9 @@ export default function AddProducts() {
     setPrice("");
     setOriginalPrice("");
     setWeight("");
+    setPieces("");
+    setServes("");
+    setDisplayUnit("weight");
     setCalories("");
     setCategory("cookies");
     setImageFile(null);
@@ -94,13 +117,17 @@ export default function AddProducts() {
     setUploading(false);
   };
 
+  const isBanner = category === "taste-of-the-season";
+
   return (
     <div className="add-product-container">
       <h2>Add New Product</h2>
       {message && <p className="message">{message}</p>}
 
       <form className="product-form" onSubmit={handleSubmit}>
-        {imagePreview && <img src={imagePreview} alt="Preview" className="preview-image" />}
+        {imagePreview && (
+          <img src={imagePreview} alt="Preview" className="preview-image" />
+        )}
 
         <label>Product Image</label>
         <input type="file" accept="image/*" onChange={handleImageChange} />
@@ -122,43 +149,76 @@ export default function AddProducts() {
           required
         />
 
-        <label>Original Price</label>
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Original Price"
-          value={originalPrice}
-          onChange={(e) => setOriginalPrice(e.target.value)}
-          required
-        />
+        {!isBanner && (
+          <>
+            <label>Original Price</label>
+            <input
+              type="number"
+              step="0.01"
+              placeholder="Original Price"
+              value={originalPrice}
+              onChange={(e) => setOriginalPrice(e.target.value)}
+              required
+            />
 
-        <label>New Price (optional)</label>
-        <input
-          type="number"
-          step="0.01"
-          placeholder="New Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+            <label>New Price (optional)</label>
+            <input
+              type="number"
+              step="0.01"
+              placeholder="New Price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
 
-        <label>Weight (grams)</label>
-        <input
-          type="number"
-          placeholder="e.g. 120"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
+            <label>Weight (grams)</label>
+            <input
+              type="number"
+              placeholder="e.g. 120"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
 
-        <label>Calories per 100g</label>
-        <input
-          type="text"
-          placeholder="Calories"
-          value={calories}
-          onChange={(e) => setCalories(e.target.value)}
-        />
+            <label>Pieces</label>
+            <input
+              type="number"
+              placeholder="e.g. 6"
+              value={pieces}
+              onChange={(e) => setPieces(e.target.value)}
+            />
+
+            <label>Number of People (Serves)</label>
+            <input
+              type="number"
+              placeholder="e.g. 4"
+              value={serves}
+              onChange={(e) => setServes(e.target.value)}
+            />
+
+            <label>Show on shop as:</label>
+            <select
+              value={displayUnit}
+              onChange={(e) => setDisplayUnit(e.target.value)}
+            >
+              <option value="weight">Weight</option>
+              <option value="pieces">Pieces</option>
+              <option value="serves">Serves</option>
+            </select>
+
+            <label>Calories</label>
+            <input
+              type="text"
+              placeholder="Calories"
+              value={calories}
+              onChange={(e) => setCalories(e.target.value)}
+            />
+          </>
+        )}
 
         <label>Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
           <option value="cookies">Cookies</option>
           <option value="cakes">Cakes</option>
           <option value="bites-of-happiness">Bites of Happiness</option>

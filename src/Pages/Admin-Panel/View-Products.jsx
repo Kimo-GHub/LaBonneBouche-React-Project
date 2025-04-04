@@ -72,8 +72,9 @@ export default function ViewProducts() {
               <th>Description</th>
               <th>Original Price</th>
               <th>New Price</th>
-              
               <th>Weight</th>
+              <th>Pieces</th>
+              <th>Serves</th> 
               <th>Calories</th>
               <th>Category</th>
               <th>Actions</th>
@@ -89,8 +90,9 @@ export default function ViewProducts() {
                 <td>{product.description}</td>
                 <td>${product.originalPrice}</td>
                 <td>{product.price ? `$${product.price}` : "-"}</td>
-             
-                <td>{product.weight}</td>
+                <td>{product.weight || "-"}</td>
+                <td>{product.pieces ? product.pieces : "1 PCS"}</td>
+                <td>{product.serves ? `Serves ${product.serves}` : "1"}</td> 
                 <td>{product.calories}</td>
                 <td>{product.category}</td>
                 <td className="action-buttons">
