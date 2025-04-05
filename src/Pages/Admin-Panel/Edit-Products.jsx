@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../Firebase/firebase";
-import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
-import "../../styles/Admin/AddProducts.css";
+import { supabase } from "../../Firebase/supabaseClient";
+import { doc, getDocs, updateDoc, collection } from "firebase/firestore";
+import "../../styles/Admin/EditProducts.css";
 
 export default function EditProduct() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ export default function EditProduct() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [newImageFile, setNewImageFile] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,11 +37,42 @@ export default function EditProduct() {
     setProduct({ ...product, [field]: value });
   };
 
+  const handleImageChange = (e) => {
+    setNewImageFile(e.target.files[0]);
+  };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
 
+    let imageUrl = product.imageUrl;
+
+    if (newImageFile) {
+      try {
+        // Remove old image
+        const oldImagePath = imageUrl?.split("/product-images/")[1];
+        if (oldImagePath) {
+          await supabase.storage.from("la-bonne-bouche").remove([`product-images/${oldImagePath}`]);
+        }
+
+        // Upload new image
+        const fileName = `${Date.now()}_${newImageFile.name}`;
+        const { data, error } = await supabase.storage
+          .from("la-bonne-bouche")
+          .upload(`product-images/${fileName}`, newImageFile);
+
+        if (error) throw error;
+
+        imageUrl = `https://pfczymmhgubmkalctpqc.supabase.co/storage/v1/object/public/la-bonne-bouche/product-images/${fileName}`;
+      } catch (err) {
+        console.error("Image upload error:", err);
+        setMessage("Image upload failed.");
+        return;
+      }
+    }
+
     const updatedProduct = {
       ...product,
+      imageUrl,
       weight:
         product.weight >= 1000
           ? `${(product.weight / 1000).toFixed(1)}KG`
@@ -48,27 +81,39 @@ export default function EditProduct() {
 
     await updateDoc(doc(db, "products", product.id), updatedProduct);
     setMessage("Product updated successfully!");
-    setTimeout(() => navigate("/admin/view-products"), 1500);
+    setTimeout(() => navigate("/admin-panel/view-products"), 1500);
   };
 
   if (loading) {
     return (
-      <div className="spinner-container">
-        <div className="spinner" />
+      <div className="edit-product-spinner-container">
+        <div className="edit-product-spinner" />
       </div>
     );
   }
 
   if (!product) {
-    return <div className="message">Product not found.</div>;
+    return <div className="edit-product-message">Product not found.</div>;
   }
 
   return (
-    <div className="add-product-container">
+    <div className="edit-product-container">
       <h2>Edit Product</h2>
-      {message && <p className="message">{message}</p>}
+      {message && <p className="edit-product-message">{message}</p>}
 
-      <form className="product-form" onSubmit={handleUpdate}>
+      <form className="edit-product-form" onSubmit={handleUpdate}>
+    
+        {product.imageUrl && (
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="edit-product-image-preview"
+          />
+        )}
+
+        <label>Change Image</label>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+
         <label>Product Name</label>
         <input
           type="text"
@@ -108,6 +153,32 @@ export default function EditProduct() {
           onChange={(e) => handleChange("weight", e.target.value)}
         />
 
+        <label>Pieces</label>
+        <input
+          type="text"
+          placeholder="e.g. 6"
+          value={product.pieces || ""}
+          onChange={(e) => handleChange("pieces", e.target.value)}
+        />
+
+        <label>Number of People (Serves)</label>
+        <input
+          type="text"
+          placeholder="e.g. 4"
+          value={product.serves || ""}
+          onChange={(e) => handleChange("serves", e.target.value)}
+        />
+
+        <label>Show on shop as:</label>
+        <select
+          value={product.displayType || "Weight"}
+          onChange={(e) => handleChange("displayType", e.target.value)}
+        >
+          <option value="Weight">Weight</option>
+          <option value="Pieces">Pieces</option>
+          <option value="Serves">Serves</option>
+        </select>
+
         <label>Calories per 100g</label>
         <input
           type="text"
@@ -124,15 +195,16 @@ export default function EditProduct() {
           <option value="cakes">Cakes</option>
           <option value="bites-of-happiness">Bites of Happiness</option>
           <option value="taste-of-the-season">A Taste of the Season</option>
+          <option value="todays-treat">Today's Treat</option>
           <option value="featured">Featured Products</option>
         </select>
 
-        <div className="form-buttons">
+        <div className="edit-product-form-buttons">
           <button type="submit">Update Product</button>
           <button
             type="button"
-            className="cancel-btn"
-            onClick={() => navigate("/admin/view-products")}
+            className="edit-product-cancel-btn"
+            onClick={() => navigate("/admin-panel/view-products")}
           >
             Cancel
           </button>
