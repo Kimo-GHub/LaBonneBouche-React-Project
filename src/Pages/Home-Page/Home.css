@@ -1,92 +1,340 @@
-
-#about-us {
-  background-image: url('../../assets/Home-images/aboutusBG.png');
-  background-size: cover; 
-  background-position: center center; 
-  background-repeat: no-repeat; 
-  padding-right: 10px;
-  z-index: 1;
-  height: 36rem;
-  background-image: none;
-  background-color: #091a45;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  padding-left: 5%; 
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+}
 
+/* About Us Section */
 #about-us {
-  background-image: url('../../assets/Home-images/aboutusBG.png'); 
-  background-size: cover; 
-  background-position: center center; 
-  background-repeat: no-repeat; 
+  background-image: url('../../assets/Home-images/aboutusBG.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: #091a45;
-  color: #fff; 
-  height: 30rem;
+  color: #fff;
+  height: 36rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start; 
-  padding: 8rem;
+  align-items: flex-start;
+  padding: 8rem 5% 0;
   text-align: left;
-}
-
-#about-us-heading {
-  margin-bottom: 2rem;
-}
-
-#about-us-title {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px; 
-}
-#about-us-subtitle {
-  font-size: 2.5rem;
-  font-weight: 400;
-  font-family: "Beautifully Delicious Script";
-  margin-top: 1rem;
-  opacity: 75%;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-  letter-spacing: 1px; 
 }
 
 #about-us-content {
   max-width: 80%;
   font-size: 1.25rem;
   font-weight: 300;
-  line-height: normal;
+  line-height: 1.6;
   color: #dddddd;
   margin-top: 2rem;
-  line-height: 1.6;
-
-  font-weight: 300; 
-  font-family:'Poppins',sans-serif;
+}
+#about-us-content p {
+ 
+  margin-top: 5rem;
 }
 
-/* Styling for the button */
+
 .read-more-btn {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #091a45; 
-  background-color: #f1a7c3; 
-  padding: 0.75rem 1.5rem; 
+  color: #091a45;
+  background-color: #f1a7c3;
+  padding: 0.75rem 1.5rem;
   text-decoration: none;
-  border-radius: 30px; 
+  border-radius: 30px;
   display: inline-block;
-  text-align: center;
   margin-top: 40px;
   transition: background-color 0.3s, transform 0.3s ease-in-out;
 }
 
 .read-more-btn:hover {
-  background-color: #e68fa3; 
-  transform: scale(1.05); 
+  background-color: #e68fa3;
+  transform: scale(1.05);
 }
 
-.read-more-btn:focus {
-  outline: none; 
+/* Featured Products Section */
+.home-category-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.home-section-heading-wrapper {
+  position: relative;
+  text-align: right;
+  margin-bottom: 40px;
+  padding-right: 40px;
+}
+
+.home-featured-vector {
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: -70px;
+}
+
+.home-section-paragraph {
+  color: #091A45;
+  font-size: 1.3rem;
+  font-weight: 400;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-bottom: -20px;
+}
+
+/* Product Card Styles */
+.home-product-card {
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 320px;
+  height: auto;
+  flex-shrink: 0;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.home-product-card:hover {
+  transform: translateY(-6px);
+}
+
+.home-image-wrapper {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  background-color: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Product Details */
+.home-product-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #DDA9D9;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.home-product-description {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  padding: 0 8px;
+  min-height: 40px;
+}
+
+.home-product-price-line {
+  font-size: 16px;
+  font-weight: 700;
+  color: #091A45;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.home-original-price {
+  text-decoration: line-through;
+  color: #aaa;
+  font-weight: 400;
+}
+
+.home-product-price {
+  color: #091A45;
+}
+
+.home-product-unit {
+  font-size: 14px;
+  font-weight: 600;
+  color: #777;
+}
+
+/* Divider (optional between price and unit) */
+.home-divider {
+  font-size: 14px;
+  color: #999;
+  margin: 0 4px;
+}
+
+/* CTA Button */
+.home-add-to-cart-btn {
+  background-color: #fff;
+  color: #091A45;
+  border: 2px solid #091A45;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+}
+
+.home-add-to-cart-btn:hover {
+  background-color: #091A45;
+  color: #fff;
+}
+
+/* Banner (Today's Treat) */
+.home-banner-section {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.home-season-banner {
+  position: relative;
+  width: 110%;
+  height: auto;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.home-banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.home-banner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: none;
+  padding: 20px 30px;
+}
+
+.home-banner-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.home-banner-cta {
+  background-color: #dba4d4;
+  color: #1e1e2d;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.home-banner-cta:hover {
+  background-color: #c38abe;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .home-product-card {
+    width: 220px;
+  }
+
+  .home-image-wrapper {
+    height: 200px;
+  }
+
+  .home-product-description {
+    font-size: 13px;
+    min-height: 35px;
+  }
+
+  .home-product-price-line {
+    font-size: 15px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .home-banner-title {
+    font-size: 20px;
+  }
+
+  .home-banner-cta {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .home-featured-vector {
+    max-width: 90%;
+    margin-right: auto;
+  }
+
+  .home-section-heading-wrapper {
+    padding-right: 20px;
+    text-align: center;
+  }
+
+  .home-section-paragraph {
+    padding: 0 16px;
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+}
+.home-show-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.home-show-more-btn {
+  background-color: #dea9cd;
+  color: #091A45;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.home-show-more-btn:hover {
+  background-color: #ce96c1;
+  transform: scale(1.05);
+}
+
+.home-Todays-Treat{
+  max-width: 1300px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: 0px;
+  margin-right: auto;
+  margin-bottom: -70px;
 }

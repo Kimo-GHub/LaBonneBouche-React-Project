@@ -73,29 +73,13 @@ export default function AddProducts() {
       name,
       description,
       originalPrice:
-        category === "taste-of-the-season" ? null : parseFloat(originalPrice),
-      price:
-        category === "taste-of-the-season"
-          ? null
-          : price
-          ? parseFloat(price)
-          : null,
-      weight:
-        category === "taste-of-the-season" ? null : formatWeight(weight),
-      pieces:
-        category === "taste-of-the-season"
-          ? null
-          : pieces
-          ? `${pieces} PCS`
-          : null,
-      serves:
-        category === "taste-of-the-season"
-          ? null
-          : serves
-          ? parseInt(serves)
-          : null,
-      displayUnit: category === "taste-of-the-season" ? null : displayUnit,
-      calories: category === "taste-of-the-season" ? null : calories,
+        isBanner ? null : parseFloat(originalPrice),
+      price: isBanner ? null : price ? parseFloat(price) : null,
+      weight: isBanner ? null : formatWeight(weight),
+      pieces: isBanner ? null : pieces ? `${pieces} PCS` : null,
+      serves: isBanner ? null : serves ? parseInt(serves) : null,
+      displayUnit: isBanner ? null : displayUnit,
+      calories: isBanner ? null : calories,
       category,
       imageUrl,
       createdAt: serverTimestamp(),
@@ -117,7 +101,7 @@ export default function AddProducts() {
     setUploading(false);
   };
 
-  const isBanner = category === "taste-of-the-season";
+  const isBanner = category === "taste-of-the-season" || category === "todays-treat";
 
   return (
     <div className="add-product-container">
@@ -223,6 +207,7 @@ export default function AddProducts() {
           <option value="cakes">Cakes</option>
           <option value="bites-of-happiness">Bites of Happiness</option>
           <option value="taste-of-the-season">A Taste of the Season</option>
+          <option value="todays-treat">Today's Treat</option>
           <option value="featured">Featured Products</option>
         </select>
 
