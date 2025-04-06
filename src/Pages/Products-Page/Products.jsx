@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { db } from '../../Firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
@@ -7,12 +7,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules'; 
+import { Navigation, Pagination } from 'swiper/modules';
+import { CartContext } from '../../App'; // ✅ Import the cart context
 import './products.css';
 import productVector from '../../images/product-images/product-vector.png';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const { addToCart } = useContext(CartContext); // ✅ Destructure addToCart
 
   const categoryMap = {
     cookies: 'Cookies',
@@ -75,7 +77,6 @@ function Products() {
     <div className="products-page">
       <Header />
 
-      {/* Decorative Vector */}
       <div className="vector-wrapper">
         <img
           src={productVector}
@@ -95,7 +96,6 @@ function Products() {
                 <span className="section-heading-text">{category}</span>
                 <span className="section-subtitle">{getSubtitle(category)}</span>
               </h2>
-
               {category === 'Cakes' && (
                 <p className="section-paragraph">
                   Enjoy the taste of freshness.{' '}
@@ -109,11 +109,7 @@ function Products() {
                 <div className="banner-section">
                   {items.map((product) => (
                     <div className="season-banner" key={product.id}>
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="banner-image"
-                      />
+                      <img src={product.imageUrl} alt={product.name} className="banner-image" />
                       <div className="banner-overlay">
                         <h3 className="banner-title">{product.name}</h3>
                         <button className="banner-cta">Order Now</button>
@@ -140,11 +136,7 @@ function Products() {
                     <SwiperSlide key={product.id}>
                       <div className="product-card">
                         <div className="image-wrapper">
-                          <img
-                            src={product.imageUrl}
-                            alt={product.name}
-                            className="product-image"
-                          />
+                          <img src={product.imageUrl} alt={product.name} className="product-image" />
                         </div>
                         <h3 className="product-name">{product.name}</h3>
                         <p className="product-description">{product.description}</p>
@@ -159,7 +151,20 @@ function Products() {
                           )}
                           <span className="product-unit">{renderProductUnit(product)}</span>
                         </p>
-                        <button className="add-to-cart-btn">Add To Cart</button>
+                        <button
+                          className="add-to-cart-btn"
+                          onClick={() =>
+                            addToCart({
+                              id: product.id,
+                              name: product.name,
+                              imageUrl: product.imageUrl,
+                              price: product.price ?? product.originalPrice,
+                              quantity: 1,
+                            })
+                          }
+                        >
+                          Add To Cart
+                        </button>
                       </div>
                     </SwiperSlide>
                   ))}

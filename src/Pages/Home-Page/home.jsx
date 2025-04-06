@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { db } from '../../Firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
@@ -12,10 +12,12 @@ import './Home.css';
 import aboutusBG from '../../images/Home-images/aboutusBG.png';
 import featuredVector from '../../images/Home-images/FeaturedProducts.png';
 import TodaysTreat from '../../images/Home-images/treatBG.png';
+import { CartContext } from '../../App'; // ✅ Import CartContext
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [todaysTreat, setTodaysTreat] = useState(null);
+  const { addToCart } = useContext(CartContext); // ✅ Access addToCart
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -110,7 +112,20 @@ function Home() {
                       <span className="home-divider"> / </span>
                       <span className="home-product-unit">{renderProductUnit(product)}</span>
                     </p>
-                    <button className="home-add-to-cart-btn">Add To Cart</button>
+                    <button
+                      className="home-add-to-cart-btn"
+                      onClick={() =>
+                        addToCart({
+                          id: product.id,
+                          name: product.name,
+                          imageUrl: product.imageUrl,
+                          price: product.price ?? product.originalPrice,
+                          quantity: 1,
+                        })
+                      }
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </SwiperSlide>
               ))}
@@ -141,7 +156,20 @@ function Home() {
               />
               <div className="home-banner-overlay">
                 <h3 className="home-banner-title">{todaysTreat.name}</h3>
-                <button className="home-banner-cta">Order Now</button>
+                <button
+                  className="home-banner-cta"
+                  onClick={() =>
+                    addToCart({
+                      id: todaysTreat.id,
+                      name: todaysTreat.name,
+                      imageUrl: todaysTreat.imageUrl,
+                      price: todaysTreat.price ?? todaysTreat.originalPrice,
+                      quantity: 1,
+                    })
+                  }
+                >
+                  Order Now
+                </button>
               </div>
             </div>
           </section>
