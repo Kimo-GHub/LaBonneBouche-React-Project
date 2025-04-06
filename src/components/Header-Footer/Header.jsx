@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../Firebase/firebase';
 import '../../styles/home/Header.css';
 import blueLogo from '../../images/Home-images/logo.png';
 import whiteLogo from '../../images/Home-images/logo-white.png';
@@ -23,23 +25,43 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
+  const [userName, setUserName] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setProfilePicture(currentUser.photoURL || defaultProfilePic);
+
+        const userDocRef = doc(db, "users", currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        const userData = userDoc.exists() ? userDoc.data() : null;
+
+        const fullName = `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim();
+        setUserName(fullName || "User");
+        setUserRole(userData?.role || "customer");
       } else {
         setUser(null);
         setProfilePicture(defaultProfilePic);
+        setUserName("");
+        setUserRole("");
       }
     });
+
+    return () => unsubscribe();
   }, []);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const handleProfileClick = () => navigate(user ? '/profile' : '/login');
+
+  const handleSignOut = async () => {
+    await signOut(getAuth());
+    setDropdownVisible(false);
+    navigate('/');
+  };
 
   return (
     <header
@@ -82,7 +104,6 @@ function Header() {
             <li><NavLink to="/products" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Shop</NavLink></li>
             <li><NavLink to="/cart" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>My Cart</NavLink></li>
             <li><NavLink to="/contact-us" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Contact Us</NavLink></li>
-            <li><NavLink to="/admin-panel" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Admin Panel</NavLink></li>
           </ul>
 
           <div className="auth-buttons">
@@ -96,8 +117,41 @@ function Header() {
                 </Link>
               </>
             ) : (
-              <div className="user-profile" onClick={handleProfileClick}>
-                <img src={profilePicture} alt="Profile" className="profile-img" />
+              <div
+                className="user-profile-wrapper"
+                onMouseEnter={() => setDropdownVisible(true)}
+                onMouseLeave={() => setDropdownVisible(false)}
+              >
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  className="profile-img"
+                  onClick={() => {
+                    navigate('/profile');
+                    setDropdownVisible(false);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+                {dropdownVisible && (
+                  <div className="profile-dropdown">
+                    <img src={profilePicture} alt="User" className="dropdown-img" />
+                    <p className="dropdown-name">{userName}</p>
+                    {userRole === "admin" && (
+                      <button
+                        className="dropdown-button"
+                        onClick={() => {
+                          navigate('/admin-panel');
+                          setDropdownVisible(false);
+                        }}
+                      >
+                        Admin Panel
+                      </button>
+                    )}
+                    <button className="dropdown-button" onClick={handleSignOut}>
+                      Sign Out
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

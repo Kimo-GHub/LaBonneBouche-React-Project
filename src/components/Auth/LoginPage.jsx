@@ -21,7 +21,7 @@ export default function Login() {
     setError(null);
 
     try {
-      const { user, role } = await loginUser(email, password); // assumes loginUser returns user object
+      const { user, role } = await loginUser(email, password);
 
       const userDocRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userDocRef);
@@ -29,6 +29,7 @@ export default function Login() {
       if (userSnap.exists()) {
         const userData = userSnap.data();
 
+        // Check ban status
         if (userData.banned) {
           const now = new Date();
 
@@ -48,13 +49,14 @@ export default function Login() {
             });
           }
         }
-      }
 
-      // Redirect based on role
-      if (role?.trim().toLowerCase() === "admin-panel") {
-        navigate("/admin-panel");
-      } else {
-        navigate("/");
+        // Redirect based on role
+        const role = userData.role?.toLowerCase();
+        if (role === "admin") {
+          navigate("/admin-panel");
+        } else {
+          navigate("/");
+        }
       }
     } catch (err) {
       setError(err.message);

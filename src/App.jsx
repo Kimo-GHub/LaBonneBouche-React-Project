@@ -42,6 +42,8 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  if (loading) return <div>Loading...</div>; // or splash screen
+
   return (
     <Router>
       <ScrollToTopButton />
@@ -55,11 +57,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
 
-        {/* Updated Admin Route to support nested routes */}
-        <Route path="/admin-panel/*" element={<AdminPanel />} />
-
-        {/* Protected Admin Route (optional, uncomment if needed) */}
-        {/*
+        {/* Protected Admin Route */}
         <Route
           path="/admin-panel/*"
           element={
@@ -70,7 +68,6 @@ function App() {
             )
           }
         />
-        */}
       </Routes>
     </Router>
   );

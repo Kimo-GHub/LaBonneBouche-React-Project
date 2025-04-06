@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../../Firebase/firebase";
+import { db, deleteUserFromAuth } from "../../Firebase/firebase";
 import {
   collection,
   getDocs,
@@ -12,6 +12,9 @@ import "../../styles/Admin/Edit-Users.css";
 function EditUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("all");
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showBanModal, setShowBanModal] = useState(false);
@@ -55,10 +58,40 @@ function EditUsers() {
     setShowEditModal(true);
   };
 
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
+      user.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesRole = roleFilter === "all" || user.role === roleFilter;
+
+    return matchesSearch && matchesRole;
+  });
+
   return (
     <div className="edit-users-container">
       <div className="user-table">
         <h2>Manage Users</h2>
+
+        <div className="user-filters">
+          <input
+            type="text"
+            placeholder="Search by name or email"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <select
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
+            className="role-filter"
+          >
+            <option value="all">All Roles</option>
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+          </select>
+        </div>
 
         {loading ? (
           <div className="spinner-container">
@@ -72,42 +105,23 @@ function EditUsers() {
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>User ID</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.id}>
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
                   <td>{user.email}</td>
+                  <td>{user.role || "N/A"}</td>
                   <td>{user.id}</td>
                   <td className="actions">
-                    <button
-                      className="edit-btn"
-                      onClick={() => openEditModal(user)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => {
-                        setSelectedUser(user);
-                        setShowDeleteModal(true);
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="ban-btn"
-                      onClick={() => {
-                        setSelectedUser(user);
-                        setShowBanModal(true);
-                      }}
-                    >
-                      Ban
-                    </button>
+                    <button className="edit-btn" onClick={() => openEditModal(user)}>Edit</button>
+                    <button className="delete-btn" onClick={() => { setSelectedUser(user); setShowDeleteModal(true); }}>Delete</button>
+                    <button className="ban-btn" onClick={() => { setSelectedUser(user); setShowBanModal(true); }}>Ban</button>
                   </td>
                 </tr>
               ))}
@@ -123,29 +137,27 @@ function EditUsers() {
             <h3>Confirm Deletion</h3>
             <p>
               Are you sure you want to delete{" "}
-              <strong>
-                {selectedUser.firstName} {selectedUser.lastName}
-              </strong>
-              ?
+              <strong>{selectedUser.firstName} {selectedUser.lastName}</strong>?
             </p>
             <div className="modal-buttons">
               <button
                 className="confirm"
                 onClick={async () => {
-                  await deleteDoc(doc(db, "users", selectedUser.id));
-                  setShowDeleteModal(false);
-                  setSelectedUser(null);
-                  fetchUsers();
+                  try {
+                    await deleteDoc(doc(db, "users", selectedUser.id));
+                    await deleteUserFromAuth(selectedUser.id);
+                  } catch (error) {
+                    console.error("Error deleting user from Firebase Auth:", error.message);
+                  } finally {
+                    setShowDeleteModal(false);
+                    setSelectedUser(null);
+                    fetchUsers();
+                  }
                 }}
               >
                 Yes, Delete
               </button>
-              <button
-                className="cancel"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                Cancel
-              </button>
+              <button className="cancel" onClick={() => setShowDeleteModal(false)}>Cancel</button>
             </div>
           </div>
         </div>
@@ -156,28 +168,15 @@ function EditUsers() {
         <div className="modal-backdrop">
           <div className="modal">
             <h3>Ban User</h3>
-            <p>
-              Banning{" "}
-              <strong>
-                {selectedUser.firstName} {selectedUser.lastName}
-              </strong>
-            </p>
+            <p>Banning <strong>{selectedUser.firstName} {selectedUser.lastName}</strong></p>
 
             <label>Start Date:</label>
-            <input
-              type="date"
-              value={banStart}
-              onChange={(e) => setBanStart(e.target.value)}
-            />
+            <input type="date" value={banStart} onChange={(e) => setBanStart(e.target.value)} />
 
             {!isLifetimeBan && (
               <>
                 <label>End Date:</label>
-                <input
-                  type="date"
-                  value={banEnd}
-                  onChange={(e) => setBanEnd(e.target.value)}
-                />
+                <input type="date" value={banEnd} onChange={(e) => setBanEnd(e.target.value)} />
               </>
             )}
 
@@ -250,10 +249,7 @@ function EditUsers() {
               value={editEmail}
               onChange={(e) => setEditEmail(e.target.value)}
             />
-            <select
-              value={editRole}
-              onChange={(e) => setEditRole(e.target.value)}
-            >
+            <select value={editRole} onChange={(e) => setEditRole(e.target.value)}>
               <option value="customer">Customer</option>
               <option value="admin">Admin</option>
             </select>
@@ -275,15 +271,7 @@ function EditUsers() {
               >
                 Save Changes
               </button>
-              <button
-                className="cancel"
-                onClick={() => {
-                  setShowEditModal(false);
-                  setSelectedUser(null);
-                }}
-              >
-                Cancel
-              </button>
+              <button className="cancel" onClick={() => { setShowEditModal(false); setSelectedUser(null); }}>Cancel</button>
             </div>
           </div>
         </div>
