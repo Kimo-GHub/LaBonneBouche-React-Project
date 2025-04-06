@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import '../../styles/home/Header.css';
-import bannerBg from '../../images/Home-images/BANNER.png';
-import logo from '../../images/Home-images/logo.png';
+import blueLogo from '../../images/Home-images/logo.png';
+import whiteLogo from '../../images/Home-images/logo-white.png';
 import defaultProfilePic from '../../images/Home-images/DefaultProfile.png';
+import homeBackground from '../../images/Home-images/BANNER.png';
+
+const pageDetails = {
+  "/contact-us": { title: "Contact Us", subtitle: "Let's Connect" },
+  "/cart": { title: "Your Cart", subtitle: "Order Summary" },
+  "/about-us": { title: "About Us", subtitle: "Sweet & Simple" },
+  "/products": { title: "Our Products", subtitle: "Sweetest Selections" },
+  "/": { title: "Welcome", subtitle: "Taste the Best" },
+};
 
 function Header() {
+  const location = useLocation();
+  const { title, subtitle } = pageDetails[location.pathname] || pageDetails["/"];
+  const isHomePage = location.pathname === "/";
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const navigate = useNavigate();
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
     const auth = getAuth();
@@ -27,72 +38,78 @@ function Header() {
     });
   }, []);
 
-  const handleProfileClick = () => {
-    navigate(user ? '/profile' : '/login');
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const handleProfileClick = () => navigate(user ? '/profile' : '/login');
 
   return (
-    <header className="header" style={{ backgroundImage: `url(${bannerBg})` }}>
-      <div className="container-fluid header-container">
+    <header
+      className="navbar-header"
+      style={
+        isHomePage
+          ? {
+              backgroundImage: `url(${homeBackground})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              paddingBottom: "0",
+              height: "100vh",
+            }
+          : {}
+      }
+    >
+      <nav className={`navbar ${isHomePage ? 'home-navbar' : ''}`}>
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="La Bonne Bouche" className="img-fluid" />
+            <img
+              src={isHomePage ? blueLogo : whiteLogo}
+              alt="La Bonne Bouche"
+              className="nav-logo"
+            />
           </Link>
         </div>
 
-        {/* Hamburger Icon */}
+        {/* Hamburger for mobile */}
         <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        {/* Navigation */}
         <div className={`nav-actions ${menuOpen ? 'menu-open' : ''}`}>
-          <ul className="navbar-nav nav-links">
-            <li className="nav-item">
-              <NavLink to="/" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>Home</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/about-us" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>About Us</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/products" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>Shop</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/cart" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>My Cart</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/contact-us" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>Contact Us</NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink to="/admin-panel" className={({ isActive }) => `link ${isActive ? 'active' : ''}`} onClick={toggleMenu}>admin-panel</NavLink>
-            </li>
+          <ul className="nav-links">
+            <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Home</NavLink></li>
+            <li><NavLink to="/about-us" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>About Us</NavLink></li>
+            <li><NavLink to="/products" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Shop</NavLink></li>
+            <li><NavLink to="/cart" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>My Cart</NavLink></li>
+            <li><NavLink to="/contact-us" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Contact Us</NavLink></li>
+            <li><NavLink to="/admin-panel" className={({ isActive }) => isActive ? "active" : ""} onClick={toggleMenu}>Admin Panel</NavLink></li>
           </ul>
 
           <div className="auth-buttons">
             {!user ? (
               <>
                 <Link to="/login" onClick={toggleMenu}>
-                  <button className="login-btn">Login</button>
+                  <button className={`login-btn ${isHomePage ? 'home-login' : ''}`}>Login</button>
                 </Link>
                 <Link to="/signup" onClick={toggleMenu}>
-                  <button className="signup-btn">Sign Up</button>
+                  <button className={`signup-btn ${isHomePage ? 'home-signup' : ''}`}>Sign Up</button>
                 </Link>
               </>
             ) : (
               <div className="user-profile" onClick={handleProfileClick}>
-                <img
-                  src={profilePicture}
-                  alt="Profile"
-                  className="profile-img"
-                />
+                <img src={profilePicture} alt="Profile" className="profile-img" />
               </div>
             )}
           </div>
         </div>
-      </div>
+      </nav>
+
+      {!isHomePage && (
+        <section className="hero">
+          <h1 className="hero-title">{title}</h1>
+          <h2 className="hero-subtitle">{subtitle}</h2>
+        </section>
+      )}
     </header>
   );
 }

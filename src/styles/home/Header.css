@@ -1,118 +1,223 @@
+/* Fonts */
+@font-face {
+  font-family: "BDSans";
+  src: url("../../Fonts/BDSans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Beautifully Delicious Script";
+  src: url("../../Fonts/BDScript-Regular.otf") format("opentype");
+}
+
 /* Reset */
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Header background */
-.header {
-  width: 100%;
-  height: 40rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
+body {
+  overflow-x: hidden;
 }
 
-/* Overall nav container */
-.header-container {
+.navbar-header {
+  width: 100vw;
+  background-color: #091a45;
+  color: white;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+}
+
+/* Navbar layout */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 4rem;
+  flex-wrap: wrap;
+  padding: 20px 50px;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  position: relative;
 }
 
-/* Logo stays left */
+/* Logo */
 .logo {
   flex-shrink: 0;
 }
 
-/* Nav links + buttons together on right */
+.logo img,
+.nav-logo {
+  width: 250px;
+  height: auto;
+}
+
+/* Navigation */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 }
 
-/* Nav links list */
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 2.5rem;
-  margin: 0;
-  padding: 0;
+  gap: 40px;
 }
 
-/* Individual link */
-.link {
+.nav-links a {
   text-decoration: none;
-  color: #091a45;
-  font-size: 1.563rem;
-  font-style: normal;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-size: 1.4rem;
   font-weight: 600;
   transition: all 0.3s ease-in-out;
 }
 
-/* Active link underline */
-.link.active {
-  color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
+.nav-links a.active {
+  border-bottom: 2px solid white;
+  padding-bottom: 5px;
 }
 
-/* Auth buttons wrapper */
+/* Auth buttons */
 .auth-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
+  align-items: center;
 }
 
-/* Button base styles */
 .login-btn,
 .signup-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
- 
-  border-radius: 999px;
-  font-size: 1.25rem;
+  padding: 12px 28px;
+  font-size: 1.2rem;
   font-weight: 600;
+  border-radius: 30px;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
   border: none;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Login style */
 .login-btn {
-  background-color: #091a45;
-  color: #fff;
-  padding: 0.90rem 2rem;
-}
-
-/* Sign Up style */
-.signup-btn {
-  background-color: #ffffff;
+  background-color: white;
   color: #091a45;
-  border: 2px solid #091a45;
-  padding: 0.80rem 2rem;
-
 }
 
-/* Add hover effect for better UX */
+.signup-btn {
+  background-color: #ddb7dc;
+  color: #091a45;
+}
+
+/* Profile picture */
+.user-profile {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Hero section */
+.hero {
+  width: 100vw;
+  height: 250px;
+  text-align: center;
+  background-color: #091a45;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: -25px;
+}
+
+.hero-subtitle {
+  font-family: "Beautifully Delicious Script", cursive;
+  font-size: 5rem;
+  font-weight: 400;
+  transform: scaleX(1.4);
+  opacity: 0.5;
+  line-height: 30%;
+  text-align: left;
+  align-self: flex-start;
+  margin-left: 40%;
+  margin-bottom: 20px;
+}
+/* === HOME PAGE NAVBAR CUSTOMIZATION === */
+
+/* White nav links on home page */
+.home-navbar .nav-links a {
+  color: white;
+}
+
+.home-navbar .nav-links a.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+/* === HOME PAGE NAVBAR CUSTOMIZATION === */
+
+/* White nav links on home page */
+.home-navbar .nav-links a {
+  color: white;
+}
+
+.home-navbar .nav-links a.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+/* Home page login: blue bg, white text */
+.home-login {
+  background-color: #091a45 !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* Home page sign up: white bg, blue text (no border) */
+.home-signup {
+  background-color: white !important;
+  color: #091a45 !important;
+  border: none !important;
+}
+
+/* Hover on home page buttons */
+.home-login:hover {
+  background-color: white !important;
+  color: #091a45 !important;
+}
+
+.home-signup:hover {
+  background-color: #091a45 !important;
+  color: white !important;
+}
+/* === DEFAULT (ALL OTHER PAGES) BUTTON HOVER === */
 .login-btn:hover {
-  background-color: #0b2a6a;
+  background-color: #ddb7dc;
+  color: #091a45;
 }
 
 .signup-btn:hover {
-  background-color: #091a45;
-  color: #fff;
+  background-color: white;
+  color: 091a45;
 }
 
 
-/* Hamburger Icon Styling */
+/* Hamburger */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -124,12 +229,11 @@
 .hamburger span {
   width: 25px;
   height: 3px;
-  background: #091a45;
+  background: white;
   transition: 0.3s ease-in-out;
   border-radius: 2px;
 }
 
-/* Open state animations */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -148,7 +252,7 @@
 
   .nav-actions {
     position: absolute;
-    top: 15%;
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.95);
@@ -175,7 +279,7 @@
     width: 100%;
   }
 
-  .nav-links .link {
+  .nav-links a {
     font-size: 1.25rem;
     width: 100%;
     color: #091a45;
@@ -193,25 +297,9 @@
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
   }
-}
-.auth-buttons a {
-  text-decoration: none;
-}
-.auth-buttons a .login-btn,
-.auth-buttons a .signup-btn {
-  text-decoration: none;
-}
 
-.user-profile {
-  cursor: pointer;
-  display: inline-block;
-  margin-left: 20px;
+  .profile-img {
+    width: 50px;
+    height: 50px;
+  }
 }
-
-.profile-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
