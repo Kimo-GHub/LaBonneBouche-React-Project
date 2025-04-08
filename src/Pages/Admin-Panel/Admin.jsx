@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import AdminSidebar from './Admin-Sidebar';
 import EditUsers from './Edit-User';
-import AddAdmin from './Add-Admin';
+import ViewOrders from './View-Orders';
 import AddProducts from './Add-Products';
 import AddSales from './Add-Sales';
 import ViewProducts from './View-Products';
@@ -14,7 +14,7 @@ export default function Admin() {
       <div className="admin-content">
         <Routes>
           <Route path="edit-users" element={<EditUsers />} />
-          <Route path="add-admin" element={<AddAdmin />} />
+          <Route path="view-orders" element={<ViewOrders />} />
           <Route path="add-products" element={<AddProducts />} />
           <Route path="view-products" element={<ViewProducts />} />
           <Route path="add-sales" element={<AddSales />} />

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { registerUser } from "../../Firebase/firebase";
 import { useNavigate, Link } from "react-router-dom";
@@ -7,6 +6,7 @@ import "../../styles/Auth/AuthForm.css";
 export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(""); // ✅ NEW
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -43,7 +43,7 @@ export default function Signup() {
     }
 
     try {
-      await registerUser(email, password, firstName, lastName);
+      await registerUser(email, password, firstName, lastName, phoneNumber); // ✅ Pass phone number
       navigate("/login");
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
@@ -82,17 +82,34 @@ export default function Signup() {
 
         <div className="input-pair">
           <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+          <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+        </div>
+
+        <div className="input-pair">
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </div>
@@ -105,16 +122,6 @@ export default function Signup() {
             <li className={/[0-9]/.test(password) ? "valid" : ""}>At least one number</li>
             <li className={/[^A-Za-z0-9]/.test(password) ? "valid" : ""}>At least one special character</li>
           </ul>
-        </div>
-
-        <div className="full-width-input">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
         </div>
 
         <button type="submit">Sign Up</button>

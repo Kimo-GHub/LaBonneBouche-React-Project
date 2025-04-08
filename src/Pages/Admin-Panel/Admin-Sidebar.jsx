@@ -21,7 +21,7 @@ const AdminSidebar = () => {
       <h2>Admin Panel</h2>
       <nav>
         <ul className="admin-sidebar-menu">
-          <li><Link to="/admin-panel/add-admin">Add Admin</Link></li>
+          <li><Link to="/admin-panel/view-orders">View Orders</Link></li>
           <li><Link to="/admin-panel/edit-users">Edit Users</Link></li>
           <li><Link to="/admin-panel/add-products">Add Products</Link></li>
           <li><Link to="/admin-panel/view-products">View Products</Link></li>

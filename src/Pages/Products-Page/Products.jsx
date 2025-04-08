@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../../Firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
@@ -8,13 +8,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import { CartContext } from '../../App'; // ✅ Import the cart context
+import { useCart } from '../../context/CartContext'; // ✅ This is correct now
 import './products.css';
 import productVector from '../../images/product-images/product-vector.png';
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(CartContext); // ✅ Destructure addToCart
+  const { addToCart } = useCart(); // ✅ Using the useCart hook
 
   const categoryMap = {
     cookies: 'Cookies',
@@ -25,16 +25,16 @@ function Products() {
 
   const categories = Object.values(categoryMap);
 
-  const fetchProducts = async () => {
-    const querySnapshot = await getDocs(collection(db, 'products'));
-    const productList = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setProducts(productList);
-  };
-
   useEffect(() => {
+    const fetchProducts = async () => {
+      const querySnapshot = await getDocs(collection(db, 'products'));
+      const productList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProducts(productList);
+    };
+
     fetchProducts();
   }, []);
 
@@ -112,7 +112,20 @@ function Products() {
                       <img src={product.imageUrl} alt={product.name} className="banner-image" />
                       <div className="banner-overlay">
                         <h3 className="banner-title">{product.name}</h3>
-                        <button className="banner-cta">Order Now</button>
+                        <button
+                          className="banner-cta"
+                          onClick={() =>
+                            addToCart({
+                              id: product.id,
+                              name: product.name,
+                              imageUrl: product.imageUrl,
+                              price: product.price ?? product.originalPrice,
+                              quantity: 1,
+                            })
+                          }
+                        >
+                          Order Now
+                        </button>
                       </div>
                     </div>
                   ))}

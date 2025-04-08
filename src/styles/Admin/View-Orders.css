@@ -1,0 +1,100 @@
+.view-orders-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.view-orders-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #091a45;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 16px 12px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.orders-table th {
+  background-color: #f5f7fa;
+  font-weight: bold;
+  color: #091a45;
+  border-bottom: 2px solid #eee;
+}
+
+.orders-table td {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.orders-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.status-dropdown {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.status-dropdown:focus {
+  outline: none;
+  border-color: #091a45;
+}
+
+.status-in-progress {
+  color: #d39e00;
+  font-weight: 500;
+}
+
+.status-completed {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.status-cancelled {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .orders-table, .orders-table thead, .orders-table tbody, .orders-table th, .orders-table td, .orders-table tr {
+    display: block;
+  }
+
+  .orders-table thead tr {
+    display: none;
+  }
+
+  .orders-table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  .orders-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    width: 45%;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #091a45;
+  }
+}

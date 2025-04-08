@@ -140,7 +140,7 @@
   box-shadow: 0 5px 12px rgba(0,0,0,0.06);
   background-color: white;
   height: fit-content;
-  
+  position: sticky;
   top: 120px;
 }
 
@@ -218,6 +218,39 @@
   margin-top: 5px;
 }
 
+/* Used Coupons */
+.used-coupons-section {
+  margin-top: 20px;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+.used-coupon-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.used-coupon-list li {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Shipping Section */
+.shipping-section {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.shipping-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px) {
   .cart-container {
@@ -241,4 +274,63 @@
   .summary-row {
     font-size: 0.95rem;
   }
+}
+
+
+/* Checkout Confirmation Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.confirm-btn {
+  background-color: #091A45;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.confirm-btn:hover {
+  background-color: #0b2c63;
+}
+
+.cancel-btn:hover {
+  background-color: #999;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../../Firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import Header from '../../components/Header-Footer/Header';
@@ -12,12 +12,12 @@ import './Home.css';
 import aboutusBG from '../../images/Home-images/aboutusBG.png';
 import featuredVector from '../../images/Home-images/FeaturedProducts.png';
 import TodaysTreat from '../../images/Home-images/treatBG.png';
-import { CartContext } from '../../App'; // ✅ Import CartContext
+import { useCart } from '../../context/CartContext'; // ✅ Updated import
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [todaysTreat, setTodaysTreat] = useState(null);
-  const { addToCart } = useContext(CartContext); // ✅ Access addToCart
+  const { addToCart } = useCart(); // ✅ Updated usage
 
   useEffect(() => {
     const fetchProducts = async () => {

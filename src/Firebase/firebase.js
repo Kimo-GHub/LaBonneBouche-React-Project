@@ -29,45 +29,46 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize services
+// Firebase services
 const auth = getAuth(app);
 const db = getFirestore(app);
-const functions = getFunctions(app); // Initialize Cloud Functions
+const functions = getFunctions(app);
 
-// Register new user
-const registerUser = async (email, password, firstName, lastName) => {
+// ✅ Register new user and store phone
+const registerUser = async (email, password, firstName, lastName, phoneNumber) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
 
-  // Create user document in Firestore
   await setDoc(doc(db, "users", user.uid), {
     email,
     firstName,
     lastName,
+    phoneNumber, // ✅ store phone
     role: "customer",
+    createdAt: new Date()
   });
 
   return user;
 };
 
-// Login user and return role
+// 🔐 Login user
 const loginUser = async (email, password) => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
 
-  // Fetch user role from Firestore
   const userDoc = await getDoc(doc(db, "users", user.uid));
   const userData = userDoc.exists() ? userDoc.data() : null;
 
   return { user, role: userData?.role };
 };
 
-// Delete Firebase Auth user using Cloud Function
+// 🔥 Delete Firebase Auth user via callable function
 const deleteUserFromAuth = async (uid) => {
   const callable = httpsCallable(functions, 'deleteUserFromAuth');
   return await callable({ uid });
 };
 
+// 📦 Export
 export {
   auth,
   db,

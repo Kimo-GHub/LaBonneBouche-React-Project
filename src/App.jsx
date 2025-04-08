@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from './Pages/Home-Page/home';
 import AboutUs from './Pages/AboutUs-Page/AboutUs';
@@ -14,17 +14,10 @@ import { auth, db } from './Firebase/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 
-// Cart Context
-export const CartContext = createContext();
-
 function App() {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cartItems, setCartItems] = useState(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -49,60 +42,34 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = (product) => {
-    setCartItems((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      if (exists) return prev;
-      return [...prev, { ...product, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const updateQuantity = (id, newQty) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: newQty } : item
-      )
-    );
-  };
-
   if (loading) return null;
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity }}>
-      <Router>
-        <ScrollToTopButton />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
+    <Router>
+      <ScrollToTopButton />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
 
-          {/* Protected Admin Route */}
-          <Route
-            path="/admin-panel/*"
-            element={
-              user && role === "admin" ? (
-                <AdminPanel />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
-          />
-        </Routes>
-      </Router>
-    </CartContext.Provider>
+        {/* Protected Admin Route */}
+        <Route
+          path="/admin-panel/*"
+          element={
+            user && role === "admin" ? (
+              <AdminPanel />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

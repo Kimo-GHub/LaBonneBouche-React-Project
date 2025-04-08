@@ -28,6 +28,7 @@ function EditUsers() {
   const [editFirstName, setEditFirstName] = useState("");
   const [editLastName, setEditLastName] = useState("");
   const [editEmail, setEditEmail] = useState("");
+  const [editPhoneNumber, setEditPhoneNumber] = useState(""); // ✅ New field
   const [editRole, setEditRole] = useState("customer");
 
   const fetchUsers = async () => {
@@ -54,6 +55,7 @@ function EditUsers() {
     setEditFirstName(user.firstName || "");
     setEditLastName(user.lastName || "");
     setEditEmail(user.email || "");
+    setEditPhoneNumber(user.phoneNumber || ""); // ✅ Load phone
     setEditRole(user.role || "customer");
     setShowEditModal(true);
   };
@@ -105,6 +107,7 @@ function EditUsers() {
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Phone</th> {/* ✅ New Column */}
                 <th>Role</th>
                 <th>User ID</th>
                 <th>Actions</th>
@@ -116,6 +119,7 @@ function EditUsers() {
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
                   <td>{user.email}</td>
+                  <td>{user.phoneNumber || "-"}</td> {/* ✅ Display phone */}
                   <td>{user.role || "N/A"}</td>
                   <td>{user.id}</td>
                   <td className="actions">
@@ -249,6 +253,12 @@ function EditUsers() {
               value={editEmail}
               onChange={(e) => setEditEmail(e.target.value)}
             />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={editPhoneNumber}
+              onChange={(e) => setEditPhoneNumber(e.target.value)}
+            />
             <select value={editRole} onChange={(e) => setEditRole(e.target.value)}>
               <option value="customer">Customer</option>
               <option value="admin">Admin</option>
@@ -262,6 +272,7 @@ function EditUsers() {
                     firstName: editFirstName,
                     lastName: editLastName,
                     email: editEmail,
+                    phoneNumber: editPhoneNumber, 
                     role: editRole,
                   });
                   setShowEditModal(false);
@@ -271,7 +282,9 @@ function EditUsers() {
               >
                 Save Changes
               </button>
-              <button className="cancel" onClick={() => { setShowEditModal(false); setSelectedUser(null); }}>Cancel</button>
+              <button className="cancel" onClick={() => { setShowEditModal(false); setSelectedUser(null); }}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>

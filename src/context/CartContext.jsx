@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
+// src/context/CartContext.jsx
+import { createContext, useContext, useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 
@@ -12,51 +13,98 @@ export const CartProvider = ({ children }) => {
 
   const [promoCode, setPromoCode] = useState("");
   const [promoMessage, setPromoMessage] = useState("");
-  const [coupon, setCoupon] = useState(null); // ✅ store entire coupon object
+  const [coupon, setCoupon] = useState(null);
   const [discount, setDiscount] = useState(0);
+  const [usedCoupons, setUsedCoupons] = useState(() => {
+    const saved = localStorage.getItem("usedCoupons");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const subtotal = cartItems.reduce((acc, item) => {
     const price = item.price || item.originalPrice || 0;
     return acc + price * item.quantity;
   }, 0);
 
-  // 🔁 Recalculate discount every time subtotal or coupon changes
+  const total = Math.max(0, subtotal - discount);
+
+  // 🧮 Recalculate discount
   useEffect(() => {
-    if (!coupon) return setDiscount(0);
+    if (!coupon) {
+      setDiscount(0);
+      return;
+    }
     if (coupon.type === "flat") {
       setDiscount(coupon.amount);
     } else if (coupon.type === "percent") {
       setDiscount((subtotal * coupon.amount) / 100);
     }
-  }, [subtotal, coupon]);
+  }, [coupon, subtotal]);
 
-  const applyPromoCode = async (code) => {
-    const trimmed = code.trim().toUpperCase();
-    const snapshot = await getDocs(collection(db, "coupons"));
-    const coupons = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    const match = coupons.find((c) => c.code === trimmed);
-
-    if (!match) {
-      setPromoMessage("Invalid promo code.");
+  // 💥 Clear promo when cart is emptied
+  useEffect(() => {
+    if (cartItems.length === 0) {
       setCoupon(null);
       setPromoCode("");
+      setPromoMessage("");
+      setUsedCoupons([]);
+      localStorage.removeItem("usedCoupons"); // ✅ FULL RESET
+    }
+  }, [cartItems]);
+
+  // 🏷️ Apply promo code
+  const applyPromoCode = async (code) => {
+    const trimmed = code.trim().toUpperCase();
+
+    // If promo already applied this session
+    if (usedCoupons.find((c) => c.code === trimmed)) {
+      setPromoMessage("You’ve already used this promo code.");
       return;
     }
 
-    const now = new Date();
-    if (!match.permanent && match.expiry?.seconds) {
-      const expiryDate = new Date(match.expiry.seconds * 1000);
-      if (expiryDate < now) {
-        setPromoMessage("Promo code has expired.");
-        setCoupon(null);
-        setPromoCode("");
+    try {
+      const snapshot = await getDocs(collection(db, "coupons"));
+      const coupons = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const match = coupons.find((c) => c.code === trimmed);
+
+      if (!match) {
+        setPromoMessage("Invalid promo code.");
         return;
       }
-    }
 
-    setPromoCode(trimmed);
-    setCoupon(match); // ✅ this triggers discount recalculation
-    setPromoMessage("Promo applied!");
+      const now = new Date();
+      if (!match.permanent && match.expiry?.seconds) {
+        const expiryDate = new Date(match.expiry.seconds * 1000);
+        if (expiryDate < now) {
+          setPromoMessage("Promo code has expired.");
+          return;
+        }
+      }
+
+      const valueApplied =
+        match.type === "flat"
+          ? match.amount
+          : parseFloat(((subtotal * match.amount) / 100).toFixed(2));
+
+      const newUsed = [
+        ...usedCoupons,
+        {
+          code: match.code,
+          type: match.type,
+          amount: match.amount,
+          valueApplied,
+        },
+      ];
+
+      setPromoCode(trimmed);
+      setCoupon(match);
+      setDiscount(valueApplied);
+      setPromoMessage("Promo applied!");
+      setUsedCoupons(newUsed);
+      localStorage.setItem("usedCoupons", JSON.stringify(newUsed));
+    } catch (error) {
+      console.error("Error applying promo code:", error);
+      setPromoMessage("Something went wrong. Try again.");
+    }
   };
 
   const addToCart = (product) => {
@@ -86,12 +134,15 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const total = Math.max(0, subtotal - discount);
-
-  // 💾 Optional: persist cart
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+  const clearCart = () => {
+    setCartItems([]);
+    setCoupon(null);
+    setPromoCode("");
+    setPromoMessage("");
+    setDiscount(0);
+    setUsedCoupons([]);
+    localStorage.removeItem("usedCoupons"); // ✅ Important
+  };
 
   return (
     <CartContext.Provider
@@ -106,6 +157,8 @@ export const CartProvider = ({ children }) => {
         discount,
         subtotal,
         total,
+        usedCoupons,
+        clearCart,
       }}
     >
       {children}
