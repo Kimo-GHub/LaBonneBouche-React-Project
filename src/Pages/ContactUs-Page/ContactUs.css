@@ -94,11 +94,16 @@ body {
 }
 
 .here-to-help-subtitle {
-  font-family: 'Georgia', serif;
-  font-size: 56px;
-  color: #999bb3;
+  font-family: "Beautifully Delicious Script", cursive;
+  font-size: 5rem;
+  font-weight: 400;
+  transform: scaleX(1.4);
+  opacity: 0.5;
+  line-height: 1;
+  color: #091A45;
   margin: 10px 0 20px;
 }
+
 
 .contact-prompt {
   font-size: 16px;

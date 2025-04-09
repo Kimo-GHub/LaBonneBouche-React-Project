@@ -61,9 +61,12 @@
 }
 
 .section-subtitle {
-  font-size: 64px;
-  font-family: 'Georgia', serif;
-  color: rgba(9, 26, 69, 0.15);
+  font-family: "Beautifully Delicious Script", cursive;
+  font-size: 5rem;
+  font-weight: 400;
+  transform: scaleX(1.4);
+  opacity: 0.5;
+  line-height: 1;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -71,7 +74,10 @@
   z-index: 1;
   white-space: nowrap;
   pointer-events: none;
+  color: #091A45;
 }
+
+
 
 .section-paragraph {
   font-size: 16px;
