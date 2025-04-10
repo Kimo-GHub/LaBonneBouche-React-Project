@@ -27,7 +27,7 @@ const AdminSidebar = () => {
           <li><Link to="/admin-panel/view-products">View Products</Link></li>
           <li><Link to="/admin-panel/add-sales">Add Sales</Link></li>
           <li><Link to="/">Home</Link></li>
-          <li className="logout-btn">
+          <li className="admin-logout-btn">
             <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>

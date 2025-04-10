@@ -87,7 +87,7 @@ export default function Login() {
     <>
       {/* Back Button */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/")}
         style={{
           position: "absolute",
           top: "20px",
