@@ -1,44 +1,34 @@
-/* Background Decorative Text */
-.background-text-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  font-size: 5rem;
-  font-weight: bold;
-  opacity: 0.02;
-  user-select: none;
-  margin-top: 30px;
+/* General Styling */
+body {
   font-family: 'Poppins', sans-serif;
-}
-
-.background-text {
-  white-space: nowrap;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 /* Main Cart Section */
 .cart-main {
   text-align: center;
   padding: 100px 20px;
-  background-color: #fafafa;
+  background-color: #f5f7fa;
   min-height: 100vh;
 }
 
 .cart-title {
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: #091a45;
-  font-family: "Poppins", sans-serif;
   margin-bottom: 40px;
+  font-weight: 700;
 }
 
 .cart-content-placeholder {
-  font-size: 1.2rem;
-  color: #444;
-  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #666;
 }
 
 /* Layout */
 .cart-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 40px;
   max-width: 1100px;
   margin: 0 auto;
@@ -48,40 +38,38 @@
 /* Cart Items Section */
 .cart-page {
   flex: 2;
-  background: #fff;
+  background: #ffffff;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #eee;
-  padding-bottom: 15px;
 }
 
 .cart-item img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
   margin-right: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .cart-item-details {
   flex: 1;
-  padding: 0 10px;
   text-align: left;
 }
 
 .item-name {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
@@ -98,12 +86,19 @@
 }
 
 .quantity-controls button {
-  padding: 4px 10px;
-  background-color: #eee;
+  padding: 5px 12px;
+  background-color: #edf2f7;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.quantity-controls button:hover {
+  background-color: #dbe4ec;
 }
 
 .quantity-controls span {
@@ -113,11 +108,11 @@
 
 /* Remove Button */
 .remove-btn {
-  background: #ff4d4f;
+  background: #e53935;
   color: white;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   font-size: 16px;
   cursor: pointer;
@@ -128,25 +123,23 @@
 }
 
 .remove-btn:hover {
-  background: #d9363e;
+  background: #c62828;
 }
 
 /* Summary Sidebar */
 .cart-summary {
   flex: 1;
-  border: 1px solid #eee;
   padding: 24px;
   border-radius: 16px;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.06);
   background-color: white;
-  height: fit-content;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   position: sticky;
   top: 120px;
 }
 
 .summary-title {
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 20px;
   color: #091A45;
 }
@@ -154,18 +147,18 @@
 .summary-row {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
-  font-family: "Poppins", sans-serif;
+  margin: 12px 0;
   font-size: 1rem;
 }
 
 .total-row {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   border-top: 1px solid #eee;
   padding-top: 12px;
 }
 
+/* Checkout Button */
 .checkout-btn {
   padding: 12px 20px;
   background-color: #091A45;
@@ -173,9 +166,9 @@
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1rem;
-  margin-top: 20px;
+  margin-top: 24px;
   width: 100%;
   transition: background 0.3s ease;
 }
@@ -188,8 +181,8 @@
 .promo-section {
   margin-top: 20px;
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 10px;
 }
 
 .promo-section input {
@@ -200,55 +193,145 @@
 }
 
 .promo-section button {
-  background-color: #eee;
+  background-color: #222;
+  color: white;
   border: none;
   padding: 10px;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .promo-section button:hover {
-  background-color: #ddd;
+  background-color: #444;
 }
 
 .promo-message {
   font-size: 0.9rem;
   color: #35a753;
-  margin-top: 5px;
 }
 
 /* Used Coupons */
 .used-coupons-section {
   margin-top: 20px;
   text-align: left;
-  font-family: "Poppins", sans-serif;
 }
 
 .used-coupon-list {
-  list-style-type: disc;
+  list-style: disc;
   padding-left: 20px;
   margin-top: 10px;
 }
 
 .used-coupon-list li {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-size: 0.95rem;
-  color: #333;
 }
 
 /* Shipping Section */
 .shipping-section {
   margin-top: 20px;
   text-align: left;
+  font-size: 0.95rem;
 }
 
 .shipping-option {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Confirmation Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
+  animation: scaleIn 0.25s ease-out;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
   font-size: 0.95rem;
-  margin-bottom: 8px;
+}
+
+.confirm-btn {
+  background-color: #091A45;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.confirm-btn:hover {
+  background-color: #0b2c63;
+}
+
+.cancel-btn:hover {
+  background-color: #999;
+}
+
+/* Order Toast */
+.order-success-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  animation: fadeOut 1.8s ease forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* Responsive */
@@ -274,63 +357,14 @@
   .summary-row {
     font-size: 0.95rem;
   }
-}
 
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
-/* Checkout Confirmation Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  width: 90%;
-  max-width: 400px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.confirm-btn,
-.cancel-btn {
-  padding: 10px 20px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.confirm-btn {
-  background-color: #091A45;
-  color: white;
-}
-
-.cancel-btn {
-  background-color: #ccc;
-  color: #333;
-}
-
-.confirm-btn:hover {
-  background-color: #0b2c63;
-}
-
-.cancel-btn:hover {
-  background-color: #999;
+  .cart-item img {
+    margin-right: 0;
+  }
 }

@@ -4,7 +4,7 @@ import Footer from '../../components/Header-Footer/Footer';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../Firebase/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import './cart.css';
 
 function Cart() {
@@ -25,6 +25,7 @@ function Cart() {
   const [inputCode, setInputCode] = useState('');
   const [applyingPromo, setApplyingPromo] = useState(false);
   const [shippingMethod, setShippingMethod] = useState('card');
+  const [orderSuccess, setOrderSuccess] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [localPromoMessage, setLocalPromoMessage] = useState('');
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ function Cart() {
   const shippingCost = shippingMethod === 'cod' ? 3 : 0;
   const finalTotal = total + shippingCost;
 
-  // Hide promo messages after 2 seconds
   useEffect(() => {
     if (promoMessage) {
       setLocalPromoMessage(promoMessage);
@@ -55,10 +55,13 @@ function Cart() {
     if (!user) return navigate('/login');
 
     try {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      const phone = userDoc.exists() ? userDoc.data().phoneNumber || 'N/A' : 'N/A';
+
       const orderData = {
         customerName: user.displayName || 'N/A',
         customerEmail: user.email,
-        customerPhone: user.phoneNumber || 'N/A',
+        customerPhone: phone,
         items: cartItems,
         total: finalTotal,
         discount,
@@ -73,13 +76,12 @@ function Cart() {
       };
 
       await addDoc(collection(db, 'orders'), orderData);
-
-      alert('🎉 Your order has been placed successfully!');
       clearCart();
       setShowConfirmModal(false);
+      setOrderSuccess(true);
+      setTimeout(() => setOrderSuccess(false), 3000);
     } catch (error) {
-      console.error('Error placing order:', error);
-      alert('❌ Failed to place order. Please try again.');
+      console.error('❌ Error saving order:', error);
     }
   };
 
@@ -108,13 +110,7 @@ function Cart() {
                       <button onClick={() => updateQuantity(item.id, 1)}>+</button>
                     </div>
                   </div>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(item.id)}
-                    title="Remove from cart"
-                  >
-                    X
-                  </button>
+                  <button className="remove-btn" onClick={() => removeFromCart(item.id)}>X</button>
                 </div>
               ))}
             </div>
@@ -123,8 +119,7 @@ function Cart() {
               <h2 className="summary-title">Cart Summary</h2>
 
               <div className="summary-row">
-                <span>Subtotal:</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>Subtotal:</span><span>${subtotal.toFixed(2)}</span>
               </div>
 
               <div className="promo-section">
@@ -154,7 +149,7 @@ function Cart() {
                     {usedCoupons.map((c, i) => (
                       <li key={i}>
                         <strong>{c.code}</strong> — {c.type === 'flat' ? `$${c.amount}` : `${c.amount}%`} off
-                        &nbsp;(Saved: <strong>${c.valueApplied}</strong>)
+                        (Saved: <strong>${c.valueApplied}</strong>)
                       </li>
                     ))}
                   </ul>
@@ -163,52 +158,55 @@ function Cart() {
 
               <div className="shipping-section">
                 <p style={{ marginBottom: '8px', fontWeight: '500' }}>Shipping Method:</p>
-                <label className="shipping-option">
+                <label>
                   <input
                     type="radio"
                     value="cod"
                     checked={shippingMethod === 'cod'}
                     onChange={() => setShippingMethod('cod')}
-                  />
-                  Cash on Delivery (+$3)
+                  /> Cash on Delivery (+$3)
                 </label>
-                <label className="shipping-option">
+                <label>
                   <input
                     type="radio"
                     value="card"
                     checked={shippingMethod === 'card'}
                     onChange={() => setShippingMethod('card')}
-                  />
-                  Pay by Card (Free)
+                  /> Pay by Card (Free)
                 </label>
-                <label className="shipping-option">
+                <label>
                   <input
                     type="radio"
                     value="pickup"
                     checked={shippingMethod === 'pickup'}
                     onChange={() => setShippingMethod('pickup')}
-                  />
-                  Local Pickup (Free)
+                  /> Local Pickup (Free)
                 </label>
               </div>
 
               <div className="summary-row">
-                <span>Shipping:</span>
-                <span>${shippingCost.toFixed(2)}</span>
+                <span>Shipping:</span><span>${shippingCost.toFixed(2)}</span>
               </div>
 
               <div className="summary-row total-row">
-                <span>Total:</span>
-                <span>${finalTotal.toFixed(2)}</span>
+                <span>Total:</span><span>${finalTotal.toFixed(2)}</span>
               </div>
 
               <button className="checkout-btn" onClick={() => setShowConfirmModal(true)}>
-                Proceed to Checkout
+                Place Order
               </button>
             </div>
           </div>
         )}
 
+        {/* ✅ Order Success Toast */}
+        {orderSuccess && (
+          <div className="order-success-toast">
+            🎉 Your order has been placed successfully!
+          </div>
+        )}
+
+        {/* ✅ Confirmation Modal */}
         {showConfirmModal && (
           <div className="modal-overlay">
             <div className="modal">
@@ -216,12 +214,8 @@ function Cart() {
               <p>Are you sure you want to place your order?</p>
               <p style={{ fontSize: '0.9rem' }}>💡 Don't forget to apply your promo code!</p>
               <div className="modal-buttons">
-                <button className="confirm-btn" onClick={handlePlaceOrder}>
-                  Yes, Place Order
-                </button>
-                <button className="cancel-btn" onClick={() => setShowConfirmModal(false)}>
-                  Cancel
-                </button>
+                <button className="confirm-btn" onClick={handlePlaceOrder}>Yes, Place Order</button>
+                <button className="cancel-btn" onClick={() => setShowConfirmModal(false)}>Cancel</button>
               </div>
             </div>
           </div>

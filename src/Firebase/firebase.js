@@ -15,7 +15,7 @@ import {
   httpsCallable,
 } from 'firebase/functions';
 
-// Firebase configuration
+// ✅ Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB7wmtCHFArmx9RuYvVNof4MUG4Ck-TZW4",
   authDomain: "labonnebouche-e8bd6.firebaseapp.com",
@@ -26,15 +26,15 @@ const firebaseConfig = {
   measurementId: "G-TMC0SEYYZE"
 };
 
-// Initialize Firebase
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Firebase services
+// ✅ Firebase Services
 const auth = getAuth(app);
 const db = getFirestore(app);
 const functions = getFunctions(app);
 
-// ✅ Register new user and store phone
+// ✅ Register New User with Firestore Profile
 const registerUser = async (email, password, firstName, lastName, phoneNumber) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
@@ -43,7 +43,7 @@ const registerUser = async (email, password, firstName, lastName, phoneNumber) =
     email,
     firstName,
     lastName,
-    phoneNumber, // ✅ store phone
+    phoneNumber,
     role: "customer",
     createdAt: new Date()
   });
@@ -51,7 +51,7 @@ const registerUser = async (email, password, firstName, lastName, phoneNumber) =
   return user;
 };
 
-// 🔐 Login user
+// ✅ Login User and Return Role
 const loginUser = async (email, password) => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
@@ -62,18 +62,18 @@ const loginUser = async (email, password) => {
   return { user, role: userData?.role };
 };
 
-// 🔥 Delete Firebase Auth user via callable function
+// ✅ Delete Firebase Auth User via Cloud Function
 const deleteUserFromAuth = async (uid) => {
   const callable = httpsCallable(functions, 'deleteUserFromAuth');
   return await callable({ uid });
 };
 
-// 📦 Export
+// ✅ Export Everything
 export {
   auth,
   db,
   functions,
   registerUser,
   loginUser,
-  deleteUserFromAuth
+  deleteUserFromAuth,
 };

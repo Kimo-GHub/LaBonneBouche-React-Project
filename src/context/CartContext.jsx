@@ -27,12 +27,13 @@ export const CartProvider = ({ children }) => {
 
   const total = Math.max(0, subtotal - discount);
 
-  // 🧮 Recalculate discount
+  // 🔁 Update discount when coupon or subtotal changes
   useEffect(() => {
     if (!coupon) {
       setDiscount(0);
       return;
     }
+
     if (coupon.type === "flat") {
       setDiscount(coupon.amount);
     } else if (coupon.type === "percent") {
@@ -40,22 +41,25 @@ export const CartProvider = ({ children }) => {
     }
   }, [coupon, subtotal]);
 
-  // 💥 Clear promo when cart is emptied
+  // 💾 Save cart and clear promo if emptied
   useEffect(() => {
     if (cartItems.length === 0) {
       setCoupon(null);
       setPromoCode("");
       setPromoMessage("");
       setUsedCoupons([]);
-      localStorage.removeItem("usedCoupons"); // ✅ FULL RESET
+      setDiscount(0);
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("usedCoupons");
+    } else {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);
 
-  // 🏷️ Apply promo code
+  // 🏷️ Promo logic
   const applyPromoCode = async (code) => {
     const trimmed = code.trim().toUpperCase();
 
-    // If promo already applied this session
     if (usedCoupons.find((c) => c.code === trimmed)) {
       setPromoMessage("You’ve already used this promo code.");
       return;
@@ -76,6 +80,18 @@ export const CartProvider = ({ children }) => {
         const expiryDate = new Date(match.expiry.seconds * 1000);
         if (expiryDate < now) {
           setPromoMessage("Promo code has expired.");
+          return;
+        }
+      }
+
+      // Minimum subtotal rules
+      if (match.type === "flat") {
+        if (match.amount <= 10 && subtotal < 50) {
+          setPromoMessage("This coupon requires a minimum subtotal of $50.");
+          return;
+        }
+        if (match.amount > 10 && subtotal < 100) {
+          setPromoMessage("This coupon requires a minimum subtotal of $100.");
           return;
         }
       }
@@ -107,6 +123,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // ➕ Add product
   const addToCart = (product) => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item.id === product.id);
@@ -120,10 +137,12 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // ❌ Remove item
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  // 🔄 Update quantity
   const updateQuantity = (id, amount) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -134,6 +153,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // 🧹 Full cart + promo clear
   const clearCart = () => {
     setCartItems([]);
     setCoupon(null);
@@ -141,7 +161,8 @@ export const CartProvider = ({ children }) => {
     setPromoMessage("");
     setDiscount(0);
     setUsedCoupons([]);
-    localStorage.removeItem("usedCoupons"); // ✅ Important
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("usedCoupons");
   };
 
   return (
