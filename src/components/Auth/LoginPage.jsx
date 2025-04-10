@@ -84,55 +84,77 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container" id="login">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <>
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          backgroundColor: "#091a45",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          padding: "8px 16px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          zIndex: 1000,
+        }}
+      >
+        ← Back
+      </button>
 
-      <div className="switch-link">
-        Forgot your password?{" "}
-        <span onClick={() => setShowResetModal(true)}>Reset Password</span>
-      </div>
+      <div className="auth-container" id="login">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
 
-      {showResetModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Reset Password</h3>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={resetEmail}
-              onChange={(e) => setResetEmail(e.target.value)}
-            />
-            <div className="modal-buttons">
-              <button onClick={handleResetPassword}>Send Reset Email</button>
-              <button onClick={() => setShowResetModal(false)}>Cancel</button>
+        <div className="switch-link">
+          Forgot your password?{" "}
+          <span onClick={() => setShowResetModal(true)}>Reset Password</span>
+        </div>
+
+        {showResetModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h3>Reset Password</h3>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+              />
+              <div className="modal-buttons">
+                <button onClick={handleResetPassword}>Send Reset Email</button>
+                <button onClick={() => setShowResetModal(false)}>Cancel</button>
+              </div>
             </div>
           </div>
+        )}
+
+        {resetMessage && <p className="success">{resetMessage}</p>}
+        {error && <p className="error">{error}</p>}
+
+        <div className="switch-link">
+          Don’t have an account? <Link to="/signup">Sign Up</Link>
         </div>
-      )}
-
-      {resetMessage && <p className="success">{resetMessage}</p>}
-      {error && <p className="error">{error}</p>}
-
-      <div className="switch-link">
-        Don’t have an account? <Link to="/signup">Sign Up</Link>
       </div>
-    </div>
+    </>
   );
 }
