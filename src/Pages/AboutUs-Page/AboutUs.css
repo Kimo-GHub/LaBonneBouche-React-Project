@@ -40,12 +40,20 @@
 }
 
 .about-us-subtitle {
-  font-size: 2.2rem; 
-  font-family: "Beautifully Delicious Script", sans-serif;
+  font-family: "Beautifully Delicious Script", cursive;
+  font-size: 5rem;
+  font-weight: 400;
+  transform: scaleX(1.4);
+  opacity: 0.5;
+  line-height: 1;
   color: #091a45;
-  opacity: 0.85;
-  margin-bottom: 2.5rem; 
+  position: relative;
+  left: 20%;
+  top: -60px; /* ⬅️ pulls it upward */
+  margin: 0 0 20px;
+  text-align: left;
 }
+
 
 .about-us-description {
   font-size: 1.25rem; 
@@ -66,39 +74,6 @@
   height: auto;
   border-radius: 12px;
  
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .about-us-section {
-    flex-direction: column;
-    align-items: center; /* Stack the elements vertically on smaller screens */
-    padding: 2rem; /* Reduce padding for smaller screens */
-  }
-
-  .about-us-text {
-    text-align: center;
-    max-width: 90%; /* Allow more space for text */
-  }
-
-  .about-us-title {
-    font-size: 2.8rem; /* Adjust title size for smaller screens */
-    margin-bottom: 1.2rem; /* Reduce bottom margin */
-  }
-
-  .about-us-subtitle {
-    font-size: 2rem; /* Adjust subtitle size */
-    margin-bottom: 1.5rem; /* Reduce bottom margin */
-  }
-
-  .about-us-description {
-    font-size: 1.1rem; /* Smaller font size for better readability on small screens */
-  }
-
-  .about-us-image {
-    max-width: 90%; /* Allow image to take up more space on smaller screens */
-    margin-top: 2rem; /* Add margin above the image */
-  }
 }
 
 
@@ -146,34 +121,6 @@
 
 }
 
-/* Responsive Design for Mission Section */
-@media (max-width: 768px) {
-  .our-mission-section {
-    flex-direction: column;
-    padding: 2rem;
-  }
-
-  .mission-title {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .mission-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .mission-description {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: left; 
-  }
-
-  .mission-photo {
-    max-width: 80%;
-    margin-top: 2rem;
-  }
-}
 
 /* Styling for Our Vision Section */
 .our-vision-section {
@@ -221,34 +168,7 @@
 
 }
 
-/* Responsive Design for Vision Section */
-@media (max-width: 768px) {
-  .our-vision-section {
-    flex-direction: column; 
-    padding: 2rem; 
-  }
 
-  .vision-title {
-    text-align: center; 
-    margin-bottom: 1rem;
-  }
-
-  .vision-content {
-    flex-direction: column; 
-    text-align: center; 
-
-  .vision-description {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: left; 
-  }
-
-  .vision-photo {
-    max-width: 80%; 
-    margin-top: 2rem; 
-  }
-}
-}
 
 
 
@@ -315,15 +235,208 @@
 }
 
 
-@media (max-width: 768px) {
+/* === MAX WIDTH: 768px (Tablets & Most Phones) === */
+@media screen and (max-width: 768px) {
+  /* === OUR STORY === */
+  .about-us-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .about-us-text {
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .about-us-title {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-us-subtitle {
+    font-size: 3.2rem;
+    transform: scaleX(1.2);
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .about-us-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .about-us-image {
+    max-width: 90%;
+    margin-top: 2rem;
+  }
+
+  /* === OUR MISSION === */
+  .our-mission-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .mission-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mission-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-bottom: 2rem;
+  }
+
+  .mission-title {
+    order: 2;
+    margin-top: 1rem;
+    max-width: 80%;
+    text-align: center;
+  }
+
+  .mission-title-image {
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* === OUR VISION === */
+  .our-vision-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .vision-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .vision-title {
+    text-align: center;
+    max-width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .vision-title-image {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .vision-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 90%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .vision-photo {
+    max-width: 80%;
+    margin-top: 1.5rem;
+  }
+
+  /* === ABOUT CELINE === */
   .About-Celine {
     flex-direction: column;
     gap: 2rem;
-
+    padding: 2rem;
   }
 
   .about1 img {
     margin-top: -20px;
     margin-bottom: -20px;
+    width: 100%;
+  }
+
+  .about2 img.celina-title-img {
+    max-width: 80%;
+  }
+
+  .about2 p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding: 0 15px;
+    text-align: center;
+  }
+}
+
+/* === MAX WIDTH: 600px (Small Tablets & Large Phones) === */
+@media screen and (max-width: 600px) {
+  .about-us-title {
+    font-size: 2.4rem;
+  }
+
+  .about-us-subtitle {
+    font-size: 2.8rem;
+  }
+
+  .about-us-description,
+  .mission-description,
+  .vision-description,
+  .about2 p {
+    font-size: 1rem;
+  }
+}
+
+/* === MAX WIDTH: 480px (iPhone SE / older Androids) === */
+@media screen and (max-width: 480px) {
+  .about-us-title {
+    font-size: 2rem;
+  }
+
+  .about-us-subtitle {
+    font-size: 2.5rem;
+  }
+
+  .mission-title-image,
+  .vision-title-image {
+    width: 90%;
+  }
+
+  .about-us-image,
+  .vision-photo {
+    max-width: 95%;
+  }
+}
+
+/* === MAX WIDTH: 375px (iPhone 13 mini / Galaxy S9) === */
+@media screen and (max-width: 375px) {
+  .about-us-subtitle {
+    font-size: 2.2rem;
+  }
+
+  .about-us-title {
+    font-size: 1.9rem;
+  }
+}
+
+/* === MAX WIDTH: 320px (iPhone 5 / SE) === */
+@media screen and (max-width: 320px) {
+  .about-us-title {
+    font-size: 1.7rem;
+  }
+
+  .about-us-subtitle {
+    font-size: 2rem;
+    transform: scaleX(1);
+  }
+
+  .about-us-description,
+  .mission-description,
+  .vision-description {
+    font-size: 0.95rem;
   }
 }
