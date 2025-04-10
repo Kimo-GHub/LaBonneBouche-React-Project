@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 import { registerUser } from "../../Firebase/firebase";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/Auth/AuthForm.css";
@@ -60,78 +60,100 @@ export default function Signup() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup} className="signup-form-grid">
-        <div className="input-pair">
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
+    <>
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          backgroundColor: "#091a45",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          padding: "8px 16px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          zIndex: 1000,
+        }}
+      >
+        ← Back
+      </button>
+
+      <div className="auth-container">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSignup} className="signup-form-grid">
+          <div className="input-pair">
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-pair">
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-pair">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="password-strength">
+            <progress value={strength} max="4"></progress>
+            <ul className="password-rules">
+              <li className={password.length >= 8 ? "valid" : ""}>Minimum 8 characters</li>
+              <li className={/[A-Z]/.test(password) ? "valid" : ""}>At least one uppercase letter</li>
+              <li className={/[0-9]/.test(password) ? "valid" : ""}>At least one number</li>
+              <li className={/[^A-Za-z0-9]/.test(password) ? "valid" : ""}>At least one special character</li>
+            </ul>
+          </div>
+
+          <button type="submit">Sign Up</button>
+        </form>
+
+        {error && <p className="error">{error}</p>}
+
+        <div className="switch-link">
+          Already have an account? <Link to="/login">Login</Link>
         </div>
-
-        <div className="input-pair">
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="input-pair">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="password-strength">
-          <progress value={strength} max="4"></progress>
-          <ul className="password-rules">
-            <li className={password.length >= 8 ? "valid" : ""}>Minimum 8 characters</li>
-            <li className={/[A-Z]/.test(password) ? "valid" : ""}>At least one uppercase letter</li>
-            <li className={/[0-9]/.test(password) ? "valid" : ""}>At least one number</li>
-            <li className={/[^A-Za-z0-9]/.test(password) ? "valid" : ""}>At least one special character</li>
-          </ul>
-        </div>
-
-        <button type="submit">Sign Up</button>
-      </form>
-
-      {error && <p className="error">{error}</p>}
-
-      <div className="switch-link">
-        Already have an account? <Link to="/login">Login</Link>
       </div>
-    </div>
+    </>
   );
 }
