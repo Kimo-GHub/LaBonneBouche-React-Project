@@ -43,17 +43,7 @@ function ContactUs() {
     <div>
       <Header />
 
-      {/* Decorative text */}
-      <div className="background-text-container">
-        <div className="background-text">La Bonne Bouche</div>
-        <div className="background-text">La Bonne Bouche</div>
-        <div className="background-text">La Bonne Bouche</div>
-      </div>
-      <div className="background-text-container-new">
-        <div className="background-text-new">La Bonn</div>
-        <div className="background-text-new">La Bonn</div>
-        <div className="background-text-new">La Bonne Bouche</div>
-      </div>
+      
 
       {/* Content */}
       <main className="contact-main">
@@ -104,11 +94,6 @@ function ContactUs() {
 
           {/* Overlay Image */}
           <div className="owner-image-overlay">
-            <div className="overlay-text">
-              <p>La Bonn</p>
-              <p>La Bonn</p>
-              <p>La Bonne Bouche</p>
-            </div>
             <img src={ownerImage} alt="Owner smiling with baked goods" className="owner-img" />
           </div>
         </section>
