@@ -6,6 +6,13 @@ body {
   margin: 0;
   padding: 0;
 }
+/* For Cart Page (cart.css) */
+.cart-page .product-image {
+  width: 80px !important;  /* Fixed smaller size for cart page */
+  height: 80px !important; /* Fixed smaller size for cart page */
+  object-fit: cover !important;
+  object-position: center !important;
+}
 
 /* Main Cart Section */
 .cart-main {
