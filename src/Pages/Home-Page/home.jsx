@@ -10,14 +10,13 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import './Home.css';
 import aboutusBG from '../../images/Home-images/aboutusBG.png';
-import featuredVector from '../../images/Home-images/FeaturedProducts.png';
 import TodaysTreat from '../../images/Home-images/treatBG.png';
-import { useCart } from '../../context/CartContext'; // ✅ Updated import
+import { useCart } from '../../context/CartContext';
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [todaysTreat, setTodaysTreat] = useState(null);
-  const { addToCart } = useCart(); // ✅ Updated usage
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -63,10 +62,7 @@ function Home() {
         </section>
 
         {/* Featured Products */}
-        <div className="home-featured-vector-wrapper">
-          <img src={featuredVector} alt="Featured Products" className="home-featured-vector" />
-        </div>
-        <section className="home-category-section">
+        <section className="home-category-section" style={{ marginTop: '5rem' }}>
           <div className="home-section-heading-wrapper">
             <p className="home-section-paragraph">
               Discover a world of flavor and nostalgia in our carefully curated selection of featured products.
@@ -143,17 +139,14 @@ function Home() {
         </section>
 
         {/* Today's Treat */}
-        <div className="home-featured-vector-wrapper">
-          <img src={TodaysTreat} alt="Featured Products" className="home-Todays-Treat" />
-        </div>
-        {todaysTreat && (
-          <section className="home-banner-section">
-            <div className="home-season-banner">
-              <img
-                src={todaysTreat.imageUrl}
-                alt={todaysTreat.name}
-                className="home-banner-image"
-              />
+        <section className="home-banner-section" style={{ marginTop: '5rem' }}>
+          <div className="home-season-banner">
+            <img
+              src={todaysTreat?.imageUrl || TodaysTreat}
+              alt={todaysTreat?.name || 'Today’s Treat'}
+              className="home-banner-image"
+            />
+            {todaysTreat && (
               <div className="home-banner-overlay">
                 <h3 className="home-banner-title">{todaysTreat.name}</h3>
                 <button
@@ -171,9 +164,9 @@ function Home() {
                   Order Now
                 </button>
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
