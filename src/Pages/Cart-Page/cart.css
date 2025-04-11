@@ -1115,8 +1115,14 @@ body {
   gap: 8px;
 }
 
-.promo-code-section input {
+/* New container for input and promo message */
+.promo-code-input-group {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-code-section input {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -1138,6 +1144,7 @@ body {
   background-color: #0b225e;
 }
 
+/* Promo message styling remains the same */
 .promo-message {
   margin-top: 5px;
   color: #35a753;

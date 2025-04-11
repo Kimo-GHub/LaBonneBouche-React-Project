@@ -242,16 +242,18 @@ function Cart() {
               ))}
               <div className="cart-totals">
                 <div className="promo-code-section">
-                  <input
-                    type="text"
-                    value={inputCode}
-                    onChange={(e) => setInputCode(e.target.value)}
-                    placeholder="Enter promo code"
-                  />
+                  <div className="promo-code-input-group">
+                    <input
+                      type="text"
+                      value={inputCode}
+                      onChange={(e) => setInputCode(e.target.value)}
+                      placeholder="Enter promo code"
+                    />
+                    {localPromoMessage && <p className="promo-message">{localPromoMessage}</p>}
+                  </div>
                   <button onClick={handlePromoApply} disabled={!inputCode || applyingPromo}>
                     {applyingPromo ? 'Applying...' : 'Apply'}
                   </button>
-                  {localPromoMessage && <p className="promo-message">{localPromoMessage}</p>}
                 </div>
                 <div className="total-row">
                   <span>Subtotal:</span>
