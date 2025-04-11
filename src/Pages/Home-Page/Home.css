@@ -284,115 +284,286 @@ body {
   transform: scale(1.05);
   color: #fff;
 }
-/* Fully Responsive Design: Covers all dimensions */
-/* Extra small devices (phones, < 576px) */
-@media (max-width: 575.98px) {
-  .home-product-card,
+/* Featured Products Title */
+.featured-products-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem; /* Increased font size */
+  font-weight: 700;
+  color: #091A45;
+  margin-bottom: 1rem; /* Reduced margin for closer proximity */
+}
+
+/* Our Sweetest Selections Subtitle */
+.sweetest-selections-subtitle {
+  font-family: 'Beautifully Delicious Script', cursive;
+  font-size: 8rem; /* Increased font size */
+  font-weight: 400;
+  opacity: 0.8;
+  text-align: center;
+  margin-top: 0.5rem; /* Reduced margin for closer proximity */
+  color: #091A45;
+  margin-top: -6rem; /* Reduced margin to stick closer to the title */
+
+}
+
+/* Today's Treat Section */
+.todays-treat-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem; /* Increased font size */
+  font-weight: 700;
+  color: #091A45;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.todays-treat-subtitle {
+  font-family: 'Beautifully Delicious Script', cursive;
+  font-size: 8rem; /* Increased font size */
+  font-weight: 400;
+  opacity: 0.8;
+  text-align: center;
+  margin-top: -6rem; /* Reduced margin to stick closer to the title */
+  margin-bottom: 1rem; /* Reduced margin for closer proximity */
+  color: #091A45;
+}
+
+
+/* Brownie Section */
+.brownie-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.brownie-image-container {
+  position: relative;
+  width: 100%; /* Made larger */
+  max-width: 1200px; /* Increased max-width for bigger image */
+  height: 500px; /* Increased height */
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.brownie-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.brownie-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Changed text color to white */
+  text-align: center;
+}
+
+.brownie-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem; /* Increased font size */
+  font-weight: 700;
+  margin-bottom: 30px; /* Adjusted for better spacing */
+  color: white;
+}
+
+.brownie-order-btn {
+  background-color: #ddb7dc;
+  color: #091A45;
+  padding: 12px 24px;
+  font-size: 1.5rem; /* Increased font size */
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.brownie-order-btn:hover {
+  background-color: #c38abe;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  background-color: #f9f9f9;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.newsletter-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem; /* Increased font size */
+  font-weight: 700;
+  color: #091A45;
+  margin-bottom: 1rem;
+}
+
+.newsletter-subtitle {
+  font-family: "Beautifully Delicious Script", cursive;
+  font-size: 8rem; /* Increased font size */
+  font-weight: 400;
+  opacity: 0.7;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #091A45;
+  margin-top: -6rem; /* Reduced margin to stick closer to the title */
+
+}
+
+.newsletter-text {
+  font-size: 1.5rem; /* Increased font size */
+  font-weight: 400;
+  color: #091A45;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.newsletter-btn {
+  background-color: #ddb7dc;
+  color: #091A45;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem; /* Increased font size */
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter-btn:hover {
+  background-color: #c38abe;
+}
+/* For Extra small devices (phones < 576px) */
+@media (max-width: 575px) {
+
+  /* General font adjustments */
+  .home-product-name,
   .home-product-description,
-  .home-banner-title,
+  .home-product-price-line,
   .home-add-to-cart-btn,
-  .read-more-btn,
-  .home-show-more-btn {
-    font-size: 13px !important;
+  .home-show-more-btn,
+  .newsletter-heading,
+  .newsletter-subtitle,
+  .newsletter-text {
+    font-size: 1rem !important;
   }
 
-  .home-section-paragraph {
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 0 10px;
-  }
-
-  .home-product-card {
-    margin-bottom: 20px;
-    padding: 10px;
-  }
-
-  .home-product-image {
-    height: 200px;
-  }
-
-  .home-product-name {
-    font-size: 1.1rem;
-  }
-
-  .home-show-more-btn {
-    padding: 10px 25px;
-  }
-
-  .home-banner-cta {
-    padding: 8px 18px;
-    font-size: 14px;
-  }
-}
-
-/* Small devices (phones landscape, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .home-section-paragraph {
-    font-size: 1rem;
-    padding: 0 15px;
-    text-align: center;
+  .home-image-wrapper {
+    height: 220px !important;
   }
 
   .home-product-card {
-    padding: 10px;
+    width: 100% !important;
+    margin-bottom: 20px !important;
   }
 
-  .home-add-to-cart-btn {
-    font-size: 14px;
-    padding: 8px 16px;
+  .home-banner-title {
+    font-size: 2rem !important;
   }
 
-  .home-show-more-btn {
-    font-size: 14px;
-    padding: 10px 20px;
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .home-product-card {
-    padding: 12px;
+  /* Newsletter Section */
+  .newsletter-subtitle {
+    font-size: 4.5rem !important;
+    margin-top: 0.5rem !important;
+    text-align: center !important;
+    display: block !important;
   }
 
-  .home-product-description {
-    font-size: 0.95rem;
+  .newsletter-heading {
+    font-size: 2.5rem !important;
+    margin-top: -1.5rem !important;
+    text-align: center !important;
   }
 
-  .home-section-paragraph {
-    font-size: 1.1rem;
-    padding: 0 20px;
+  .newsletter-btn {
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
   }
 
-  .home-show-more-btn {
-    font-size: 15px;
-    padding: 12px 24px;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .home-section-paragraph {
-    font-size: 1.2rem;
+  /* Today's Treat Section */
+  .todays-treat-subtitle {
+    font-size: 5.2rem !important;
+    margin-top: 0.5rem !important;
+    text-align: center !important;
+    display: block !important;
   }
 
-  .home-show-more-btn {
-    font-size: 16px;
-    padding: 14px 28px;
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .home-product-card {
-    width: 320px;
+  .todays-treat-title {
+    font-size: 2.5rem !important;
+    margin-top: -1.2rem !important;
+    text-align: center !important;
   }
 
-  .home-product-description {
-    font-size: 1rem;
+  /* Featured Products Subtitle */
+  .sweetest-selections-subtitle {
+    font-size: 4.5rem !important;
+    text-align: center !important;
+    margin-top: 0.5rem !important;
+    display: block !important;
   }
 
-  .home-show-more-btn {
-    font-size: 16px;
-    padding: 14px 30px;
+  /* Featured Products Title */
+  .featured-products-title {
+    font-size: 2.5rem !important;
+    margin-top: -1.5rem !important;
+    text-align: center !important;
+  }
+
+  /* Stay Sweetened Subtitle */
+  .stay-sweetened-subtitle {
+    font-size: 4.5rem !important;
+    margin-top: 0.5rem !important;
+    text-align: center !important;
+    display: block !important;
+  }
+
+  /* Stay Sweetened Title */
+  .newsletter-heading.stay-sweetened-title {
+    font-size: 2.5rem !important;
+    margin-top: -1.5rem !important;
+  }
+
+  /* Featured Products Description */
+  .featured-products-description {
+    text-align: center !important;
+  }
+
+  /* Brownie Section */
+  .brownie-section {
+    position: relative !important;
+    text-align: center !important;
+  }
+
+  .brownie-title,
+  .brownie-button {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    color: white !important;
+    z-index: 2 !important;
+    text-align: center !important;
+  }
+
+  .brownie-title {
+    bottom: 5.5rem !important;
+    font-size: 1.5rem !important;
+  }
+
+  .brownie-button {
+    bottom: 2rem !important;
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
+  }
+
+  .brownie-image {
+    width: 100% !important;
+    height: auto !important;
   }
 }

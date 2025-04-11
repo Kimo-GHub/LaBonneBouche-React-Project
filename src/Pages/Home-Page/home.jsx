@@ -10,12 +10,11 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import './Home.css';
 import aboutusBG from '../../images/Home-images/aboutusBG.png';
-import TodaysTreat from '../../images/Home-images/treatBG.png';
+import brownieImage from '../../images/Home-images/brownie pic.png'; // Brownie Image
 import { useCart } from '../../context/CartContext';
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [todaysTreat, setTodaysTreat] = useState(null);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -23,11 +22,6 @@ function Home() {
       const featuredQuery = query(collection(db, 'products'), where('category', '==', 'featured'));
       const featuredSnapshot = await getDocs(featuredQuery);
       setFeaturedProducts(featuredSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-
-      const treatQuery = query(collection(db, 'products'), where('category', '==', 'todays-treat'));
-      const treatSnapshot = await getDocs(treatQuery);
-      const treats = treatSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setTodaysTreat(treats.length > 0 ? treats[0] : null);
     };
 
     fetchProducts();
@@ -61,11 +55,14 @@ function Home() {
           </div>
         </section>
 
-        {/* Featured Products */}
+        {/* Featured Products Section */}
         <section className="home-category-section" style={{ marginTop: '5rem' }}>
+          <h2 className="featured-products-title">Featured Products</h2>
+          <h3 className="sweetest-selections-subtitle">Our Sweetest Selections</h3>
+
           <div className="home-section-heading-wrapper">
             <p className="home-section-paragraph">
-              Discover a world of flavor and nostalgia in our carefully curated selection of featured products.
+              Discover a world of flavor and nostalgia in our carefully curated selection of Featured Products.
             </p>
           </div>
 
@@ -138,36 +135,32 @@ function Home() {
           </div>
         </section>
 
-        {/* Today's Treat */}
-        <section className="home-banner-section" style={{ marginTop: '5rem' }}>
-          <div className="home-season-banner">
-            <img
-              src={todaysTreat?.imageUrl || TodaysTreat}
-              alt={todaysTreat?.name || 'Today’s Treat'}
-              className="home-banner-image"
-            />
-            {todaysTreat && (
-              <div className="home-banner-overlay">
-                <h3 className="home-banner-title">{todaysTreat.name}</h3>
-                <button
-                  className="home-banner-cta"
-                  onClick={() =>
-                    addToCart({
-                      id: todaysTreat.id,
-                      name: todaysTreat.name,
-                      imageUrl: todaysTreat.imageUrl,
-                      price: todaysTreat.price ?? todaysTreat.originalPrice,
-                      quantity: 1,
-                    })
-                  }
-                >
-                  Order Now
-                </button>
-              </div>
-            )}
+        {/* Today's Treat Section */}
+        <section className="brownie-section">
+          <div className="todays-treat-text">
+            <h2 className="todays-treat-title">Today's Treat</h2>
+            <h3 className="todays-treat-subtitle">Sweet Sensation</h3>
+          </div>
+          <div className="brownie-image-container">
+            <img src={brownieImage} alt="Decadent Brownie Delight" className="brownie-image" />
+            <div className="brownie-text-container">
+              <h2 className="brownie-title">Decadent Brownie Delight</h2>
+              <button className="brownie-order-btn">Order Now</button>
+            </div>
           </div>
         </section>
+
+        {/* Newsletter Section */}
+        <section className="newsletter-section">
+          <h2 className="newsletter-heading">Stay Sweetened</h2>
+          <h3 className="newsletter-subtitle">Be a Part of the Sweetness</h3>
+          <p className="newsletter-text">
+            Subscribe to our newsletter and be the first to know about new treats, exclusive offers, and behind-the-scenes updates from La Bonne Bouche.
+          </p>
+          <button className="newsletter-btn">Subscribe Now</button>
+        </section>
       </main>
+
       <Footer />
     </div>
   );
