@@ -4,7 +4,7 @@ import logo2 from '../../images/Home-images/logo2.png';
 import facebookIcon from '../../images/Home-images/facebook-icon.png';
 import instagramIcon from '../../images/Home-images/instagram-icon.png';
 import tiktokIcon from '../../images/Home-images/tiktok-icon.png';
-import footerLine from '../../images/Home-images/footer-line.png'; // the line image
+import footerLine from '../../images/Home-images/Footer-line.png';  // the line image
 
 function Footer() {
   return (
