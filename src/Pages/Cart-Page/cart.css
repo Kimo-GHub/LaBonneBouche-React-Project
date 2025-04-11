@@ -1107,3 +1107,39 @@ body {
     padding: 8px;
   }
 }
+
+.promo-code-section {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.promo-code-section input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.promo-code-section button {
+  background-color: #091A45;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.promo-code-section button:hover {
+  background-color: #0b225e;
+}
+
+.promo-message {
+  margin-top: 5px;
+  color: #35a753;
+  font-size: 0.9rem;
+}
