@@ -5,7 +5,7 @@ import Footer from '../../components/Header-Footer/Footer';
 import './ContactUs.css';
 import locationIcon from '../../images/ContactUs-images/icon.png';
 import phoneIcon from '../../images/ContactUs-images/call us.png';
-import messageIcon from '../../images/ContactUs-images/message square.png';
+import messageIcon from '../../images/ContactUs-images/message-square.png';
 import ownerImage from '../../images/ContactUs-images/owner.png';
 
 function ContactUs() {
