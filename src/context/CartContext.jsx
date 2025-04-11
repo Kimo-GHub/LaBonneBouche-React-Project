@@ -6,34 +6,40 @@ import { db } from "../Firebase/firebase";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  // Persist cart items in localStorage
   const [cartItems, setCartItems] = useState(() => {
     const stored = localStorage.getItem("cartItems");
     return stored ? JSON.parse(stored) : [];
   });
 
-  const [promoCode, setPromoCode] = useState("");
-  const [promoMessage, setPromoMessage] = useState("");
-  const [coupon, setCoupon] = useState(null);
+  // Initialize promo-related state from localStorage if available
+  const [promoCode, setPromoCode] = useState(() => localStorage.getItem("promoCode") || "");
+  const [promoMessage, setPromoMessage] = useState(() => localStorage.getItem("promoMessage") || "");
+  const [coupon, setCoupon] = useState(() => {
+    const saved = localStorage.getItem("coupon");
+    return saved ? JSON.parse(saved) : null;
+  });
   const [discount, setDiscount] = useState(0);
   const [usedCoupons, setUsedCoupons] = useState(() => {
     const saved = localStorage.getItem("usedCoupons");
     return saved ? JSON.parse(saved) : [];
   });
 
+  // Calculate subtotal from cart items
   const subtotal = cartItems.reduce((acc, item) => {
     const price = item.price || item.originalPrice || 0;
     return acc + price * item.quantity;
   }, 0);
 
+  // Total is subtotal minus discount (cannot be below zero)
   const total = Math.max(0, subtotal - discount);
 
-  // 🔁 Update discount when coupon or subtotal changes
+  // Recalculate discount whenever coupon or subtotal changes
   useEffect(() => {
     if (!coupon) {
       setDiscount(0);
       return;
     }
-
     if (coupon.type === "flat") {
       setDiscount(coupon.amount);
     } else if (coupon.type === "percent") {
@@ -41,25 +47,48 @@ export const CartProvider = ({ children }) => {
     }
   }, [coupon, subtotal]);
 
-  // 💾 Save cart and clear promo if emptied
+  // Persist cart items whenever they change
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Persist promo-related state changes in localStorage
+  useEffect(() => {
+    localStorage.setItem("promoCode", promoCode);
+  }, [promoCode]);
+
+  useEffect(() => {
+    localStorage.setItem("promoMessage", promoMessage);
+  }, [promoMessage]);
+
+  useEffect(() => {
+    localStorage.setItem("coupon", JSON.stringify(coupon));
+  }, [coupon]);
+
+  useEffect(() => {
+    localStorage.setItem("usedCoupons", JSON.stringify(usedCoupons));
+  }, [usedCoupons]);
+
+  // If the cart is emptied, reset promo data completely
   useEffect(() => {
     if (cartItems.length === 0) {
       setCoupon(null);
       setPromoCode("");
       setPromoMessage("");
       setUsedCoupons([]);
-      setDiscount(0);
       localStorage.removeItem("cartItems");
+      localStorage.removeItem("promoCode");
+      localStorage.removeItem("promoMessage");
+      localStorage.removeItem("coupon");
       localStorage.removeItem("usedCoupons");
-    } else {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);
 
-  // 🏷️ Promo logic
+  // Apply a promo code by fetching all coupons from Firebase
   const applyPromoCode = async (code) => {
     const trimmed = code.trim().toUpperCase();
 
+    // Check if this promo code has been used already (in this session)
     if (usedCoupons.find((c) => c.code === trimmed)) {
       setPromoMessage("You’ve already used this promo code.");
       return;
@@ -84,7 +113,7 @@ export const CartProvider = ({ children }) => {
         }
       }
 
-      // Minimum subtotal rules
+      // For flat type, check minimum subtotal conditions
       if (match.type === "flat") {
         if (match.amount <= 10 && subtotal < 50) {
           setPromoMessage("This coupon requires a minimum subtotal of $50.");
@@ -96,11 +125,13 @@ export const CartProvider = ({ children }) => {
         }
       }
 
+      // Calculate the value applied based on type
       const valueApplied =
         match.type === "flat"
           ? match.amount
           : parseFloat(((subtotal * match.amount) / 100).toFixed(2));
 
+      // Append this coupon to the used coupons list
       const newUsed = [
         ...usedCoupons,
         {
@@ -116,14 +147,13 @@ export const CartProvider = ({ children }) => {
       setDiscount(valueApplied);
       setPromoMessage("Promo applied!");
       setUsedCoupons(newUsed);
-      localStorage.setItem("usedCoupons", JSON.stringify(newUsed));
     } catch (error) {
       console.error("Error applying promo code:", error);
       setPromoMessage("Something went wrong. Try again.");
     }
   };
 
-  // ➕ Add product
+  // Add a product to the cart, increase its quantity if it already exists
   const addToCart = (product) => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item.id === product.id);
@@ -137,23 +167,21 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // ❌ Remove item
+  // Remove a product from the cart by filtering it out
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // 🔄 Update quantity
+  // Update the quantity of a product in the cart (cannot go below 1)
   const updateQuantity = (id, amount) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
-          : item
+        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
       )
     );
   };
 
-  // 🧹 Full cart + promo clear
+  // Clear the cart and reset all promo data
   const clearCart = () => {
     setCartItems([]);
     setCoupon(null);
@@ -162,6 +190,9 @@ export const CartProvider = ({ children }) => {
     setDiscount(0);
     setUsedCoupons([]);
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("promoCode");
+    localStorage.removeItem("promoMessage");
+    localStorage.removeItem("coupon");
     localStorage.removeItem("usedCoupons");
   };
 
