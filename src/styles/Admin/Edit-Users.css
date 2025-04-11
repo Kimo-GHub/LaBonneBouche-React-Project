@@ -5,20 +5,20 @@
 }
 
 /* Table Wrapper */
-.user-table {
+.edit-user-table {
   margin-left: 20px;
   padding: 2rem;
 }
 
 /* Title */
-.user-table h2 {
+.edit-user-table h2 {
   font-size: 28px;
   margin-bottom: 1rem;
   color: #333;
 }
 
 /* Table */
-.styled-table {
+.edit-styled-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 16px;
@@ -29,25 +29,25 @@
 }
 
 /* Table Headers & Cells */
-.styled-table th,
-.styled-table td {
+.edit-styled-table th,
+.edit-styled-table td {
   padding: 20px 18px;
   border: 1px solid #ddd;
   text-align: center;
 }
 
-.styled-table th {
+.edit-styled-table th {
   background-color: #f1f1f1;
   font-weight: bold;
   color: #2c3e50;
 }
 
-.styled-table tr:nth-child(even) {
+.edit-styled-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
 /* Action Buttons Container */
-.actions {
+.edit-actions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -55,7 +55,7 @@
 }
 
 /* Action Buttons */
-.actions button {
+.edit-actions button {
   min-width: 75px;
   padding: 8px 16px;
   border: none;
@@ -65,31 +65,28 @@
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.actions button:hover {
+.edit-actions button:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
 
-.edit-btn {
+.edit-edit-btn {
   background-color: #3498db;
   color: white;
 }
 
-.delete-btn {
+.edit-delete-btn {
   background-color: #e74c3c;
   color: white;
 }
 
-.ban-btn {
+.edit-ban-btn {
   background-color: #f39c12;
   color: white;
 }
 
-/* ------------------- */
-/* Modal Styling Below */
-/* ------------------- */
-
-.modal-backdrop {
+/* Modal Styling */
+.edit-modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -103,7 +100,7 @@
   z-index: 999;
 }
 
-.modal {
+.edit-modal {
   background-color: #fff;
   padding: 2rem 2.5rem;
   border-radius: 16px;
@@ -111,25 +108,27 @@
   width: 90%;
   text-align: center;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
-  animation: fadeInUp 0.3s ease-out;
+  animation: edit-fadeInUp 0.3s ease-out;
 }
 
-.modal h3 {
+.edit-modal h3 {
   font-size: 22px;
   margin-bottom: 1rem;
   color: #2c3e50;
 }
 
-.modal p {
+.edit-modal p {
   color: #555;
   font-size: 16px;
   margin-bottom: 1.5rem;
 }
 
-/* Inputs (text, email, date) */
-.modal input[type="text"],
-.modal input[type="email"],
-.modal input[type="date"] {
+/* Inputs */
+.edit-modal input[type="text"],
+.edit-modal input[type="email"],
+.edit-modal input[type="date"],
+.edit-modal input[type="tel"],
+.edit-modal .edit-phone-number-input {
   width: 100%;
   padding: 10px 12px;
   font-size: 14px;
@@ -140,12 +139,11 @@
   transition: border-color 0.2s ease;
 }
 
-.modal input:focus {
+.edit-modal input:focus {
   border-color: #3498db;
 }
 
-/* Styled Dropdown */
-.modal select {
+.edit-modal select {
   margin-top: 10px;
   width: 100%;
   padding: 10px 12px;
@@ -163,13 +161,12 @@
   background-size: 16px 16px;
 }
 
-.modal select:focus {
+.edit-modal select:focus {
   border-color: #3498db;
   background-color: #fff;
 }
 
-/* Checkbox */
-.checkbox {
+.edit-checkbox {
   margin-top: 12px;
   display: flex;
   align-items: center;
@@ -178,7 +175,7 @@
   color: #333;
 }
 
-.checkbox input[type="checkbox"] {
+.edit-checkbox input[type="checkbox"] {
   width: 16px;
   height: 16px;
   accent-color: #f39c12;
@@ -186,20 +183,20 @@
   margin: 0;
 }
 
-.checkbox label {
+.edit-checkbox label {
   cursor: pointer;
   line-height: 1.4;
 }
 
 /* Modal Buttons */
-.modal-buttons {
+.edit-modal-buttons {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin-top: 20px;
 }
 
-.modal-buttons button {
+.edit-modal-buttons button {
   flex: 1;
   padding: 10px 0;
   font-size: 15px;
@@ -210,23 +207,23 @@
   border: none;
 }
 
-.modal-buttons .confirm {
+.edit-modal-buttons .confirm {
   background-color: #27ae60;
   color: #fff;
 }
 
-.modal-buttons .cancel {
+.edit-modal-buttons .cancel {
   background-color: #e74c3c;
   color: #fff;
 }
 
-.modal-buttons button:hover {
+.edit-modal-buttons button:hover {
   opacity: 0.95;
   transform: translateY(-1px);
 }
 
 /* Spinner */
-.spinner-container {
+.edit-spinner-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -237,22 +234,22 @@
   color: #555;
 }
 
-.spinner {
+.edit-spinner {
   width: 40px;
   height: 40px;
   border: 4px solid #f3f3f3;
   border-top: 4px solid #3498db;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: edit-spin 0.8s linear infinite;
 }
 
-@keyframes spin {
+@keyframes edit-spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
 /* Filters */
-.user-filters {
+.edit-user-filters {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -260,8 +257,8 @@
   gap: 1rem;
 }
 
-.search-input,
-.role-filter {
+.edit-search-input,
+.edit-role-filter {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -269,7 +266,7 @@
 }
 
 /* Animation */
-@keyframes fadeInUp {
+@keyframes edit-fadeInUp {
   0% {
     opacity: 0;
     transform: translateY(30px);
