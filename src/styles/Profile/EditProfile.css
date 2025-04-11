@@ -1,128 +1,54 @@
-.edit-profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 80%;
+/* === MODERN EDIT PROFILE FORM STYLING === */
+
+:root {
+  --navy: #091A45;
+  --pink: #DDB7DC;
+  --white: #ffffff;
+  --light-pink: #fce9f9;
+  --transition: all 0.3s ease;
+  --font-main: 'Poppins', sans-serif;
 }
 
-.main-content {
+body {
+  font-family: var(--font-main);
+  color: var(--navy);
+  margin: 0;
   padding: 0;
 }
 
-.profile-pic-section img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-input {
-  display: block;
-  margin: 10px 0;
-  padding: 10px;
-  width: 100%;
-}
-
-.save-btn,
-.change-password-btn {
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-.error-text {
-  color: red;
-  font-size: 14px;
-}
-
-.profile-display {
+.edit-profile-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
+}
+
+.edit-profile-container h2 {
+  font-size: 28px;
   margin-bottom: 20px;
+  text-align: center;
+  color: var(--navy);
 }
 
-.profile-pic {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.profile-details p {
-  margin: 5px 0;
-}
-
-.profile-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-form div {
-  margin: 10px 0;
-}
-
-.profile-form label {
-  font-weight: bold;
-}
-
-.profile-form input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.profile-pic-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-button {
-  padding: 10px 15px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.error-message {
-  color: red;
-  margin: 10px 0;
-}
-
-/* New Flash Message Styles */
 /* Flash Messages */
 .flash-message {
   font-size: 1rem;
   padding: 14px 24px;
-  margin-bottom: 20px;
   border-radius: 10px;
+  margin-bottom: 20px;
   text-align: center;
   font-weight: 600;
   width: 100%;
-  max-width: 100%;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border: 1px solid transparent;
-  position: relative;
-  opacity: 1;
   animation: fadeOut 2s ease-in-out forwards;
   animation-delay: 2s;
-  transition: all 0.4s ease;
 }
 
 .success-flash {
@@ -144,42 +70,184 @@ button:hover {
   }
 }
 
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+/* Profile Picture Upload */
+.profile-pic-upload {
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.password-requirements {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.password-requirements p {
-  margin: 3px 0;
-  transition: color 0.3s ease;
-}
-
-.password-requirements p.valid {
-  color: green;
-  font-weight: bold;
+.profile-pic-upload .profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--navy);
+  margin-bottom: 15px;
 }
 
 .custom-file-upload {
   display: inline-block;
-  padding: 8px 16px;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 6px;
+  padding: 10px 20px;
+  background-color: var(--pink);
+  color: var(--navy);
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  transition: var(--transition);
 }
 
 .custom-file-upload:hover {
-  background-color: #45a049;
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+/* Profile Form - Side-by-Side Layout */
+.profile-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.profile-form div {
+  flex: 1 1 calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .profile-form div {
+    flex: 1 1 100%;
+  }
+}
+
+.profile-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: var(--navy);
+}
+
+.profile-form input {
+  padding: 12px 15px;
+  border: 2px solid var(--pink);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: var(--transition);
+  outline: none;
+  background-color: #fff0f7;
+}
+
+.profile-form input:focus {
+  border-color: var(--navy);
+  background-color: #ffffff;
+}
+
+/* Password Requirements */
+.password-requirements {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.5;
+  flex: 1 1 100%;
+}
+
+.password-requirements p {
+  margin: 4px 0;
+  transition: color 0.3s ease;
+}
+
+.password-requirements .valid {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Submit Button */
+.profile-form button {
+  padding: 14px 28px;
+  background-color: var(--navy);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 20px;
+  flex: 1 1 100%;
+}
+
+.profile-form button:hover {
+  background-color: #060f2c;
+}
+@media (max-width: 480px) {
+  .edit-profile-container {
+    width: 100%;
+    padding: 20px 12px;
+    border-radius: 12px;
+  }
+
+  .edit-profile-container h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .flash-message {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+
+  .profile-pic-upload {
+    margin-bottom: 24px;
+  }
+
+  .profile-pic-upload .profile-pic {
+    width: 65px;
+    height: 65px;
+    border-width: 2px;
+  }
+
+  .custom-file-upload {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .profile-form {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .profile-form div {
+    flex: 1 1 100%;
+  }
+
+  .profile-form label {
+    font-size: 0.85rem;
+  }
+
+  .profile-form input {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .profile-form button {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+
+  .password-requirements {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .password-requirements p {
+    margin: 3px 0;
+  }
 }

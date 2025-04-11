@@ -1,98 +1,206 @@
-/* Container Layout */
+:root {
+  --navy: #091A45;
+  --pink: #DDB7DC;
+  --white: #ffffff;
+  --light-pink: #fce9f9;
+  --transition: all 0.3s ease;
+  --font-main: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+}
+
 .profile-settings {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50;
+  color: var(--navy);
 }
 
-/* Show/Hide Order History Button */
-.toggle-orders-btn {
-  background-color: #3498db;
-  color: white;
-  font-weight: 600;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.toggle-orders-btn:hover {
-  background-color: #2c80b4;
-  transform: scale(1.05);
-}
-
+/* Headings */
 h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #1e272e;
-}
-
-.form-group {
-  margin-bottom: 2rem;
-}
-
-/* Inputs */
-input.phone-input {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: border 0.2s ease;
-}
-
-input.phone-input:focus {
-  border-color: #2980b9;
-  outline: none;
-}
-
-/* Update Button */
-.update-btn {
-  background-color: #2980b9;
-  color: white;
-  padding: 10px 20px;
-  font-weight: 600;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease;
-}
-
-.update-btn:hover {
-  background-color: #1c6aa3;
-}
-
-/* Message */
-.status-message {
-  margin-top: 10px;
-  font-weight: 500;
-  color: green;
-}
-
-/* Order History */
-.order-history {
-  margin-top: 2rem;
+  color: var(--navy);
 }
 
 .order-history h3 {
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: var(--navy);
 }
 
-/* Table */
+/* Form Groups */
+.form-group {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group.inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-group.inline label {
+  flex: 1 1 100%;
+}
+
+/* Phone Input */
+input.phone-input {
+  flex: 1 1 auto;
+  max-width: 200px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 2px solid var(--pink);
+  background-color: #fff0f7;
+  transition: var(--transition);
+  margin: 0;
+}
+
+input.phone-input:focus {
+  border-color: var(--navy);
+  background-color: var(--white);
+  outline: none;
+}
+
+/* Search & Filter */
+.search-input,
+.filter-dropdown {
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--pink);
+  background-color: #fff0f7;
+  transition: var(--transition);
+}
+
+.search-input:focus,
+.filter-dropdown:focus {
+  border-color: var(--navy);
+  background-color: var(--white);
+  outline: none;
+}
+
+.profile-settings button {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin: 10px;
+}
+
+
+button:hover {
+  transform: scale(1.03);
+}
+
+.update-btn {
+  min-width: 100px;
+  height: 38px;
+  padding: 0 12px;
+  font-size: 0.9rem;
+  background-color: var(--navy);
+  color: var(--white);
+  margin: 0;
+}
+
+.update-btn:hover {
+  background-color: #060f2c;
+}
+
+.toggle-orders-btn,
+.logout-btn {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.toggle-orders-btn:hover,
+.logout-btn:hover {
+  background-color: #060f2c;
+}
+
+.delete-btn,
+.delete-confirm-btn {
+  background-color: var(--pink);
+  color: var(--navy);
+}
+
+.delete-btn:hover,
+.delete-confirm-btn:hover {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.delete-cancel-btn {
+  background-color: #f0f0f0;
+  color: var(--navy);
+}
+
+.delete-cancel-btn:hover {
+  background-color: var(--pink);
+  color: var(--navy);
+}
+
+.export-btn.csv {
+  background-color: var(--pink);
+  color: var(--navy);
+}
+
+.export-btn.csv:hover {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.export-btn.pdf {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.export-btn.pdf:hover {
+  background-color: #060f2c;
+}
+
+/* Status Message */
+.status-message {
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Order History Table */
+.order-history {
+  margin-top: 2rem;
+}
+
 .order-history table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
-  background: white;
+  background: var(--white);
+  border: 2px solid var(--navy); /* Outer border */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
@@ -101,46 +209,16 @@ input.phone-input:focus {
 .order-history th,
 .order-history td {
   padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--pink); /* Row separators */
   text-align: left;
   vertical-align: top;
 }
 
 .order-history th {
-  background-color: #ecf0f1;
+  background-color: var(--pink);
+  color: var(--navy);
   font-weight: 600;
-}
-
-/* Logout & Delete Buttons */
-.logout-btn,
-.delete-btn {
-  margin-top: 20px;
-  margin-right: 15px;
-  padding: 10px 20px;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: background-color 0.3s ease;
-}
-
-.logout-btn {
-  background-color: #34495e;
-  color: white;
-}
-
-.logout-btn:hover {
-  background-color: #2c3e50;
-}
-
-.delete-btn {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.delete-btn:hover {
-  background-color: #c0392b;
+  border-bottom: 2px solid var(--navy);
 }
 
 /* Modal */
@@ -158,42 +236,13 @@ input.phone-input:focus {
 }
 
 .modal-content {
-  background: white;
+  background: var(--white);
   padding: 30px;
   border-radius: 10px;
   text-align: center;
   max-width: 400px;
   width: 90%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-}
-
-.delete-confirm-btn,
-.delete-cancel-btn {
-  margin: 10px;
-  padding: 10px 20px;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.delete-confirm-btn {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.delete-cancel-btn {
-  background-color: #bdc3c7;
-  color: #2c3e50;
-}
-
-.delete-confirm-btn:hover {
-  background-color: #c0392b;
-}
-
-.delete-cancel-btn:hover {
-  background-color: #95a5a6;
 }
 
 /* Responsive Table */
@@ -211,7 +260,7 @@ input.phone-input:focus {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     padding: 10px;
-    background: #fff;
+    background: var(--white);
     border-radius: 8px;
   }
 
@@ -224,8 +273,9 @@ input.phone-input:focus {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-weight: bold;
+    font-weight: 600;
     white-space: nowrap;
+    color: var(--navy);
   }
 
   .order-history td:nth-of-type(1)::before { content: "Date"; }
@@ -234,58 +284,85 @@ input.phone-input:focus {
   .order-history td:nth-of-type(4)::before { content: "Discount"; }
   .order-history td:nth-of-type(5)::before { content: "Total"; }
   .order-history td:nth-of-type(6)::before { content: "Status"; }
-}
+} 
+@media (max-width: 480px) {
+  .profile-settings {
+    padding: 1rem;
+    width: 100%;
+  }
 
-/* Filters & Export */
-.filter-dropdown {
-  padding: 6px 14px; /* ⬅️ Reduced top/bottom padding */
-  font-size: 0.95rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: white;
-  transition: border 0.2s ease;
-}
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 
-.search-input {
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: white;
-  transition: border 0.2s ease;
-}
+  .order-history h3 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
 
-.search-input:focus,
-.filter-dropdown:focus {
-  border-color: #2980b9;
-  outline: none;
-}
+  .form-group {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
 
-/* Export Buttons */
-.export-btn {
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  font-weight: bold;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  .form-group.inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.export-btn.pdf {
-  background-color: #FF0000;
-  color: white;
-}
+  input.phone-input {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.85rem;
+    padding: 8px;
+  }
 
-.export-btn.pdf:hover {
-  background-color: #cc0000;
-}
+  .search-input,
+  .filter-dropdown {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+    width: 100%;
+  }
 
-.export-btn.csv {
-  background-color: #217346;
-  color: white;
-}
+  .profile-settings button {
+    font-size: 0.85rem;
+    height: auto;
+    padding: 10px 16px;
+    margin: 6px 0;
+    width: 100%;
+  }
 
-.export-btn.csv:hover {
-  background-color: #1a5b36;
+  .update-btn {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .status-message {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .order-history table {
+    font-size: 0.85rem;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .delete-confirm-btn,
+  .delete-cancel-btn {
+    width: 100%;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 0.85rem;
+  }
 }

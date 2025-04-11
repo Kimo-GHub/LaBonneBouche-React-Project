@@ -152,19 +152,20 @@ export default function ProfileSettings() {
 
       {!loading && (
         <>
-          <div className="form-group">
-            <label>Phone Number:</label>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="phone-input"
-              placeholder="Enter phone number"
-            />
-            <button onClick={handlePhoneUpdate} className="update-btn">
-              Update Phone Number
-            </button>
-          </div>
+         <div className="form-group inline">
+  <label>Phone Number:</label>
+  <input
+    type="tel"
+    value={phoneNumber}
+    onChange={(e) => setPhoneNumber(e.target.value)}
+    className="phone-input"
+    placeholder="Enter phone number"
+  />
+  <button onClick={handlePhoneUpdate} className="update-btn">
+    Update
+  </button>
+</div>
+
 
           <div className="order-history">
             <h3>
