@@ -7,8 +7,7 @@ import OurMission1 from '../../images/About-us-images/OurMission1.png';
 import vision1 from '../../images/About-us-images/vision1.png'; 
 import AboutCelinaImage from '../../images/About-us-images/about-celina.png';
 import AboutCTextImage from '../../images/About-us-images/AboutC.png';
-import './fonts/BDSans-Regular.otf';
-import './fonts/BDScript-Regular.otf';
+
 
 function AboutUs() {
   return (
