@@ -6,7 +6,8 @@ import './ContactUs.css';
 import locationIcon from '../../images/ContactUs-images/icon.png';
 import phoneIcon from '../../images/ContactUs-images/call us.png';
 import messageIcon from '../../images/ContactUs-images/message-square.png';
-import ownerImage from '../../images/ContactUs-images/owner.png';
+import ownerImage from '../../images/ContactUs-images/Owner.png';
+
 
 function ContactUs() {
   const [showPopup, setShowPopup] = useState(false);
