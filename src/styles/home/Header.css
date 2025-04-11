@@ -1,12 +1,12 @@
 /* Fonts */
 @font-face {
   font-family: "BDSans";
-  src: url("../../Fonts/BDSans-Regular.otf") format("opentype");
+  src: url("/fonts/BDSans-Regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Beautifully Delicious Script";
-  src: url("../../Fonts/BDScript-Regular.otf") format("opentype");
+  src: url("/fonts/BDScript-Regular.otf") format("opentype");
 }
 
 /* Reset */
