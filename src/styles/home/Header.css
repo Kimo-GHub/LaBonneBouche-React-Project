@@ -310,11 +310,12 @@ body {
   cursor: pointer;
 }
 
+/* Profile Dropdown Container */
 .profile-dropdown {
   position: absolute;
   top: 60px;
   right: 0;
-  background: #fefefe;
+  background: #091a45; /* Deep navy background */
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   padding: 20px 16px;
@@ -322,31 +323,35 @@ body {
   min-width: 220px;
   text-align: center;
   transition: all 0.3s ease;
+  color: white;
 }
 
+/* Profile Image */
 .dropdown-img {
   width: 75px;
   height: 75px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 12px;
-  border: 2px solid #ccc;
+  border: 2px solid #ddb7dc; /* Light lavender border */
 }
 
+/* User Name */
 .dropdown-name {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 15px;
 }
 
+/* Buttons within Dropdown */
 .dropdown-button {
   width: 100%;
   padding: 10px 14px;
   margin-bottom: 8px;
   border: none;
-  background-color: #4a90e2; /* bright blue */
-  color: white;
+  background-color: #ddb7dc; /* Light lavender background */
+  color: #091a45; /* Deep navy text */
   font-weight: 500;
   font-size: 0.95rem;
   border-radius: 6px;
@@ -354,31 +359,159 @@ body {
   transition: background-color 0.2s ease;
 }
 
+/* Hover Effect for Buttons */
 .dropdown-button:hover {
-  background-color: #357ab7; /* darker blue */
+  background-color: #caa1c9; /* Slightly darker lavender on hover */
 }
+
 @media screen and (max-width: 768px) {
+  /* Adjust header height and background image */
+  .navbar-header {
+    height: 40vh !important;
+    background-size: contain !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Adjust navbar padding */
+  .navbar {
+    padding: 10px 20px !important;
+  }
+
+  /* Adjust logo size */
+  .nav-logo {
+    width: 150px !important;
+    height: auto !important;
+  }
+
+  /* Hamburger menu adjustments */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    cursor: pointer !important;
+    gap: 5px !important;
+    z-index: 1001 !important;
+  }
+
+  .hamburger span {
+    width: 25px !important;
+    height: 3px !important;
+    background: white !important;
+    transition: 0.3s ease-in-out !important;
+    border-radius: 2px !important;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px) !important;
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px) !important;
+  }
+
+  /* Navigation actions adjustments */
+  .nav-actions {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 1.5rem 2rem !important;
+    gap: 1rem !important;
+    opacity: 0 !important;
+    transform: translateY(-20px) !important;
+    pointer-events: none !important;
+    transition: all 0.3s ease-in-out !important;
+    z-index: 1000 !important;
+  }
+
+  .nav-actions.menu-open {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  /* Navigation links adjustments */
+  .nav-links {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    width: 100% !important;
+    align-items: center !important;
+  }
+
+  .nav-links a {
+    font-size: 1.25rem !important;
+    width: 100% !important;
+    color: #091a45 !important;
+    padding: 0.5rem 0 !important;
+    text-align: center !important;
+  }
+
+  /* Auth buttons adjustments */
+  .auth-buttons {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  .login-btn,
+  .signup-btn {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Profile image adjustments */
+  .user-profile-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+  }
+
+  .profile-img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+  }
+
+  /* Hero section adjustments */
+  .hero {
+    padding: 40px 20px !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
   .hero-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 0; /* Reset any default spacing */
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .hero-subtitle {
-    font-size: 3.2rem;
-    transform: scaleX(1.2);
-    text-align: left;
-    margin-left: 150px;
-    margin-top: -15px;     /* ⬅️ Pushes subtitle lower from the title */
-    margin-bottom: 20px;
-    opacity: 0.5;
-    left: 0;
-    position: relative;
+    font-size: 3.2rem !important;
+    transform: scaleX(1.2) !important;
+    margin-top: -20px !important;
+    margin-bottom: 20px !important;
+    opacity: 0.5 !important;
+    text-align: left !important;
+    align-self: flex-start !important;
+    margin-left: 160px !important; /* Pulls the subtitle further left */
   }
-
-  .hero {
-    padding: 40px 20px;
-    height: auto;
-  }
+  
+  
 }
+
 
