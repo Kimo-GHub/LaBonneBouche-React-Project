@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import Header from '../../components/Header-Footer/Header';
 import Footer from '../../components/Header-Footer/Footer';
@@ -8,31 +8,28 @@ import phoneIcon from '../../images/ContactUs-images/call us.png';
 import messageIcon from '../../images/ContactUs-images/message-square.png';
 import ownerImage from '../../images/ContactUs-images/Owner.png';
 
-
 function ContactUs() {
   const [showPopup, setShowPopup] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const formRef = useRef();
 
   const togglePopup = () => setShowPopup(!showPopup);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    emailjs.send(
-      'service_82cjjku',     // Replace with your actual Service ID
-      'template_tuq42aj',    // Replace with your actual Template ID
-      formData,
+    
+    // This sends the email using form data automatically from formRef
+    emailjs.sendForm(
+      'service_82cjjku',      // Replace with your actual Service ID
+      'template_tuq42aj',      // Replace with your actual Template ID
+      formRef.current,
       'juQtlDEQIxJsv-7xu'      // Replace with your actual Public Key (User ID)
     )
-    .then(() => {
+    .then((result) => {
+      console.log('EmailJS Success:', result.text);
       alert('Email successfully sent!');
       setShowPopup(false);
-      setFormData({ name: '', email: '', message: '' });
+      // Reset form inputs by resetting the form element
+      formRef.current.reset();
     })
     .catch((error) => {
       console.error('EmailJS Error:', error);
@@ -43,10 +40,6 @@ function ContactUs() {
   return (
     <div>
       <Header />
-
-      
-
-      {/* Content */}
       <main className="contact-main">
         <section className="stacked-hero">
           <div className="content-wrapper">
@@ -69,7 +62,6 @@ function ContactUs() {
                     Building 15, Georges Haimari Street, Ashrafieh, Beirut, Lebanon
                   </div>
                 </div>
-
                 <div className="contact-item">
                   <div className="contact-icon">
                     <img src={phoneIcon} alt="Phone icon" />
@@ -79,7 +71,6 @@ function ContactUs() {
                     +961 76 567 599
                   </div>
                 </div>
-
                 <div className="contact-item">
                   <div className="contact-icon">
                     <img src={messageIcon} alt="Message icon" />
@@ -112,28 +103,22 @@ function ContactUs() {
         <div className="email-popup">
           <div className="email-form">
             <h3>Email Us</h3>
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
                 required
               />
               <input
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
                 required
               />
               <textarea
                 name="message"
                 placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
                 required
               />
               <div className="email-buttons">
@@ -144,7 +129,6 @@ function ContactUs() {
           </div>
         </div>
       )}
-
       <Footer />
     </div>
   );

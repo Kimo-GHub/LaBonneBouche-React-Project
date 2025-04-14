@@ -567,3 +567,70 @@ body {
     height: auto !important;
   }
 }
+/* Subscription Popup for Home Page */
+.subscription-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  width: 90%;
+  max-width: 400px;
+}
+
+.subscription-form h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #091A45;
+}
+
+.subscription-form input,
+.subscription-form textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.subscription-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subscription-buttons button {
+  padding: 10px 20px;
+  background-color: #091A45;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscription-buttons button:hover {
+  background-color: #1a2a57;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 480px) {
+  .subscription-popup {
+    padding: 20px;
+    max-width: 90%;
+  }
+  
+  .subscription-form h3 {
+    font-size: 18px;
+  }
+  
+  .subscription-buttons button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
