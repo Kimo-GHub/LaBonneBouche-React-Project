@@ -98,7 +98,7 @@ function Home() {
               <br />
               where a passion for baking turned into a love affair with sweets.
             </p>
-            <a href="/about-us" className="read-more-btn">
+            <a href="/about-us" className="home-read-more-btn">
               Read More
             </a>
           </div>

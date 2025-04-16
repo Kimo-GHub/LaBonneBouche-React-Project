@@ -41,7 +41,7 @@ body {
 }
 
 
-.read-more-btn {
+.home-read-more-btn {
   font-size: 1.2rem;
   font-weight: 800;
   color: #091a45;
@@ -54,7 +54,7 @@ body {
   transition: background-color 0.3s, transform 0.3s ease-in-out;
 }
 
-.read-more-btn:hover {
+.home-read-more-btn:hover {
   background-color: #e68fa3;
   transform: scale(1.05);
 }
