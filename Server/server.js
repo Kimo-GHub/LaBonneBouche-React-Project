@@ -10,21 +10,42 @@ import { fileURLToPath } from 'url';
 
 dotenv.config();
 
-// Stripe setup
+// Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2022-11-15',
 });
 
-// Firebase Admin SDK
+// Firebase Admin SDK setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const serviceAccount = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'firebaseServiceAccount.json'))
-);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// Attempt to load local service account file
+let serviceAccount;
+const serviceAccountPath = path.join(__dirname, 'firebaseServiceAccount.json');
+
+if (fs.existsSync(serviceAccountPath)) {
+  try {
+    serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+  } catch (err) {
+    console.error('Error reading Firebase service account JSON file:', err);
+    process.exit(1);
+  }
+}
+
+// Initialize Firebase Admin using the local service account
+// or fallback to GOOGLE_APPLICATION_CREDENTIALS if available.
+if (serviceAccount) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    // Optionally include projectId if needed:
+    // projectId: serviceAccount.project_id,
+  });
+  console.log('Firebase Admin initialized using local service account file.');
+} else {
+  // If no local file, ensure GOOGLE_APPLICATION_CREDENTIALS is set in your environment.
+  admin.initializeApp();
+  console.log('Firebase Admin initialized using GOOGLE_APPLICATION_CREDENTIALS environment variable.');
+}
 
 const firestore = admin.firestore();
 
@@ -33,12 +54,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🟢 Health check
+// 🟢 Health check endpoint
 app.get('/', (req, res) => {
   res.send('✅ Stripe Payment Backend is running');
 });
 
-// 🔄 Add or attach payment method
+// 🔄 Add or attach payment method endpoint
 app.post('/api/payment-method', async (req, res) => {
   const { paymentMethodId, uid, email, name } = req.body;
 
@@ -52,16 +73,14 @@ app.post('/api/payment-method', async (req, res) => {
     let customerId = userSnap.exists ? userSnap.data().customerId : null;
 
     if (!customerId) {
-      // 🆕 Create customer if one doesn't exist
+      // 🆕 Create a new Stripe customer if one doesn't exist
       const customer = await stripe.customers.create({
         email,
         name: name || 'Customer from LaBonneBouche React App',
         payment_method: paymentMethodId,
         invoice_settings: { default_payment_method: paymentMethodId },
       });
-
       customerId = customer.id;
-
       await userRef.set(
         {
           customerId,
@@ -70,19 +89,17 @@ app.post('/api/payment-method', async (req, res) => {
         { merge: true }
       );
     } else {
-      // 🔁 Attach payment method to existing customer
+      // 🔁 Attach payment method to an existing customer
       await stripe.paymentMethods.attach(paymentMethodId, {
         customer: customerId,
       });
-
-      // 🧾 Set as default payment method for invoices
+      // 🧾 Update the customer to set this as the default payment method
       await stripe.customers.update(customerId, {
         invoice_settings: {
           default_payment_method: paymentMethodId,
         },
       });
-
-      // 🔃 Update Firestore with new default card
+      // 🔃 Update Firestore with the new default card
       await userRef.set(
         {
           defaultPaymentMethodId: paymentMethodId,
@@ -113,6 +130,7 @@ app.get('/api/payment-methods/:customerId', async (req, res) => {
 });
 
 // ❌ Detach a saved card
+// Note: Be sure your route names match what your client expects.
 app.delete('/api/payment-method/:id', async (req, res) => {
   try {
     const deleted = await stripe.paymentMethods.detach(req.params.id);
@@ -123,7 +141,7 @@ app.delete('/api/payment-method/:id', async (req, res) => {
   }
 });
 
-// 🚀 Start server
+// 🚀 Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
