@@ -174,7 +174,7 @@ function Cart() {
         items: cartItems,
         total: finalTotal,
         discount,
-        paymentMethod: paymentMethod === 'card' ? 'Credit Card' : 'Cash on Delivery',
+        paymentMethod: paymentMethod === 'card' ? 'Card' : 'Cash',
         status: 'in progress',
         createdAt: new Date(),
       };
@@ -303,17 +303,17 @@ function Cart() {
                       checked={paymentMethod === 'card'}
                       onChange={() => setPaymentMethod('card')}
                     />
-                    <span className="payment-label">Credit Card</span>
+                    <span className="payment-label">Card</span>
                   </label>
                   <label className="payment-option">
                     <input
                       type="radio"
                       name="paymentMethod"
-                      value="cod"
-                      checked={paymentMethod === 'cod'}
-                      onChange={() => setPaymentMethod('cod')}
+                      value="cash"
+                      checked={paymentMethod === 'cash'}
+                      onChange={() => setPaymentMethod('cash')}
                     />
-                    <span className="payment-label">Cash on Delivery</span>
+                    <span className="payment-label">Cash</span>
                   </label>
                 </div>
               </div>

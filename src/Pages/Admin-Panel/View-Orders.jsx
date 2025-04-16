@@ -3,6 +3,52 @@ import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../Firebase/firebase";
 import "../../styles/Admin/View-Orders.css";
 
+// Helper component to display long text with a "Read more" toggle.
+const ReadMoreText = ({ text, maxLength = 50 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  if (!text) return null;
+  if (text.length <= maxLength) return <span>{text}</span>;
+  return (
+    <span>
+      {isExpanded ? text : text.substring(0, maxLength) + "..."}
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)} 
+        className="read-more-btn"
+      >
+        {isExpanded ? " Read less" : " Read more"}
+      </button>
+    </span>
+  );
+};
+
+// Helper component to display a list of items with a "Read more" toggle.
+const ReadMoreList = ({ items, maxItems = 3 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  if (!items || items.length === 0) return null;
+
+  const itemsToShow = isExpanded ? items : items.slice(0, maxItems);
+
+  return (
+    <div>
+      <ul style={{ margin: 0, paddingLeft: "20px" }}>
+        {itemsToShow.map((item, index) => (
+          <li key={index}>
+            {item.name} x {item.quantity}
+          </li>
+        ))}
+      </ul>
+      {items.length > maxItems && (
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)} 
+          className="read-more-btn"
+        >
+          {isExpanded ? "Read less" : `Read more (${items.length - maxItems} more)`}
+        </button>
+      )}
+    </div>
+  );
+};
+
 function ViewOrders() {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
@@ -10,6 +56,7 @@ function ViewOrders() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("latest");
 
+  // Fetch orders from Firestore and format the timestamp.
   const fetchOrders = async () => {
     setLoading(true);
     try {
@@ -27,6 +74,7 @@ function ViewOrders() {
     setLoading(false);
   };
 
+  // Update the order status in Firestore and state.
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await updateDoc(doc(db, "orders", orderId), { status: newStatus });
@@ -39,6 +87,7 @@ function ViewOrders() {
     }
   };
 
+  // Filter and sort the orders based on search query and sort option.
   const handleSearchAndSort = () => {
     const keyword = searchQuery.trim().toLowerCase();
     let filtered = [...orders];
@@ -67,7 +116,6 @@ function ViewOrders() {
       default:
         break;
     }
-
     setFilteredOrders(filtered);
   };
 
@@ -82,7 +130,6 @@ function ViewOrders() {
   return (
     <div className="view-orders-container">
       <h2>Customer Orders</h2>
-
       <div className="order-controls">
         <input
           type="text"
@@ -90,7 +137,10 @@ function ViewOrders() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
           <option value="latest">Sort by Latest</option>
           <option value="oldest">Sort by Oldest</option>
           <option value="highest">Sort by Highest Total</option>
@@ -108,36 +158,53 @@ function ViewOrders() {
             <thead>
               <tr>
                 <th>Order ID</th>
-                <th>Customer</th>
+                <th>Customer Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Delivery</th>
+                <th>Address</th>
                 <th>Items</th>
+                <th>Discount</th>
+                <th>Payment</th>
                 <th>Total</th>
-                <th>Time</th>
+                <th>Order Time</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {filteredOrders.map((order) => (
                 <tr key={order.id}>
-                  <td>{order.id}</td>
-                  <td>{order.customerName || "N/A"}</td>
-                  <td>{order.customerEmail}</td>
-                  <td>{order.customerPhone || "-"}</td>
-                  <td>{order.deliveryMethod || "N/A"}</td>
-                  <td>
-                    <ul>
-                      {order.items?.map((item, index) => (
-                        <li key={index}>
-                          {item.name} x {item.quantity}
-                        </li>
-                      ))}
-                    </ul>
+                  <td data-label="Order ID">{order.id}</td>
+                  <td data-label="Customer Name">
+                    {order.customerName || "N/A"}
                   </td>
-                  <td>${order.total?.toFixed(2)}</td>
-                  <td>{order.createdAt?.toLocaleString()}</td>
-                  <td>
+                  <td data-label="Email">
+                    {order.customerEmail || "N/A"}
+                  </td>
+                  <td data-label="Phone">
+                    {order.customerPhone || "N/A"}
+                  </td>
+                  <td data-label="Address">
+                    <ReadMoreText 
+                      text={order.customerAddress} 
+                      maxLength={50} 
+                    />
+                  </td>
+                  <td data-label="Items">
+                    <ReadMoreList items={order.items} maxItems={3} />
+                  </td>
+                  <td data-label="Discount">
+                    ${order.discount?.toFixed(2)}
+                  </td>
+                  <td data-label="Payment">
+                    {order.paymentMethod || "N/A"}
+                  </td>
+                  <td data-label="Total">
+                    ${order.total?.toFixed(2)}
+                  </td>
+                  <td data-label="Order Time">
+                    {order.createdAt?.toLocaleString()}
+                  </td>
+                  <td data-label="Status">
                     <select
                       value={order.status || "in progress"}
                       onChange={(e) =>
